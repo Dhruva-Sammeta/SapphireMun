@@ -173,7 +173,7 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
                         }`}
                     >
                       <div className="flex flex-col text-left">
-                        <span className="text-sm font-semibold">Vizag Edition</span>
+                        <span className="text-sm font-semibold">Visakhapatnam Edition</span>
                         <span className="text-[10px] opacity-60">Upcoming • May 2026</span>
                       </div>
                       {pathname === "/vizag" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}

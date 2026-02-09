@@ -100,7 +100,7 @@ export default function VizagPage() {
                                 First Edition • Coming May 2026
                             </div>
                             <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
-                                Sapphire <span className="font-semibold metallic-text">MUN</span>
+                                Sapphire MUN <span className="font-semibold metallic-text">Vizag</span>
                             </h1>
                             <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                                 The next chapter begins in Vizag. Experience the evolution of India's first Experience-targeted Model UN.
@@ -137,7 +137,7 @@ export default function VizagPage() {
                                 <div className="text-2xl font-semibold flex items-center justify-center gap-2">
                                     <MapPin className="h-5 w-5 text-red-400" />
                                 </div>
-                                <div className="text-sm text-muted">Vizag</div>
+                                <div className="text-sm text-muted">Visakhapatnam</div>
                             </div>
                             <div className="text-center">
                                 <div className="text-2xl font-semibold flex items-center justify-center gap-2">
