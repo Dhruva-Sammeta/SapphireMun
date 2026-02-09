@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useMobile } from "@/hooks/use-mobile"
 import { motion, AnimatePresence } from "framer-motion"
 import { Layers, ChevronRight, Check } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 interface NavItem {
   href: string
@@ -28,10 +28,12 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
   const [activeSection, setActiveSection] = useState("")
   const [isOpen, setIsOpen] = useState(false)
   const [isSwitcherOpen, setIsSwitcherOpen] = useState(false)
+  const [isNavigating, setIsNavigating] = useState(false)
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
   const switcherRef = useRef<HTMLDivElement>(null)
   const isMobile = useMobile()
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -99,6 +101,18 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
     }
   }
 
+  const handleEditionSwitch = (href: string) => {
+    if (pathname === href) {
+      setIsSwitcherOpen(false)
+      return
+    }
+    setIsNavigating(true)
+    setIsSwitcherOpen(false)
+    setTimeout(() => {
+      router.push(href)
+    }, 800)
+  }
+
   return (
     <>
       <header
@@ -141,31 +155,29 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
                       </p>
                     </div>
 
-                    <Link
-                      href="/hyderabad"
-                      className={`flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/hyderabad" ? "bg-blue-500/20 text-blue-400" : "hover:bg-white/5 text-white/70 hover:text-white"
+                    <button
+                      onClick={() => handleEditionSwitch("/hyderabad")}
+                      className={`flex w-full items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/hyderabad" ? "bg-blue-500/20 text-blue-400" : "hover:bg-white/5 text-white/70 hover:text-white"
                         }`}
-                      onClick={() => setIsSwitcherOpen(false)}
                     >
                       <div className="flex flex-col text-left">
                         <span className="text-sm font-semibold">Hyderabad Edition</span>
                         <span className="text-[10px] opacity-60">Completed • Aug 2025</span>
                       </div>
                       {pathname === "/hyderabad" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
-                    </Link>
+                    </button>
 
-                    <Link
-                      href="/vizag"
-                      className={`flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/vizag" ? "bg-red-500/20 text-red-400" : "hover:bg-white/5 text-white/70 hover:text-white"
+                    <button
+                      onClick={() => handleEditionSwitch("/vizag")}
+                      className={`flex w-full items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/vizag" ? "bg-red-500/20 text-red-400" : "hover:bg-white/5 text-white/70 hover:text-white"
                         }`}
-                      onClick={() => setIsSwitcherOpen(false)}
                     >
                       <div className="flex flex-col text-left">
                         <span className="text-sm font-semibold">Vizag Edition</span>
                         <span className="text-[10px] opacity-60">Upcoming • May 2026</span>
                       </div>
                       {pathname === "/vizag" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
-                    </Link>
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -251,6 +263,28 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
       {isMobile && isOpen && (
         <div className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
       )}
+
+      {/* Navigation Transition Overlay */}
+      <AnimatePresence>
+        {isNavigating && (
+          <motion.div
+            key="nav-transition-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            className="fixed inset-0 z-[100] bg-[#050a2a] flex items-center justify-center"
+          >
+            <motion.img
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              src="/images/design-mode/download.png"
+              alt="Loading"
+              className="h-20 w-auto opacity-20 animate-pulse"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
