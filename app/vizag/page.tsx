@@ -10,6 +10,7 @@ import {
     Calendar,
     Sparkles,
     Lock,
+    Archive,
 } from "lucide-react"
 import VizagFooter from "@/components/vizag-footer"
 import FloatingCard from "@/components/floating-card"
@@ -109,6 +110,16 @@ export default function VizagPage() {
                                     Get Updates
                                 </Link>
                             </Button>
+
+                            <Button asChild size="lg" className="btn-glass w-full sm:w-auto opacity-60 hover:opacity-100">
+                                <Link
+                                    href="/hyderabad"
+                                    className="flex items-center justify-center"
+                                >
+                                    <Archive className="mr-2 h-4 w-4" />
+                                    Hyderabad Archive
+                                </Link>
+                            </Button>
                         </div>
 
                         <div className="grid grid-cols-3 gap-6 pt-8 max-w-lg mx-auto text-fg">
@@ -147,10 +158,10 @@ export default function VizagPage() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Committees Placeholder */}
-            <ChunkSection className="py-24 relative">
+            < ChunkSection className="py-24 relative" >
                 <div className="container">
                     <div className="text-center space-y-4 mb-16">
                         <h2 className="text-3xl md:text-5xl font-light text-fg reflect-ribbon">
@@ -189,10 +200,10 @@ export default function VizagPage() {
                         ))}
                     </div>
                 </div>
-            </ChunkSection>
+            </ChunkSection >
 
             {/* Updates Section */}
-            <ChunkSection id="updates" className="py-24 relative">
+            < ChunkSection id="updates" className="py-24 relative" >
                 <div className="container">
                     <FloatingCard className="p-12 metallic-card reflective-hover text-center border-red-500/20">
                         <div className="max-w-3xl mx-auto space-y-6">
@@ -222,9 +233,9 @@ export default function VizagPage() {
                         </div>
                     </FloatingCard>
                 </div>
-            </ChunkSection>
+            </ChunkSection >
 
             <VizagFooter />
-        </div>
+        </div >
     )
 }
