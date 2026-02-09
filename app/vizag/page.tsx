@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import {
     ArrowRight,
@@ -25,6 +27,8 @@ import { HyperText } from "@/components/ui/hyper-text"
 
 export default function VizagPage() {
     const heroRef = useRef<HTMLElement>(null)
+    const [isNavigating, setIsNavigating] = React.useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         const hero = heroRef.current
@@ -45,6 +49,13 @@ export default function VizagPage() {
         window.addEventListener("scroll", requestTick, { passive: true })
         return () => window.removeEventListener("scroll", requestTick)
     }, [])
+
+    const handleEditionSwitch = (href: string) => {
+        setIsNavigating(true)
+        setTimeout(() => {
+            router.push(href)
+        }, 800)
+    }
 
     return (
         <div className="min-h-screen bg-app text-app overflow-x-hidden vizag-theme animate-in fade-in duration-1000">
@@ -111,14 +122,13 @@ export default function VizagPage() {
                                 </Link>
                             </Button>
 
-                            <Button asChild size="lg" className="btn-glass w-full sm:w-auto opacity-60 hover:opacity-100">
-                                <Link
-                                    href="/hyderabad"
-                                    className="flex items-center justify-center"
-                                >
-                                    <Archive className="mr-2 h-4 w-4" />
-                                    Hyderabad Archive
-                                </Link>
+                            <Button
+                                onClick={() => handleEditionSwitch("/hyderabad")}
+                                size="lg"
+                                className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 transition-opacity"
+                            >
+                                <Sparkles className="mr-2 h-4 w-4 text-blue-300" />
+                                Hyderabad Edition
                             </Button>
                         </div>
 
@@ -158,10 +168,10 @@ export default function VizagPage() {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Committees Placeholder */}
-            < ChunkSection className="py-24 relative" >
+            <ChunkSection className="py-24 relative">
                 <div className="container">
                     <div className="text-center space-y-4 mb-16">
                         <h2 className="text-3xl md:text-5xl font-light text-fg reflect-ribbon">
@@ -203,7 +213,7 @@ export default function VizagPage() {
             </ChunkSection >
 
             {/* Updates Section */}
-            < ChunkSection id="updates" className="py-24 relative" >
+            <ChunkSection id="updates" className="py-24 relative" >
                 <div className="container">
                     <FloatingCard className="p-12 metallic-card reflective-hover text-center border-red-500/20">
                         <div className="max-w-3xl mx-auto space-y-6">
@@ -236,6 +246,28 @@ export default function VizagPage() {
             </ChunkSection >
 
             <VizagFooter />
+
+            {/* Navigation Transition Overlay */}
+            <AnimatePresence>
+                {isNavigating && (
+                    <motion.div
+                        key="nav-transition-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="fixed inset-0 z-[100] bg-[#050a2a] flex items-center justify-center"
+                    >
+                        <motion.img
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            src="/images/design-mode/download.png"
+                            alt="Loading"
+                            className="h-20 w-auto opacity-20 animate-pulse"
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div >
     )
 }
