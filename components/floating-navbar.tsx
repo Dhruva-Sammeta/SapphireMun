@@ -1,8 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useMobile } from "@/hooks/use-mobile"
+import { motion, AnimatePresence } from "framer-motion"
+import { Layers, ChevronRight, Check } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 interface NavItem {
   href: string
@@ -24,7 +27,21 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("")
   const [isOpen, setIsOpen] = useState(false)
+  const [isSwitcherOpen, setIsSwitcherOpen] = useState(false)
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const switcherRef = useRef<HTMLDivElement>(null)
   const isMobile = useMobile()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (switcherRef.current && !switcherRef.current.contains(event.target as Node)) {
+        setIsSwitcherOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,8 +81,22 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
     }
   }
 
-  const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setIsSwitcherOpen(!isSwitcherOpen)
+  }
+
+  const handleMouseEnter = () => {
+    if (isMobile) return
+    hoverTimerRef.current = setTimeout(() => {
+      setIsSwitcherOpen(true)
+    }, 2000)
+  }
+
+  const handleMouseLeave = () => {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current)
+    }
   }
 
   return (
@@ -75,18 +106,70 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
       >
         <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl py-3 px-4 shadow-lg">
           <div className="flex items-center gap-6">
-            {/* Logo */}
-            <button
-              onClick={handleLogoClick}
-              className="flex items-center gap-2 flex-shrink-0 bg-transparent border-none cursor-pointer group"
+            {/* Logo & Switcher Trigger */}
+            <div
+              className="relative"
+              ref={switcherRef}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              <img
-                src="/images/design-mode/download.png"
-                alt="Sapphire MUN"
-                className="h-7 w-6 flex-shrink-0 group-hover:scale-110 transition-transform duration-200 object-contain"
-              />
-              <span className="hidden sm:block text-white font-semibold text-lg">Sapphire MUN</span>
-            </button>
+              <button
+                onClick={handleLogoClick}
+                className="flex items-center gap-2 flex-shrink-0 bg-transparent border-none cursor-pointer group"
+              >
+                <img
+                  src="/images/design-mode/download.png"
+                  alt="Sapphire MUN"
+                  className="h-7 w-6 flex-shrink-0 group-hover:rotate-12 transition-transform duration-300 object-contain"
+                />
+                <span className="hidden sm:block text-white font-semibold text-lg">Sapphire MUN</span>
+              </button>
+
+              {/* Edition Switcher Dropdown */}
+              <AnimatePresence>
+                {isSwitcherOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-4 w-64 bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 p-2"
+                  >
+                    <div className="px-3 py-2 mb-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
+                        <Layers className="w-3 h-3" /> Select Edition
+                      </p>
+                    </div>
+
+                    <Link
+                      href="/hyderabad"
+                      className={`flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/hyderabad" ? "bg-blue-500/20 text-blue-400" : "hover:bg-white/5 text-white/70 hover:text-white"
+                        }`}
+                      onClick={() => setIsSwitcherOpen(false)}
+                    >
+                      <div className="flex flex-col text-left">
+                        <span className="text-sm font-semibold">Hyderabad Edition</span>
+                        <span className="text-[10px] opacity-60">Completed • Aug 2025</span>
+                      </div>
+                      {pathname === "/hyderabad" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
+                    </Link>
+
+                    <Link
+                      href="/vizag"
+                      className={`flex items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/vizag" ? "bg-red-500/20 text-red-400" : "hover:bg-white/5 text-white/70 hover:text-white"
+                        }`}
+                      onClick={() => setIsSwitcherOpen(false)}
+                    >
+                      <div className="flex flex-col text-left">
+                        <span className="text-sm font-semibold">Vizag Edition</span>
+                        <span className="text-[10px] opacity-60">Upcoming • May 2026</span>
+                      </div>
+                      {pathname === "/vizag" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Desktop Navigation */}
             {!isMobile && (
