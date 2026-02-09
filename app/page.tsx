@@ -128,7 +128,7 @@ export default function EditionSelector() {
                     <Sparkles className="w-8 h-8 text-red-300" />
                   </div>
 
-                  <h2 className="text-3xl font-light mb-2 text-white group-hover:text-red-200 transition-colors">Vizag</h2>
+                  <h2 className="text-3xl font-light mb-2 text-white group-hover:text-red-200 transition-colors">Visakhapatnam</h2>
                   <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-6 animate-pulse">First Edition • Upcoming</div>
 
                   <div className="space-y-3 w-full opacity-70 group-hover:opacity-100 transition-opacity">

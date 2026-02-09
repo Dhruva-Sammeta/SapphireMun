@@ -140,7 +140,7 @@ export default function Page() {
                                 className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 bg-red-500/5 hover:bg-red-500/10 border-red-500/20"
                             >
                                 <Sparkles className="mr-2 h-4 w-4 text-red-400" />
-                                Vizag Edition
+                                Visakhapatnam Edition
                             </Button>
                         </div>
 

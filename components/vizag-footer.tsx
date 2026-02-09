@@ -18,7 +18,7 @@ const VizagFooter: React.FC = () => {
                             />
                             <span className="text-xl font-bold text-fg">Sapphire MUN</span>
                         </Link>
-                        <p className="text-muted max-w-md">India's first Experience-targeted Model UN. First edition coming to Vizag.</p>
+                        <p className="text-muted max-w-md">India's first Experience-targeted Model UN. First edition coming to Visakhapatnam.</p>
                     </div>
 
                     {/* Quick Links */}

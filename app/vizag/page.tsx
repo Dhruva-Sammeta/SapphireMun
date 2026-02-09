@@ -103,7 +103,7 @@ export default function VizagPage() {
                                 Sapphire MUN <span className="font-semibold metallic-text">Vizag</span>
                             </h1>
                             <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
-                                The next chapter begins in Vizag. Experience the evolution of India's first Experience-targeted Model UN.
+                                The next chapter begins in Visakhapatnam. Experience the evolution of India's first Experience-targeted Model UN.
                             </p>
                         </div>
 
@@ -178,7 +178,7 @@ export default function VizagPage() {
                             Committees <span className="font-semibold metallic-text">&amp; Agenda</span>
                         </h2>
                         <p className="text-lg text-muted max-w-2xl mx-auto">
-                            Stay tuned for the reveal of our committees and agendas for the Vizag edition.
+                            Stay tuned for the reveal of our committees and agendas for the Visakhapatnam edition.
                         </p>
                     </div>
 
