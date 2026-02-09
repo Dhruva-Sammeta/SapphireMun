@@ -12,7 +12,6 @@ import {
     Calendar,
     Sparkles,
     Lock,
-    Archive,
 } from "lucide-react"
 import VizagFooter from "@/components/vizag-footer"
 import FloatingCard from "@/components/floating-card"
@@ -20,8 +19,6 @@ import FloatingNavbar from "@/components/floating-navbar"
 import "../refined.css"
 import "./vizag-theme.css"
 import ChunkSection from "@/components/chunk-section"
-import ParallaxScene from "@/components/parallax-scene"
-import Section from "@/components/section"
 import GlowCard from "@/components/glow-card"
 import { HyperText } from "@/components/ui/hyper-text"
 
@@ -100,7 +97,7 @@ export default function VizagPage() {
                                 First Edition • Coming May 2026
                             </div>
                             <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
-                                Sapphire MUN <span className="font-semibold metallic-text">Vizag</span>
+                                Sapphire <span className="font-semibold metallic-text">MUN Vizag</span>
                             </h1>
                             <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
                                 The next chapter begins in Visakhapatnam. Experience the evolution of India's first Experience-targeted Model UN.

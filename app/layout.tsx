@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Sapphire MUN",
   description: "Sapphire Model United Nations - Join us for an exceptional diplomatic experience",
-  generator: "v0.dev",
+  generator: "none",
   icons: {
     icon: "/images/sapphire-logo-navbar.png",
     shortcut: "/images/sapphire-logo-navbar.png",
