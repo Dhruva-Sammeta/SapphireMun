@@ -5,6 +5,8 @@ import React from "react"
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
 import {
     ArrowRight,
     Play,
@@ -33,6 +35,8 @@ import GlowCard from "@/components/glow-card"
 
 export default function Page() {
     const heroRef = useRef<HTMLElement>(null)
+    const [isNavigating, setIsNavigating] = React.useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         const hero = heroRef.current
@@ -53,6 +57,13 @@ export default function Page() {
         window.addEventListener("scroll", requestTick, { passive: true })
         return () => window.removeEventListener("scroll", requestTick)
     }, [])
+
+    const handleEditionSwitch = (href: string) => {
+        setIsNavigating(true)
+        setTimeout(() => {
+            router.push(href)
+        }, 800)
+    }
 
     return (
         <div className="min-h-screen bg-app text-app overflow-x-hidden">
@@ -122,6 +133,15 @@ export default function Page() {
                                     Integrated Tech Experience
                                 </Link>
                             </Button>
+
+                            <Button
+                                onClick={() => handleEditionSwitch("/vizag")}
+                                size="lg"
+                                className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 bg-red-500/5 hover:bg-red-500/10 border-red-500/20"
+                            >
+                                <Sparkles className="mr-2 h-4 w-4 text-red-400" />
+                                Vizag Edition
+                            </Button>
                         </div>
 
                         <div className="grid grid-cols-3 gap-6 pt-8 max-w-lg mx-auto text-fg">
@@ -155,6 +175,28 @@ export default function Page() {
                     </div>
                 </div>
             </section>
+
+            {/* Navigation Transition Overlay */}
+            <AnimatePresence>
+                {isNavigating && (
+                    <motion.div
+                        key="nav-transition-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="fixed inset-0 z-[100] bg-[#050a2a] flex items-center justify-center"
+                    >
+                        <motion.img
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            src="/images/design-mode/download.png"
+                            alt="Loading"
+                            className="h-20 w-auto opacity-20 animate-pulse"
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <ChunkSection className="py-24 relative">
                 <div className="container">
@@ -808,6 +850,6 @@ export default function Page() {
             </ChunkSection>
 
             <Footer />
-        </div>
+        </div >
     )
 }
