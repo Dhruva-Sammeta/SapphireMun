@@ -12,6 +12,9 @@ import {
     Calendar,
     Sparkles,
     Lock,
+    ChevronDown,
+    Crosshair,
+    Hand,
 } from "lucide-react"
 import VizagFooter from "@/components/vizag-footer"
 import FloatingCard from "@/components/floating-card"
@@ -59,6 +62,7 @@ export default function VizagPage() {
             <FloatingNavbar
                 items={[
                     { href: "/", label: "Home" },
+                    { href: "#committees", label: "Committees" },
                     { href: "#updates", label: "Updates" },
                 ]}
             />
@@ -77,19 +81,11 @@ export default function VizagPage() {
                 <div className="container relative z-10">
                     <div className="mx-auto max-w-4xl text-center space-y-6 px-4">
                         <div className="inline-block relative px-0 my-2 py-20">
-                            <div className="absolute inset-0 bg-gradient-radial from-red-500/15 to-transparent blur-xl" />
                             <img
                                 src="/images/sapphire-mun-hero-logo.png"
                                 alt="Sapphire Model United Nations emblem"
-                                className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-700 reflective-hover fade-in-up"
+                                className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain relative z-10 drop-shadow-xl hover:scale-105 transition-transform duration-700 fade-in-up"
                             />
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-64 h-32 md:w-80 md:h-40 opacity-30 blur-sm">
-                                <img
-                                    src="/images/sapphire-mun-hero-logo.png"
-                                    alt=""
-                                    className="w-full h-full object-contain transform scale-y-[-1] mask-gradient-to-b animate-pulse"
-                                />
-                            </div>
                         </div>
 
                         <div className="space-y-4">
@@ -158,17 +154,13 @@ export default function VizagPage() {
                     </div>
                 </div>
 
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-                    <div className="animate-bounce">
-                        <div className="w-6 h-10 border-2 border-white/25 rounded-full flex justify-center">
-                            <div className="w-1 h-3 bg-white/40 rounded-full mt-2 animate-pulse" />
-                        </div>
-                    </div>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                    <ChevronDown className="w-8 h-8 text-white/50 animate-bounce" />
                 </div>
             </section>
 
             {/* Committees Placeholder */}
-            <ChunkSection className="py-24 relative">
+            <ChunkSection id="committees" className="py-24 relative">
                 <div className="container">
                     <div className="text-center space-y-4 mb-16">
                         <h2 className="text-3xl md:text-5xl font-light text-fg reflect-ribbon">
@@ -179,30 +171,96 @@ export default function VizagPage() {
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
                         {[
-                            { id: 1, cipher: "CLASSIFIED" },
-                            { id: 2, cipher: "ENCRYPTED" },
-                            { id: 3, cipher: "REDACTED" },
-                            { id: 4, cipher: "INCOMING" },
-                            { id: 5, cipher: "SECURED" },
-                            { id: 6, cipher: "DECODING" },
-                        ].map((item) => (
+                            {
+                                id: 1,
+                                status: "revealed",
+                                title: "DISEC",
+                                icon: Crosshair,
+                                type_level: "Security Council — Intermediate",
+                                desc: "Deliberation on the proliferation of autonomous weapons systems (Lethal AI) and the emerging threat of algorithmic warfare to global security.",
+                            },
+                            {
+                                id: 2,
+                                status: "revealed",
+                                title: "UNHRC",
+                                icon: Hand,
+                                type_level: "Human Rights — Intermediate",
+                                desc: "Addressing the weaponisation of surveillance technologies and digital authoritarianism as violations of fundamental human rights.",
+                            },
+                            { id: 3, status: "classified", cipher: "REDACTED" },
+                            { id: 4, status: "classified", cipher: "INCOMING" },
+                            { id: 5, status: "classified", cipher: "SECURED" },
+                            { id: 6, status: "classified", cipher: "DECODING" },
+                        ].map((item: any) => (
                             <GlowCard
                                 key={item.id}
-                                className="group p-8 text-center flex flex-col items-center justify-center min-h-[220px] border border-red-500/20 bg-gradient-to-br from-red-950/20 to-slate-900/40 backdrop-blur-sm hover:border-red-500/40 transition-all duration-500 cursor-pointer"
+                                className={`group p-6 flex flex-col justify-between min-h-[220px] transition-all duration-500 cursor-pointer relative overflow-hidden ${item.status === 'revealed'
+                                    ? "bg-red-950/20 border-red-500/20 hover:border-red-500/50 hover:bg-red-900/10"
+                                    : "bg-red-950/10 border-red-500/10 hover:border-red-500/30"
+                                    }`}
                             >
-                                <div className="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center mb-5 border border-red-500/30 group-hover:scale-110 group-hover:bg-red-500/20 transition-all duration-300">
-                                    <Lock className="h-6 w-6 text-red-400/60 group-hover:text-red-400 transition-colors" />
+                                <div className="space-y-4 z-10 relative">
+                                    {/* Header: Icon + Title */}
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${item.status === 'revealed'
+                                            ? "bg-red-500/20 text-red-400 group-hover:scale-110 group-hover:bg-red-500/30"
+                                            : "bg-red-900/10 text-red-500/40 group-hover:scale-110"
+                                            }`}>
+                                            {item.status === 'revealed' ? (
+                                                <item.icon className="h-5 w-5" />
+                                            ) : (
+                                                <Lock className="h-5 w-5" />
+                                            )}
+                                        </div>
+                                        {item.status === 'revealed' ? (
+                                            <h3 className="text-lg md:text-xl font-semibold text-slate-100 group-hover:text-red-300 transition-colors">
+                                                {item.title}
+                                            </h3>
+                                        ) : (
+                                            <HyperText
+                                                text={item.cipher}
+                                                className="text-lg font-bold text-red-500/50 group-hover:text-red-400 tracking-widest"
+                                                duration={800}
+                                                animateOnLoad={false}
+                                            />
+                                        )}
+                                    </div>
+
+                                    {/* Subtitle & Body */}
+                                    {item.status === 'revealed' ? (
+                                        <div className="flex flex-col h-full">
+                                            <div className="h-px w-full bg-gradient-to-r from-transparent via-red-500/40 to-transparent my-4 opacity-50" />
+                                            <p className="text-red-200/80 text-sm font-medium mb-2">
+                                                {item.type_level}
+                                            </p>
+                                            <p className="text-muted text-sm leading-relaxed line-clamp-3 mb-4">
+                                                {item.desc}
+                                            </p>
+                                            <div className="mt-auto pt-2 border-t border-red-500/10">
+                                                <p className="text-xs text-red-400/80 flex items-center gap-2 mt-3 font-medium tracking-wide">
+                                                    <span className="relative flex h-2 w-2">
+                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                                    </span>
+                                                    Agenda Revealed
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="h-px w-full bg-gradient-to-r from-transparent via-red-500/20 to-transparent my-4 opacity-30" />
+                                            <p className="text-red-500/30 text-xs uppercase tracking-wider font-medium">
+                                                Classified • Level {item.id}
+                                            </p>
+                                            <div className="space-y-2 opacity-30 mt-2">
+                                                <div className="h-2 bg-red-500/20 rounded w-3/4 animate-pulse" />
+                                                <div className="h-2 bg-red-500/20 rounded w-1/2 animate-pulse delay-75" />
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                                <HyperText
-                                    text={item.cipher}
-                                    className="text-lg font-bold text-red-300/70 group-hover:text-red-200 tracking-widest"
-                                    duration={1000}
-                                    animateOnLoad={false}
-                                />
-                                <div className="text-xs text-white/30 mt-3 uppercase tracking-wider">Committee {item.id}</div>
-                                <div className="mt-4 w-16 h-0.5 bg-gradient-to-r from-transparent via-red-500/30 to-transparent group-hover:via-red-500/60 transition-all duration-300" />
                             </GlowCard>
                         ))}
                     </div>

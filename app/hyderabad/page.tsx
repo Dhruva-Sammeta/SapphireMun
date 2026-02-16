@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import {
     ArrowRight,
+    ChevronDown,
     Play,
     Users,
     Calendar,
@@ -167,12 +168,8 @@ export default function Page() {
                     </div>
                 </div>
 
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-                    <div className="animate-bounce">
-                        <div className="w-6 h-10 border-2 border-white/25 rounded-full flex justify-center">
-                            <div className="w-1 h-3 bg-white/40 rounded-full mt-2 animate-pulse" />
-                        </div>
-                    </div>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                    <ChevronDown className="w-8 h-8 text-white/50 animate-bounce" />
                 </div>
             </section>
 
