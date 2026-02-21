@@ -24,6 +24,7 @@ import "./vizag-theme.css"
 import ChunkSection from "@/components/chunk-section"
 import GlowCard from "@/components/glow-card"
 import { HyperText } from "@/components/ui/hyper-text"
+import PagePreloader from "@/components/page-preloader"
 
 export default function VizagPage() {
     const heroRef = useRef<HTMLElement>(null)
@@ -59,6 +60,12 @@ export default function VizagPage() {
 
     return (
         <div className="min-h-screen bg-app text-app overflow-x-hidden vizag-theme animate-in fade-in duration-1000">
+            <PagePreloader
+                images={[
+                    "/images/sapphire-mun-hero-logo.png",
+                    "/images/design-mode/download.png",
+                ]}
+            />
             <FloatingNavbar
                 items={[
                     { href: "/", label: "Home" },

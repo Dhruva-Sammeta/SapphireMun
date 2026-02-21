@@ -33,6 +33,7 @@ import ChunkSection from "@/components/chunk-section"
 import ParallaxScene from "@/components/parallax-scene"
 import Section from "@/components/section"
 import GlowCard from "@/components/glow-card"
+import PagePreloader from "@/components/page-preloader"
 
 export default function Page() {
     const heroRef = useRef<HTMLElement>(null)
@@ -68,6 +69,12 @@ export default function Page() {
 
     return (
         <div className="min-h-screen bg-app text-app overflow-x-hidden">
+            <PagePreloader
+                images={[
+                    "/images/sapphire-mun-hero-logo.png",
+                    "/images/design-mode/download.png",
+                ]}
+            />
             <FloatingNavbar />
 
             <section
