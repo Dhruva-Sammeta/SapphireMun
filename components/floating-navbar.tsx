@@ -28,7 +28,6 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
   const [activeSection, setActiveSection] = useState("")
   const [isOpen, setIsOpen] = useState(false)
   const [isSwitcherOpen, setIsSwitcherOpen] = useState(false)
-  const [isNavigating, setIsNavigating] = useState(false)
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null)
   const switcherRef = useRef<HTMLDivElement>(null)
   const isMobile = useMobile()
@@ -106,11 +105,8 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
       setIsSwitcherOpen(false)
       return
     }
-    setIsNavigating(true)
     setIsSwitcherOpen(false)
-    setTimeout(() => {
-      router.push(href)
-    }, 800)
+    router.push(href)
   }
 
   return (
@@ -265,28 +261,6 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
       {isMobile && isOpen && (
         <div className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
       )}
-
-      {/* Navigation Transition Overlay */}
-      <AnimatePresence>
-        {isNavigating && (
-          <motion.div
-            key="nav-transition-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="fixed inset-0 z-[100] bg-[#050a2a] flex items-center justify-center"
-          >
-            <motion.img
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              src="/images/design-mode/download.png"
-              alt="Loading"
-              className="h-20 w-auto opacity-20 animate-pulse"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   )
 }

@@ -11,13 +11,12 @@ interface PagePreloaderProps {
 }
 
 /**
- * Full-screen preloader that waits for:
- * 1. Critical images to load
- * 2. Document fonts to be ready
- * 3. A minimum display time (prevents flash)
- * Then smoothly fades out to reveal page content.
+ * Full-screen preloader — the SINGLE source of truth for page transitions.
+ * Shows the Sapphire crystal logo while assets load, then fades out.
+ * Navigation transition overlays in pages/navbar are removed;
+ * this component alone handles the "enter" experience.
  */
-export default function PagePreloader({ images = [], minDisplayTime = 600 }: PagePreloaderProps) {
+export default function PagePreloader({ images = [], minDisplayTime = 1200 }: PagePreloaderProps) {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -28,7 +27,7 @@ export default function PagePreloader({ images = [], minDisplayTime = 600 }: Pag
                 new Promise<void>((resolve) => {
                     const img = new Image()
                     img.onload = () => resolve()
-                    img.onerror = () => resolve() // Don't block on errors
+                    img.onerror = () => resolve()
                     img.src = src
                 })
         )
@@ -40,7 +39,7 @@ export default function PagePreloader({ images = [], minDisplayTime = 600 }: Pag
             const remaining = Math.max(0, minDisplayTime - elapsed)
             setTimeout(() => setIsLoading(false), remaining)
         })
-    }, [images, minDisplayTime])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <AnimatePresence>
@@ -49,40 +48,43 @@ export default function PagePreloader({ images = [], minDisplayTime = 600 }: Pag
                     key="page-preloader"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
                     className="fixed inset-0 z-[200] flex items-center justify-center"
                     style={{ background: "linear-gradient(180deg, #07113b 0%, #050a2a 50%, #020410 100%)" }}
                 >
-                    <motion.div
-                        initial={{ scale: 0.85, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="flex flex-col items-center gap-6"
-                    >
-                        <img
+                    <div className="flex flex-col items-center gap-8">
+                        <motion.img
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
                             src="/images/sapphire-mun-hero-logo.png"
                             alt=""
-                            className="h-24 w-24 object-contain animate-pulse drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+                            className="h-28 w-28 object-contain drop-shadow-[0_0_40px_rgba(59,130,246,0.3)]"
+                            style={{ animation: "preloader-breathe 2s ease-in-out infinite" }}
                         />
-                        <div className="flex gap-1.5">
+                        <div className="flex gap-2">
                             {[0, 1, 2].map((i) => (
                                 <div
                                     key={i}
-                                    className="w-1.5 h-1.5 rounded-full bg-white/40"
+                                    className="w-1.5 h-1.5 rounded-full bg-white/50"
                                     style={{
-                                        animation: `preloader-dot 1s ease-in-out ${i * 0.15}s infinite`,
+                                        animation: `preloader-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
                                     }}
                                 />
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
 
                     <style>{`
-            @keyframes preloader-dot {
-              0%, 100% { opacity: 0.3; transform: scale(1); }
-              50% { opacity: 1; transform: scale(1.5); }
-            }
-          `}</style>
+                        @keyframes preloader-dot {
+                            0%, 100% { opacity: 0.25; transform: scale(1); }
+                            50% { opacity: 1; transform: scale(1.6); }
+                        }
+                        @keyframes preloader-breathe {
+                            0%, 100% { transform: scale(1); opacity: 0.85; }
+                            50% { transform: scale(1.06); opacity: 1; }
+                        }
+                    `}</style>
                 </motion.div>
             )}
         </AnimatePresence>

@@ -37,12 +37,14 @@ import PagePreloader from "@/components/page-preloader"
 
 export default function Page() {
     const heroRef = useRef<HTMLElement>(null)
-    const [isNavigating, setIsNavigating] = React.useState(false)
     const router = useRouter()
 
     useEffect(() => {
         const hero = heroRef.current
         if (!hero) return
+        // Skip parallax on mobile
+        const isMobile = window.innerWidth < 768 || "ontouchstart" in window
+        if (isMobile) return
         let ticking = false
         const updateParallax = () => {
             const scrolled = window.pageYOffset
@@ -61,10 +63,7 @@ export default function Page() {
     }, [])
 
     const handleEditionSwitch = (href: string) => {
-        setIsNavigating(true)
-        setTimeout(() => {
-            router.push(href)
-        }, 800)
+        router.push(href)
     }
 
     return (
@@ -179,28 +178,6 @@ export default function Page() {
                     <ChevronDown className="w-8 h-8 text-white/50 animate-bounce" />
                 </div>
             </section>
-
-            {/* Navigation Transition Overlay */}
-            <AnimatePresence>
-                {isNavigating && (
-                    <motion.div
-                        key="nav-transition-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="fixed inset-0 z-[100] bg-[#050a2a] flex items-center justify-center"
-                    >
-                        <motion.img
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            src="/images/design-mode/download.png"
-                            alt="Loading"
-                            className="h-20 w-auto opacity-20 animate-pulse"
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
 
             <ChunkSection className="py-24 relative">
                 <div className="container">

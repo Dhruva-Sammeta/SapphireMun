@@ -28,7 +28,6 @@ import PagePreloader from "@/components/page-preloader"
 
 export default function VizagPage() {
     const heroRef = useRef<HTMLElement>(null)
-    const [isNavigating, setIsNavigating] = React.useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -55,10 +54,7 @@ export default function VizagPage() {
     }, [])
 
     const handleEditionSwitch = (href: string) => {
-        setIsNavigating(true)
-        setTimeout(() => {
-            router.push(href)
-        }, 800)
+        router.push(href)
     }
 
     return (
@@ -311,28 +307,6 @@ export default function VizagPage() {
             </ChunkSection >
 
             <VizagFooter />
-
-            {/* Navigation Transition Overlay */}
-            <AnimatePresence>
-                {isNavigating && (
-                    <motion.div
-                        key="nav-transition-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="fixed inset-0 z-[100] bg-[#050a2a] flex items-center justify-center"
-                    >
-                        <motion.img
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            src="/images/design-mode/download.png"
-                            alt="Loading"
-                            className="h-20 w-auto opacity-20 animate-pulse"
-                        />
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </div >
     )
 }
