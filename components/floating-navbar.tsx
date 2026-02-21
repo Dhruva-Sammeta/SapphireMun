@@ -210,16 +210,17 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
             {/* Mobile Hamburger */}
             {isMobile && (
               <button
-                className="flex flex-col gap-1 p-2 hover:bg-white/10 rounded-full transition-colors justify-center"
+                className="relative w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors flex-shrink-0"
                 onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
               >
                 <span
-                  className={`w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-1.5" : ""
+                  className={`absolute w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-0" : "-translate-y-[5px]"
                     }`}
                 />
-                <span className={`w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : ""}`} />
+                <span className={`absolute w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "opacity-0 scale-0" : ""}`} />
                 <span
-                  className={`w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-1.5" : ""
+                  className={`absolute w-5 h-0.5 bg-white transition-all duration-300 ${isOpen ? "-rotate-45 translate-y-0" : "translate-y-[5px]"
                     }`}
                 />
               </button>

@@ -34,6 +34,9 @@ export default function VizagPage() {
     useEffect(() => {
         const hero = heroRef.current
         if (!hero) return
+        // Skip parallax on mobile — causes jank on slow devices
+        const isMobile = window.innerWidth < 768 || "ontouchstart" in window
+        if (isMobile) return
         let ticking = false
         const updateParallax = () => {
             const scrolled = window.pageYOffset
@@ -59,7 +62,7 @@ export default function VizagPage() {
     }
 
     return (
-        <div className="min-h-screen bg-app text-app overflow-x-hidden vizag-theme animate-in fade-in duration-1000">
+        <div className="min-h-screen bg-app text-app overflow-x-hidden vizag-theme">
             <PagePreloader
                 images={[
                     "/images/sapphire-mun-hero-logo.png",
