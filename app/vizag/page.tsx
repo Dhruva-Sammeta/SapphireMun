@@ -160,18 +160,18 @@ export default function VizagPage() {
             </section>
 
             {/* Committees Placeholder */}
-            <ChunkSection id="committees" className="py-24 relative">
-                <div className="container">
-                    <div className="text-center space-y-4 mb-16">
-                        <h2 className="text-3xl md:text-5xl font-light text-fg reflect-ribbon">
+            <ChunkSection id="committees" className="py-12 md:py-24 relative">
+                <div className="container px-4">
+                    <div className="text-center space-y-4 mb-8 md:mb-16">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-light text-fg reflect-ribbon">
                             Committees <span className="font-semibold metallic-text">&amp; Agenda</span>
                         </h2>
-                        <p className="text-lg text-muted max-w-2xl mx-auto">
+                        <p className="text-base md:text-lg text-muted max-w-2xl mx-auto px-2">
                             Stay tuned for the reveal of our committees and agendas for the Visakhapatnam edition.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-12">
                         {[
                             {
                                 id: 1,
@@ -196,7 +196,7 @@ export default function VizagPage() {
                         ].map((item: any) => (
                             <GlowCard
                                 key={item.id}
-                                className={`group p-6 flex flex-col justify-between min-h-[220px] transition-all duration-500 cursor-pointer relative overflow-hidden ${item.status === 'revealed'
+                                className={`group p-4 md:p-6 flex flex-col justify-between min-h-[180px] md:min-h-[220px] transition-all duration-500 cursor-pointer relative overflow-hidden ${item.status === 'revealed'
                                     ? "bg-red-950/20 border-red-500/20 hover:border-red-500/50 hover:bg-red-900/10"
                                     : "bg-red-950/10 border-red-500/10 hover:border-red-500/30"
                                     }`}
@@ -268,9 +268,9 @@ export default function VizagPage() {
             </ChunkSection >
 
             {/* Updates Section */}
-            <ChunkSection id="updates" className="py-24 relative" >
+            <ChunkSection id="updates" className="py-12 md:py-24 relative" >
                 <div className="container">
-                    <FloatingCard className="p-12 metallic-card reflective-hover text-center border-red-500/20">
+                    <FloatingCard className="p-6 md:p-12 metallic-card reflective-hover text-center border-red-500/20">
                         <div className="max-w-3xl mx-auto space-y-6">
                             <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-red-500/20 to-blue-500/20 text-red-300 text-sm font-semibold">
                                 <TrendingUp className="mr-2 h-4 w-4" />

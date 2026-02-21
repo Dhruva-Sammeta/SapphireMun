@@ -116,10 +116,10 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
   return (
     <>
       <header
-        className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${isScrolled ? "scale-95" : "scale-100"}`}
+        className={`fixed z-50 transition-all duration-300 ${isMobile ? "top-3 left-4 right-4" : "top-6 left-1/2 -translate-x-1/2"} ${isScrolled ? "scale-[0.97]" : "scale-100"}`}
       >
-        <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl py-3 px-4 shadow-lg">
-          <div className="flex items-center gap-6">
+        <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl py-3 px-4">
+          <div className="flex items-center justify-between gap-4 sm:gap-6">
             {/* Logo & Switcher Trigger */}
             <div
               className="relative"
@@ -231,10 +231,10 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
       {/* Mobile Menu */}
       {isMobile && (
         <div
-          className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300 ${isOpen ? "opacity-100 visible scale-100" : "opacity-0 invisible scale-95"
+          className={`fixed top-16 left-4 right-4 z-40 transition-all duration-300 ${isOpen ? "opacity-100 visible scale-100" : "opacity-0 invisible scale-95"
             }`}
         >
-          <div className="bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl min-w-[200px]">
+          <div className="bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl">
             <div className="flex flex-col gap-2">
               {items.map((item) => (
                 <Link
@@ -243,12 +243,13 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="text-white/80 hover:text-blue-400 hover:bg-white/10 py-3 px-4 rounded-xl transition-all duration-200 text-center font-medium"
-                  onClick={() => {
+                  onClick={(e) => {
+                    if (item.href.startsWith("#")) {
+                      e.preventDefault()
+                    }
                     setIsOpen(false)
                     if (item.href.startsWith("#")) {
-                      handleNavClick(item.href) // logic handles preventing default if needed, or we rely on Link? actually handleNavClick does scrollIntoView.
-                      // But Link with # href might do default jump. 
-                      // Ideally we prevent default here too if we want smooth scroll.
+                      handleNavClick(item.href)
                     }
                   }}
                 >

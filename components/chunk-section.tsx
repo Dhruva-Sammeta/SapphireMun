@@ -19,7 +19,7 @@ type ChunkSectionProps = {
  * a fast-start -> slow-finish animation to feel reflective and premium.
  * Optimized for mobile performance with reduced animation complexity.
  */
-export default function ChunkSection({ id, className, children, threshold = 0.45 }: ChunkSectionProps) {
+export default function ChunkSection({ id, className, children, threshold = 0.45, mobileThreshold = 0.1 }: ChunkSectionProps & { mobileThreshold?: number }) {
   const ref = useRef<HTMLElement | null>(null)
   const controls = useAnimation()
   const [active, setActive] = useState(false)
@@ -41,7 +41,8 @@ export default function ChunkSection({ id, className, children, threshold = 0.45
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
+          const activeThreshold = isMobile ? mobileThreshold : threshold
+          if (entry.isIntersecting && entry.intersectionRatio >= activeThreshold) {
             setActive(true)
           } else if (entry.intersectionRatio < 0.1) {
             setActive(false)
@@ -49,7 +50,7 @@ export default function ChunkSection({ id, className, children, threshold = 0.45
         })
       },
       {
-        threshold: isMobile ? [0, threshold] : Array.from({ length: 10 }, (_, i) => i / 10),
+        threshold: isMobile ? [0, 0.05, mobileThreshold] : Array.from({ length: 10 }, (_, i) => i / 10),
         rootMargin: isMobile ? "0px 0px -5% 0px" : "0px 0px -10% 0px",
       },
     )
