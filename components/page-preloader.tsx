@@ -16,7 +16,7 @@ interface PagePreloaderProps {
  * Navigation transition overlays in pages/navbar are removed;
  * this component alone handles the "enter" experience.
  */
-export default function PagePreloader({ images = [], minDisplayTime = 1200 }: PagePreloaderProps) {
+export default function PagePreloader({ images = [], minDisplayTime = 1800 }: PagePreloaderProps) {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -37,7 +37,9 @@ export default function PagePreloader({ images = [], minDisplayTime = 1200 }: Pa
         Promise.all([...preloadImages, fontsReady]).then(() => {
             const elapsed = Date.now() - start
             const remaining = Math.max(0, minDisplayTime - elapsed)
-            setTimeout(() => setIsLoading(false), remaining)
+            setTimeout(() => {
+                setIsLoading(false)
+            }, remaining)
         })
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -48,43 +50,46 @@ export default function PagePreloader({ images = [], minDisplayTime = 1200 }: Pa
                     key="page-preloader"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                    className="fixed inset-0 z-[200] flex items-center justify-center"
-                    style={{ background: "linear-gradient(180deg, #07113b 0%, #050a2a 50%, #020410 100%)" }}
+                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                    className="fixed inset-0 z-[200] flex items-center justify-center bg-[#020410]"
                 >
-                    <div className="flex flex-col items-center gap-8">
-                        <motion.img
+                    <div className="flex flex-col items-center gap-10">
+                        <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            src="/images/sapphire-mun-hero-logo.png"
-                            alt=""
-                            className="h-28 w-28 object-contain drop-shadow-[0_0_40px_rgba(59,130,246,0.3)]"
-                            style={{ animation: "preloader-breathe 2s ease-in-out infinite" }}
-                        />
-                        <div className="flex gap-2">
+                            animate={{ scale: [0.95, 1.05, 0.95], opacity: 1 }}
+                            transition={{
+                                opacity: { duration: 0.8 },
+                                scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                            }}
+                            className="relative"
+                        >
+                            <img
+                                src="/images/sapphire-mun-hero-logo.png"
+                                alt=""
+                                className="h-32 w-32 object-contain drop-shadow-[0_0_50px_rgba(59,130,246,0.4)]"
+                            />
+                            <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full -z-10 animate-pulse" />
+                        </motion.div>
+
+                        <div className="flex gap-2.5">
                             {[0, 1, 2].map((i) => (
-                                <div
+                                <motion.div
                                     key={i}
-                                    className="w-1.5 h-1.5 rounded-full bg-white/50"
-                                    style={{
-                                        animation: `preloader-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
+                                    className="w-2 h-2 rounded-full bg-blue-400"
+                                    animate={{
+                                        opacity: [0.2, 1, 0.2],
+                                        scale: [1, 1.5, 1]
+                                    }}
+                                    transition={{
+                                        duration: 1.5,
+                                        repeat: Infinity,
+                                        delay: i * 0.2,
+                                        ease: "easeInOut"
                                     }}
                                 />
                             ))}
                         </div>
                     </div>
-
-                    <style>{`
-                        @keyframes preloader-dot {
-                            0%, 100% { opacity: 0.25; transform: scale(1); }
-                            50% { opacity: 1; transform: scale(1.6); }
-                        }
-                        @keyframes preloader-breathe {
-                            0%, 100% { transform: scale(1); opacity: 0.85; }
-                            50% { transform: scale(1.06); opacity: 1; }
-                        }
-                    `}</style>
                 </motion.div>
             )}
         </AnimatePresence>
