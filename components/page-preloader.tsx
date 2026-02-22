@@ -8,6 +8,8 @@ interface PagePreloaderProps {
     images?: string[]
     /** Minimum display time in ms (avoids flash on fast connections) */
     minDisplayTime?: number
+    /** Callback when loading is complete */
+    onComplete?: () => void
 }
 
 /**
@@ -16,7 +18,7 @@ interface PagePreloaderProps {
  * Navigation transition overlays in pages/navbar are removed;
  * this component alone handles the "enter" experience.
  */
-export default function PagePreloader({ images = [], minDisplayTime = 1800 }: PagePreloaderProps) {
+export default function PagePreloader({ images = [], minDisplayTime = 1800, onComplete }: PagePreloaderProps) {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -39,6 +41,7 @@ export default function PagePreloader({ images = [], minDisplayTime = 1800 }: Pa
             const remaining = Math.max(0, minDisplayTime - elapsed)
             setTimeout(() => {
                 setIsLoading(false)
+                if (onComplete) onComplete()
             }, remaining)
         })
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
