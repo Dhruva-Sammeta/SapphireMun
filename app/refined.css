@@ -136,7 +136,7 @@ html {
 }
 .btn-accent:hover {
   filter: saturate(1.1);
-  transform: translateY(-1px) !important;
+  transform: translateY(-1px) scale(1.02) !important;
 }
 
 .btn-accent-alt,
@@ -149,6 +149,12 @@ html {
   backdrop-filter: blur(12px) !important;
   position: relative;
   overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-glass:hover,
+.btn-outline:hover,
+.btn-accent-alt:hover {
+  transform: translateY(-1px) scale(1.02) !important;
 }
 .btn-glass::after,
 .btn-outline::after,

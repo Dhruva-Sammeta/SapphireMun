@@ -89,81 +89,118 @@ export default function VizagPage() {
                     </div>
 
                     <div className="container relative z-10">
-                        <div className="mx-auto max-w-4xl text-center space-y-6 px-4">
-                            <div className="inline-block relative px-0 my-2 py-20">
-                                <img
-                                    src="/images/sapphire-mun-hero-logo.png"
-                                    alt="Sapphire Model United Nations emblem"
-                                    className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain relative z-10 drop-shadow-xl hover:scale-105 transition-transform duration-700 fade-in-up"
-                                />
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="inline-flex items-center px-4 py-2 rounded-full text-white text-sm font-bold bg-gradient-to-r from-red-500 to-red-600 animate-pulse">
-                                    First Edition • Coming May 2026
-                                </div>
-                                <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
-                                    Sapphire <span className="font-semibold metallic-text">MUN Vizag</span>
-                                </h1>
-                                <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
-                                    The next chapter begins in Visakhapatnam. Experience the evolution of India's first Experience-targeted Model UN.
-                                </p>
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 px-4">
-                                <Button asChild size="lg" className="btn-accent w-full sm:w-auto bg-red-600 hover:bg-red-700">
-                                    <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform" target="_blank" rel="noopener noreferrer">
-                                        Register Now
-                                    </Link>
-                                </Button>
-
-                                <Button asChild size="lg" className="btn-glass w-full sm:w-auto">
-                                    <Link
-                                        href="#updates"
-                                        className="flex items-center justify-center"
-                                    >
-                                        <TrendingUp className="mr-2 h-4 w-4" />
-                                        Get Updates
-                                    </Link>
-                                </Button>
-
-                                <Button
-                                    onClick={() => handleEditionSwitch("/hyderabad")}
-                                    size="lg"
-                                    className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 transition-opacity"
+                        {revealed && (
+                            <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: {
+                                        opacity: 1,
+                                        transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+                                    },
+                                }}
+                                className="mx-auto max-w-4xl text-center space-y-6 px-4"
+                            >
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 30 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="inline-block relative px-0 my-2 py-20"
                                 >
-                                    <Sparkles className="mr-2 h-4 w-4 text-blue-300" />
-                                    Hyderabad Edition
-                                </Button>
-                            </div>
+                                    <img
+                                        src="/images/sapphire-mun-hero-logo.png"
+                                        alt="Sapphire Model United Nations emblem"
+                                        className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain relative z-10 drop-shadow-xl hover:scale-105 transition-transform duration-700 fade-in-up"
+                                    />
+                                </motion.div>
 
-                            <div className="grid grid-cols-3 gap-6 pt-8 max-w-lg mx-auto text-fg">
-                                <div className="text-center">
-                                    <div className="text-2xl font-semibold flex items-center justify-center gap-2">
-                                        <MapPin className="h-5 w-5 text-red-400" />
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="space-y-4"
+                                >
+                                    <div className="inline-flex items-center px-4 py-2 rounded-full text-white text-sm font-bold bg-gradient-to-r from-red-500 to-red-600 animate-pulse">
+                                        First Edition • Coming May 2026
                                     </div>
-                                    <div className="text-sm text-muted">Visakhapatnam</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-semibold flex items-center justify-center gap-2">
-                                        <Calendar className="h-5 w-5 text-red-400" />
+                                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
+                                        Sapphire <span className="font-semibold metallic-text">MUN Vizag</span>
+                                    </h1>
+                                    <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
+                                        The next chapter begins in Visakhapatnam. Experience the evolution of India's first Experience-targeted Model UN.
+                                    </p>
+                                </motion.div>
+
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 px-4"
+                                >
+                                    <Button asChild size="lg" className="btn-accent w-full sm:w-auto bg-red-600 hover:bg-red-700">
+                                        <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform" target="_blank" rel="noopener noreferrer">
+                                            Register Now
+                                        </Link>
+                                    </Button>
+
+                                    <Button asChild size="lg" className="btn-glass w-full sm:w-auto">
+                                        <Link
+                                            href="#updates"
+                                            className="flex items-center justify-center"
+                                        >
+                                            <TrendingUp className="mr-2 h-4 w-4" />
+                                            Get Updates
+                                        </Link>
+                                    </Button>
+
+                                    <Button
+                                        onClick={() => handleEditionSwitch("/hyderabad")}
+                                        size="lg"
+                                        className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 transition-opacity"
+                                    >
+                                        <Sparkles className="mr-2 h-4 w-4 text-blue-300" />
+                                        Hyderabad Edition
+                                    </Button>
+                                </motion.div>
+
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, scale: 0.95 },
+                                        visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="grid grid-cols-3 gap-6 pt-8 max-w-lg mx-auto text-fg"
+                                >
+                                    <div className="text-center">
+                                        <div className="text-2xl font-semibold flex items-center justify-center gap-2">
+                                            <MapPin className="h-5 w-5 text-red-400" />
+                                        </div>
+                                        <div className="text-sm text-muted">Visakhapatnam</div>
                                     </div>
-                                    <div className="text-sm text-muted">May 30-31</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-semibold flex items-center justify-center gap-2">
-                                        <Sparkles className="h-5 w-5 text-red-400" />
+                                    <div className="text-center">
+                                        <div className="text-2xl font-semibold flex items-center justify-center gap-2">
+                                            <Calendar className="h-5 w-5 text-red-400" />
+                                        </div>
+                                        <div className="text-sm text-muted">May 30-31</div>
                                     </div>
-                                    <div className="text-sm text-muted">1st Edition</div>
-                                </div>
-                                <div className="text-center col-span-3 my-0 pt-0">
-                                    <div className="text-sm text-muted flex items-center gap-2 py-7 justify-center text-left">
-                                        <Calendar className="text-sm flex items-center gap-2 justify-center py-0" />
-                                        May 30-31, 2026 • Visakhapatnam, India
+                                    <div className="text-center">
+                                        <div className="text-2xl font-semibold flex items-center justify-center gap-2">
+                                            <Sparkles className="h-5 w-5 text-red-400" />
+                                        </div>
+                                        <div className="text-sm text-muted">1st Edition</div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <div className="text-center col-span-3 my-0 pt-0">
+                                        <div className="text-sm text-muted flex items-center gap-2 py-7 justify-center text-left">
+                                            <Calendar className="text-sm flex items-center gap-2 justify-center py-0" />
+                                            May 30-31, 2026 • Visakhapatnam, India
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
                     </div>
 
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2">

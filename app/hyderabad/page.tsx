@@ -90,91 +90,128 @@ export default function Page() {
                     </div>
 
                     <div className="container relative z-10">
-                        <div className="mx-auto max-w-4xl text-center space-y-6 px-4">
-                            <div className="inline-block relative px-0 my-2 py-20">
-                                <div className="absolute inset-0 bg-gradient-radial from-blue-500/15 to-transparent blur-xl" />
-                                <img
-                                    src="/images/sapphire-mun-hero-logo.png"
-                                    alt="Sapphire Model United Nations emblem"
-                                    className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-700 reflective-hover fade-in-up"
-                                />
-                                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-64 h-32 md:w-80 md:h-40 opacity-30 blur-sm">
+                        {revealed && (
+                            <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: {
+                                        opacity: 1,
+                                        transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+                                    },
+                                }}
+                                className="mx-auto max-w-4xl text-center space-y-6 px-4"
+                            >
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 30 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="inline-block relative px-0 my-2 py-20"
+                                >
+                                    <div className="absolute inset-0 bg-gradient-radial from-blue-500/15 to-transparent blur-xl" />
                                     <img
                                         src="/images/sapphire-mun-hero-logo.png"
-                                        alt=""
-                                        className="w-full h-full object-contain transform scale-y-[-1] mask-gradient-to-b animate-pulse"
+                                        alt="Sapphire Model United Nations emblem"
+                                        className="w-64 h-64 md:w-80 md:h-80 mx-auto object-contain relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-700 reflective-hover fade-in-up"
                                     />
-                                </div>
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="inline-flex items-center px-4 py-2 rounded-full text-[var(--ocean-1000)] text-sm font-bold bg-gradient-to-r from-cyan-400 to-blue-400 animate-pulse">
-                                    First Edition Complete ✓
-                                </div>
-                                <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
-                                    Sapphire <span className="font-semibold metallic-text">MUN</span>
-                                </h1>
-                                <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
-                                    India's first Experience-targeted Model UN. Celebrating a successful inaugural edition.
-                                </p>
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 px-4">
-                                <Button asChild size="lg" className="btn-accent w-full sm:w-auto">
-                                    <Link
-                                        href="https://drive.google.com/drive/folders/1ZU8qseZSVTgjZN_Aj4UoKOMeccxGQrUl?usp=sharing"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center"
-                                    >
-                                        <ImageIcon className="mr-2 h-4 w-4" />
-                                        View Event Photos
-                                    </Link>
-                                </Button>
-
-                                <Button asChild size="lg" className="btn-glass w-full sm:w-auto">
-                                    <Link
-                                        href="https://v0-mun-website-system.vercel.app"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center"
-                                    >
-                                        <Play className="mr-2 h-4 w-4" />
-                                        Integrated Tech Experience
-                                    </Link>
-                                </Button>
-
-                                <Button
-                                    onClick={() => handleEditionSwitch("/vizag")}
-                                    size="lg"
-                                    className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 bg-red-500/5 hover:bg-red-500/10 border-red-500/20"
-                                >
-                                    <Sparkles className="mr-2 h-4 w-4 text-red-400" />
-                                    Visakhapatnam Edition
-                                </Button>
-                            </div>
-
-                            <div className="grid grid-cols-3 gap-6 pt-8 max-w-lg mx-auto text-fg">
-                                <div className="text-center">
-                                    <div className="text-2xl font-semibold">5</div>
-                                    <div className="text-sm text-muted">Committees</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-semibold">200+</div>
-                                    <div className="text-sm text-muted">Delegates</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-semibold">3</div>
-                                    <div className="text-sm text-muted">Days</div>
-                                </div>
-                                <div className="text-center col-span-3 my-0 pt-0">
-                                    <div className="text-sm text-muted flex items-center gap-2 py-7 justify-center text-left">
-                                        <Calendar className="text-sm flex items-center gap-2 justify-center py-0" />
-                                        August 15-17, 2025 • Sanskriti Degree College, Kondapur
+                                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-64 h-32 md:w-80 md:h-40 opacity-30 blur-sm">
+                                        <img
+                                            src="/images/sapphire-mun-hero-logo.png"
+                                            alt=""
+                                            className="w-full h-full object-contain transform scale-y-[-1] mask-gradient-to-b animate-pulse"
+                                        />
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                </motion.div>
+
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="space-y-4"
+                                >
+                                    <div className="inline-flex items-center px-4 py-2 rounded-full text-[var(--ocean-1000)] text-sm font-bold bg-gradient-to-r from-cyan-400 to-blue-400 animate-pulse">
+                                        First Edition Complete ✓
+                                    </div>
+                                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
+                                        Sapphire <span className="font-semibold metallic-text">MUN</span>
+                                    </h1>
+                                    <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed">
+                                        India's first Experience-targeted Model UN. Celebrating a successful inaugural edition.
+                                    </p>
+                                </motion.div>
+
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 px-4"
+                                >
+                                    <Button asChild size="lg" className="btn-accent w-full sm:w-auto">
+                                        <Link
+                                            href="https://drive.google.com/drive/folders/1ZU8qseZSVTgjZN_Aj4UoKOMeccxGQrUl?usp=sharing"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center"
+                                        >
+                                            <ImageIcon className="mr-2 h-4 w-4" />
+                                            View Event Photos
+                                        </Link>
+                                    </Button>
+
+                                    <Button asChild size="lg" className="btn-glass w-full sm:w-auto">
+                                        <Link
+                                            href="https://v0-mun-website-system.vercel.app"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center"
+                                        >
+                                            <Play className="mr-2 h-4 w-4" />
+                                            Integrated Tech Experience
+                                        </Link>
+                                    </Button>
+
+                                    <Button
+                                        onClick={() => handleEditionSwitch("/vizag")}
+                                        size="lg"
+                                        className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 bg-red-500/5 hover:bg-red-500/10 border-red-500/20"
+                                    >
+                                        <Sparkles className="mr-2 h-4 w-4 text-red-400" />
+                                        Visakhapatnam Edition
+                                    </Button>
+                                </motion.div>
+
+                                <motion.div
+                                    variants={{
+                                        hidden: { opacity: 0, scale: 0.95 },
+                                        visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+                                    }}
+                                    className="grid grid-cols-3 gap-6 pt-8 max-w-lg mx-auto text-fg"
+                                >
+                                    <div className="text-center">
+                                        <div className="text-2xl font-semibold">5</div>
+                                        <div className="text-sm text-muted">Committees</div>
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-2xl font-semibold">200+</div>
+                                        <div className="text-sm text-muted">Delegates</div>
+                                    </div>
+                                    <div className="text-center">
+                                        <div className="text-2xl font-semibold">3</div>
+                                        <div className="text-sm text-muted">Days</div>
+                                    </div>
+                                    <div className="text-center col-span-3 my-0 pt-0">
+                                        <div className="text-sm text-muted flex items-center gap-2 py-7 justify-center text-left">
+                                            <Calendar className="text-sm flex items-center gap-2 justify-center py-0" />
+                                            August 15-17, 2025 • Sanskriti Degree College, Kondapur
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
                     </div>
 
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
