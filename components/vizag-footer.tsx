@@ -35,6 +35,13 @@ const VizagFooter: React.FC = () => {
                                 Hyderabad Edition
                             </Link>
                             <Link
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform"
+                                target="_blank"
+                                className="block text-muted hover:text-red-400 transition-colors"
+                            >
+                                Register Now
+                            </Link>
+                            <Link
                                 href="https://www.instagram.com/sapphiremunvizag/"
                                 target="_blank"
                                 className="block text-muted hover:text-red-400 transition-colors"
@@ -46,7 +53,7 @@ const VizagFooter: React.FC = () => {
 
                     {/* Contact & Register */}
                     <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-fg">Stay Updated</h3>
+                        <h3 className="text-lg font-semibold text-fg">Contact & Register</h3>
                         <div className="space-y-3">
                             <div className="flex items-center gap-2 text-muted">
                                 <Mail className="w-4 text-red-400 h-4" />
@@ -74,9 +81,8 @@ const VizagFooter: React.FC = () => {
                                 <span className="py-2.5">Visakhapatnam</span>
                             </div>
                             <Button asChild className="btn-accent w-full mt-4 bg-red-600 hover:bg-red-700">
-                                <Link href="https://www.instagram.com/sapphiremunvizag/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                                    <TrendingUp className="mr-2 h-4 w-4" />
-                                    Get Updates
+                                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                                    Register Now
                                 </Link>
                             </Button>
                         </div>

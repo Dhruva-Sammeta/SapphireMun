@@ -73,6 +73,7 @@ export default function VizagPage() {
                         { href: "/", label: "Home" },
                         { href: "#committees", label: "Committees" },
                         { href: "#updates", label: "Updates" },
+                        { href: "https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform", label: "Register" },
                     ]}
                 />
 
@@ -110,8 +111,10 @@ export default function VizagPage() {
                             </div>
 
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 px-4">
-                                <Button size="lg" className="btn-accent w-full sm:w-auto opacity-80 cursor-not-allowed bg-red-600/80">
-                                    Registrations Opening Soon
+                                <Button asChild size="lg" className="btn-accent w-full sm:w-auto bg-red-600 hover:bg-red-700">
+                                    <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform" target="_blank" rel="noopener noreferrer">
+                                        Register Now
+                                    </Link>
                                 </Button>
 
                                 <Button asChild size="lg" className="btn-glass w-full sm:w-auto">
@@ -292,6 +295,16 @@ export default function VizagPage() {
                                     Follow us on Instagram for the latest updates on registrations, committee reveals, and more.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                                    <Button asChild className="btn-accent bg-red-600 hover:bg-red-700 border-red-500/30">
+                                        <Link
+                                            href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center"
+                                        >
+                                            Register Now
+                                        </Link>
+                                    </Button>
                                     <Button asChild className="btn-glass bg-red-500/10 hover:bg-red-500/20 border-red-500/30">
                                         <Link
                                             href="https://www.instagram.com/sapphiremunvizag/"
