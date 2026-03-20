@@ -397,12 +397,12 @@ export default function HyderabadPage() {
                                     }}
                                     className="pt-6"
                                 >
-                                    <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm">
+                                    <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl sm:rounded-full border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm">
                                         <div className="flex items-center gap-2">
                                             <Calendar className="h-5 w-5 text-accent" />
                                             <span className="text-lg md:text-xl font-semibold text-fg">MAY 1 · 2 · 3</span>
                                         </div>
-                                        <div className="w-px h-6 bg-cyan-400/30" />
+                                        <div className="hidden sm:block w-px h-6 bg-cyan-400/30" />
                                         <div className="flex items-center gap-2">
                                             <MapPin className="h-5 w-5 text-accent" />
                                             <span className="text-lg md:text-xl font-semibold text-fg">Hyderabad</span>
@@ -722,7 +722,7 @@ export default function HyderabadPage() {
                                     </div>
                                     <div className="flex items-center gap-2 text-muted">
                                         <Calendar className="h-4 w-4 text-accent" />
-                                        <span className="py-2.5">May 1-3, 2026</span>
+                                        <span className="py-2.5">MAY 1 · 2 · 3, 2026</span>
                                     </div>
                                     <div className="flex items-center gap-2 text-muted">
                                         <MapPin className="h-4 w-4 text-accent" />
