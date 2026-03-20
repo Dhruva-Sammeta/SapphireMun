@@ -1,11 +1,25 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient, SupabaseClient } from "@supabase/supabase-js"
 
-// Public client — used in frontend components only for auth/anon access
-// This respects Row Level Security (RLS)
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Lazy-initialized public client — avoids crashing at build time
+// when env vars are not yet available (e.g. Vercel build step).
+let _supabase: SupabaseClient | null = null
+
+export function getSupabase() {
+  if (!_supabase) {
+    _supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+  }
+  return _supabase
+}
+
+// Kept for backwards compat — lazy getter behind a proxy-like export
+export const supabase = new Proxy({} as SupabaseClient, {
+  get(_target, prop) {
+    return (getSupabase() as any)[prop]
+  },
+})
 
 // Server-only client — used exclusively in API routes
 // CAUTION: This bypasses all RLS policies. Never import in client components.
