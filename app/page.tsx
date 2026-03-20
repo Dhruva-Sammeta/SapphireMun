@@ -89,11 +89,11 @@ export default function EditionSelector() {
                 </div>
 
                 <h2 className="text-3xl font-light mb-2 text-white group-hover:text-blue-200 transition-colors">Hyderabad</h2>
-                <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6">First Edition • Completed</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6 animate-pulse">Second Edition • Upcoming</div>
 
                 <div className="space-y-3 w-full opacity-70 group-hover:opacity-100 transition-opacity">
                   <div className="flex items-center justify-center gap-2 text-sm border-t border-white/5 pt-3">
-                    <Calendar className="w-4 h-4 text-blue-400" /> Aug 2025
+                    <Calendar className="w-4 h-4 text-blue-400" /> May 1-3 2026
                   </div>
                   <div className="flex items-center justify-center gap-2 text-sm">
                     <MapPin className="w-4 h-4 text-blue-400" /> Kondapur
@@ -101,7 +101,7 @@ export default function EditionSelector() {
                 </div>
 
                 <div className="mt-8 px-6 py-2 rounded-full border border-blue-500/30 text-sm md:text-base font-medium text-blue-200 bg-blue-900/20 group-hover:bg-blue-500 text-white transition-all duration-300">
-                  Enter Archive
+                  Explore Edition 2
                 </div>
               </div>
             </motion.div>
