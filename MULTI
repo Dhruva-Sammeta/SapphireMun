@@ -1,0 +1,91 @@
+// app/page.tsx
+import React from 'react';
+import { ChunkSection, FloatingCard, Button, Link, Sparkles } from './components';
+
+const Page = () => {
+  return (
+    <div>
+      {/* Hero Section */}
+      <div className="hero">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-5xl font-bold">Welcome to Sanskriti Degree College, Kondapur</h1>
+            <p className="py-6">Sanskriti Degree College, Kondapur • Social Night at Alle House</p>
+            {/* Other hero content */}
+          </div>
+        </div>
+      </div>
+
+      {/* Social Night Section */}
+      <ChunkSection className="py-24">
+        <div className="container">
+          <FloatingCard className="p-8 metallic-card reflective-hover">
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              <div className="space-y-2">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-[rgba(15,224,255,0.18)] text-[var(--ocean-1000)] text-sm font-semibold">
+                  After Hours
+                </div>
+                <h3 className="text-2xl md:text-3xl font-light">
+                  Social Night at <span className="font-semibold metallic-text">Alle House</span>
+                </h3>
+                <p className="text-muted max-w-2xl">
+                  A well‑prepped social experience to unwind, connect, and celebrate. Music, safe logistics, and curated
+                  vibes to wrap up your day on the floor.
+                </p>
+                <div>
+                  <Button asChild className="btn-accent">
+                    <Link href="#contact" className="flex items-center">
+                      Get event updates
+                      <Sparkles className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="rounded-xl overflow-hidden bg-surface border border-white/10 aspect-video">
+                <video
+                  className="h-full w-full object-cover"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alle%20house%20%281%29-kmPSrW85x4Zre7OZDTK4e1x7khLVAf.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              </div>
+            </div>
+          </FloatingCard>
+        </div>
+      </ChunkSection>
+
+      {/* Contact Section */}
+      <div id="contact">
+        <div className="container">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            {/* Other contact content */}
+            <div className="space-y-4">
+              <h2 className="text-3xl font-bold">Contact Us</h2>
+              <ul className="list-disc list-inside">
+                <li>
+                  <Sparkles className="h-4 w-4 text-accent" /> Social Night at Alle House
+                </li>
+                {/* Other list items */}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <footer>
+        <div className="container">
+          <div className="footer-content">
+            {/* Other footer content */}
+            <p>Social Night: Alle House — meticulously prepped</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Page;

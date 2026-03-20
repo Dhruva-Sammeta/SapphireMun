@@ -1,0 +1,42 @@
+/* ─── Hyderabad 2.0 "Diamond Edition" Theme ─── */
+
+.hyd-theme {
+  --ocean-1000: #040818;
+  --ocean-950: #060d26;
+  --ocean-900: #081840;
+  --ocean-800: #0c2460;
+}
+
+/* Deeper, richer background */
+.hyd-theme .bg-app {
+  background:
+    radial-gradient(1000px 600px at 50% -5%, rgba(15, 224, 255, 0.06), transparent 60%),
+    radial-gradient(800px 500px at 20% 110%, rgba(7, 17, 59, 0.5), transparent 60%),
+    linear-gradient(180deg, #060d26 0%, #040818 100%);
+}
+
+/* Metallic text — cool sapphire gradient */
+.hyd-theme .metallic-text {
+  background: linear-gradient(90deg, #93c5fd, #e0f2fe, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cards — darker base with cyan accent border */
+.hyd-theme .metallic-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    radial-gradient(100% 220% at 100% 0%, rgba(15, 224, 255, 0.05), transparent 40%),
+    linear-gradient(180deg, rgba(6, 13, 38, 0.95), rgba(4, 8, 24, 0.95));
+  border: 1px solid rgba(15, 224, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 34px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(15, 224, 255, 0.06);
+}
+
+/* Glow card overrides for the darker theme */
+.hyd-theme .bg-surface {
+  background-color: rgba(6, 13, 38, 0.6);
+}

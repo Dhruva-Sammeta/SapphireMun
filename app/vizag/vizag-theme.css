@@ -1,0 +1,46 @@
+.vizag-theme {
+  --aqua: #ff4444;
+  /* Vibrant Red */
+  --sky: #ff8888;
+  /* Soft Red */
+  --ocean-1000: #020410;
+  /* Slightly darker depth */
+}
+
+/* Specific overrides for elements inside vizag-theme */
+.vizag-theme .btn-accent {
+  background: linear-gradient(180deg, #ff4444, #cc0000) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 26px rgba(255, 68, 68, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+  border-color: rgba(255, 68, 68, 0.5) !important;
+}
+
+.vizag-theme .text-accent {
+  color: #ff4444 !important;
+}
+
+.vizag-theme .metallic-text {
+  background: linear-gradient(90deg, #ffd1d1, #ffffff, #ffb6b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.vizag-theme .nav-item.active {
+  background: linear-gradient(180deg, #ff4444, #cc0000);
+}
+
+.vizag-theme .mobile-nav-item:hover {
+  background: #ff4444;
+}
+
+.vizag-theme .border-accent {
+  border-color: #ff4444;
+}
+
+/* Text glow effect on hover */
+.vizag-theme .group:hover .group-hover\:text-shadow-glow {
+  text-shadow:
+    0 0 20px rgba(255, 68, 68, 0.6),
+    0 0 40px rgba(255, 68, 68, 0.4),
+    0 0 60px rgba(255, 68, 68, 0.2);
+}
