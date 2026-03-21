@@ -106,6 +106,9 @@ export async function PATCH(req: NextRequest) {
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;margin:0 0 8px;">
                   Your official delegate pass will be shared closer to the event. Stay tuned!
                 </p>
+                <p style="color:rgba(230,240,255,0.7);line-height:1.7;margin:0 0 8px;">
+                  If you have any questions, you can contact us on Instagram <a href="https://instagram.com/sapphire_mun/" style="color:#0fe0ff;text-decoration:none;">@sapphire_mun</a> or email us at <a href="mailto:sapphire.mun1@gmail.com" style="color:#0fe0ff;text-decoration:none;">sapphire.mun1@gmail.com</a>.
+                </p>
                 <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:32px 0;" />
                 <p style="font-size:11px;color:rgba(230,240,255,0.25);text-align:center;margin:0;">
                   Sapphire MUN • sapphiremun.com
@@ -141,7 +144,7 @@ export async function PATCH(req: NextRequest) {
                   Unfortunately, your registration could not be approved at this time.
                 </p>
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;">
-                  If you believe this is an error, please reply to this email or contact us on Instagram <a href="https://instagram.com/sapphire_mun/" style="color:#0fe0ff;">@sapphire_mun</a>.
+                  If you believe this is an error, please reply to this email, contact us on Instagram <a href="https://instagram.com/sapphire_mun/" style="color:#0fe0ff;text-decoration:none;">@sapphire_mun</a>, or email us at <a href="mailto:sapphire.mun1@gmail.com" style="color:#0fe0ff;text-decoration:none;">sapphire.mun1@gmail.com</a>.
                 </p>
                 <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:32px 0;" />
                 <p style="font-size:11px;color:rgba(230,240,255,0.25);text-align:center;margin:0;">
