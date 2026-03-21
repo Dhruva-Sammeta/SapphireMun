@@ -24,10 +24,12 @@ export async function POST(req: NextRequest) {
     }
 
     const supabase = getServiceSupabase()
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "sapphire.mun1@gmail.com"
+    const resendKey = process.env.RESEND_API_KEY
 
     if (action === "approve") {
-      // 2. Mark as verified in DB
-      const { error: updateError } = await supabase
+      // Update DB
+      const { data: delegate, error: updateError } = await supabase
         .from("delegates")
         .update({
           payment_status: "verified",
@@ -35,36 +37,54 @@ export async function POST(req: NextRequest) {
         })
         .eq("delegate_id", delegate_id)
         .eq("payment_status", "pending")
+        .select("name, email, delegate_id, committee_pref")
+        .single()
 
-      if (updateError) {
+      if (updateError || !delegate) {
         console.error("Approve update error:", updateError)
         return NextResponse.json({ error: "Failed to update status in database." }, { status: 500 })
       }
 
-      // 3. Trigger pass generation and email implicitly via the existing route
-      // We must await this because serverless functions on Vercel terminate immediately after response
-      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-      
-      try {
-        await fetch(`${baseUrl}/api/generate-pass`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ delegate_id }),
-        })
-      } catch (err) {
-        console.error("Pass generation trigger error:", err)
+      // Send approval email
+      if (resendKey) {
+        try {
+          const { Resend } = await import("resend")
+          const resend = new Resend(resendKey)
+
+          await resend.emails.send({
+            from: `Sapphire MUN <${fromEmail}>`,
+            to: delegate.email,
+            subject: `Payment Verified — Welcome to Sapphire MUN! 🎉`,
+            html: `
+              <div style="font-family:'Inter',Arial,sans-serif;max-width:600px;margin:0 auto;background:#050a2a;color:#e6f0ff;padding:40px 32px;border-radius:16px;">
+                <h1 style="font-size:24px;color:white;">Hi ${delegate.name},</h1>
+                <p style="color:rgba(230,240,255,0.8);line-height:1.7;">
+                  Great news! Your payment has been <strong style="color:#0fe0ff;">verified</strong> and your registration for Sapphire MUN Hyderabad 2.0 is confirmed.
+                </p>
+                <p style="color:rgba(230,240,255,0.8);line-height:1.7;">
+                  <strong>Delegate ID:</strong> ${delegate.delegate_id}<br/>
+                  <strong>Committee Preference:</strong> ${delegate.committee_pref}
+                </p>
+                <p style="color:rgba(230,240,255,0.7);line-height:1.7;">
+                  Your official delegate pass will be sent to you closer to the event. Keep an eye on this email.
+                </p>
+                <p style="color:rgba(230,240,255,0.5);font-size:12px;margin-top:40px;">Sapphire MUN Registration Team</p>
+              </div>
+            `,
+          })
+        } catch (emailErr) {
+          console.error("Approval email error:", emailErr)
+          // Don't fail the action if email fails — DB update succeeded
+        }
       }
 
-      return NextResponse.json({ success: true, message: "Delegate approved and pass generation triggered." })
-    } 
-    
+      return NextResponse.json({ success: true, message: "Delegate approved and notified." })
+    }
+
     else if (action === "reject") {
-      // 2. Mark as rejected in DB
       const { data: delegate, error: updateError } = await supabase
         .from("delegates")
-        .update({
-          payment_status: "rejected",
-        })
+        .update({ payment_status: "rejected" })
         .eq("delegate_id", delegate_id)
         .select("name, email, delegate_id")
         .single()
@@ -74,13 +94,11 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Failed to reject delegate." }, { status: 500 })
       }
 
-      // 3. Optionally Send Rejection Email via Resend
-      const resendKey = process.env.RESEND_API_KEY
+      // Send rejection email
       if (resendKey) {
         try {
           const { Resend } = await import("resend")
           const resend = new Resend(resendKey)
-          const fromEmail = process.env.RESEND_FROM_EMAIL || "registrations@sapphiremun.com"
 
           await resend.emails.send({
             from: `Sapphire MUN <${fromEmail}>`,
@@ -93,7 +111,7 @@ export async function POST(req: NextRequest) {
                   We were unable to verify the payment screenshot you uploaded for delegate ID <strong>${delegate.delegate_id}</strong>.
                 </p>
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;">
-                  Please reply to this email to coordinate the resolution, or simply try submitting your screenshot again via the registration portal.
+                  Please reply to this email or re-submit your payment screenshot via the registration portal.
                 </p>
                 <p style="color:rgba(230,240,255,0.5);font-size:12px;margin-top:40px;">Sapphire MUN Registration Team</p>
               </div>
