@@ -36,6 +36,24 @@ export default function DelegateRegistrationPage() {
   const [screenshotPreview, setScreenshotPreview] = useState("")
   const [uploadError, setUploadError] = useState("")
 
+  // File handling — declared before early return to satisfy React hooks rules
+  const handleFileSelect = useCallback((file: File | null) => {
+    if (!file) return
+    const validTypes = ["image/jpeg", "image/png", "image/webp"]
+    if (!validTypes.includes(file.type)) { setUploadError("Only JPG, PNG, and WebP images are accepted."); return }
+    if (file.size > 5 * 1024 * 1024) { setUploadError("File size must be under 5MB."); return }
+    setUploadError("")
+    setScreenshotFile(file)
+    const reader = new FileReader()
+    reader.onloadend = () => setScreenshotPreview(reader.result as string)
+    reader.readAsDataURL(file)
+  }, [])
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    handleFileSelect(e.dataTransfer.files?.[0] || null)
+  }, [handleFileSelect])
+
   React.useEffect(() => { setMounted(true) }, [])
   if (!mounted) return null
 
@@ -84,24 +102,6 @@ export default function DelegateRegistrationPage() {
       setLoading(false)
     }
   }
-
-  // File handling
-  const handleFileSelect = useCallback((file: File | null) => {
-    if (!file) return
-    const validTypes = ["image/jpeg", "image/png", "image/webp"]
-    if (!validTypes.includes(file.type)) { setUploadError("Only JPG, PNG, and WebP images are accepted."); return }
-    if (file.size > 5 * 1024 * 1024) { setUploadError("File size must be under 5MB."); return }
-    setUploadError("")
-    setScreenshotFile(file)
-    const reader = new FileReader()
-    reader.onloadend = () => setScreenshotPreview(reader.result as string)
-    reader.readAsDataURL(file)
-  }, [])
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    handleFileSelect(e.dataTransfer.files?.[0] || null)
-  }, [handleFileSelect])
 
   // Step 2 → upload screenshot
   const handleStep2Submit = async () => {
