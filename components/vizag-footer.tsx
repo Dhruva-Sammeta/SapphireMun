@@ -5,7 +5,8 @@ import { Mail, Calendar, MapPin, Instagram, TrendingUp } from "lucide-react"
 
 const VizagFooter: React.FC = () => {
     return (
-        <footer className="bg-surface border-t border-white/10 mt-24 py-5">
+        <footer className="relative bg-gradient-to-t from-red-950/40 to-[#050a2a] border-t border-red-500/20 mt-24 py-5 overflow-hidden">
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
             <div className="container py-16 md:py-20 pt-20 md:pt-24">
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {/* Logo and Description */}
@@ -35,8 +36,7 @@ const VizagFooter: React.FC = () => {
                                 Hyderabad Edition
                             </Link>
                             <Link
-                                href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform"
-                                target="_blank"
+                                href="/registrations"
                                 className="block text-muted hover:text-red-400 transition-colors"
                             >
                                 Register Now
@@ -80,8 +80,8 @@ const VizagFooter: React.FC = () => {
                                 <MapPin className="h-4 w-4 text-red-400" />
                                 <span className="py-2.5">Visakhapatnam</span>
                             </div>
-                            <Button asChild className="btn-accent w-full mt-4 bg-red-600 hover:bg-red-700">
-                                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjl6yQGXP7D0esg/viewform" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                            <Button asChild className="btn-accent w-full mt-4 bg-red-600 hover:bg-red-700 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                                <Link href="/registrations" className="flex items-center justify-center">
                                     Register Now
                                 </Link>
                             </Button>

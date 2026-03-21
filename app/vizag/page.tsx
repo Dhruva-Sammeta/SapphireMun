@@ -38,7 +38,7 @@ function VizagCommitteeCard({ item }: { item: any }) {
         const card = cardRef.current
         if (!card) return
         isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
-        const threshold = isMobileRef.current ? 0.5 : 0.15
+        const threshold = 0.15
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting && !hasAutoPlayed.current) {
@@ -48,7 +48,7 @@ function VizagCommitteeCard({ item }: { item: any }) {
                     observer.disconnect()
                 }
             },
-            { threshold, rootMargin: isMobileRef.current ? "-15% 0px -15% 0px" : "-60px" }
+            { threshold, rootMargin: "0px" }
         )
         observer.observe(card)
         return () => observer.disconnect()
@@ -192,13 +192,13 @@ export default function VizagPage() {
                     "/images/design-mode/download.png",
                 ]}
             />
-            <div className={`transition-opacity duration-1000 ${revealed ? "opacity-100" : "opacity-0"}`}>
+            <>
                 <FloatingNavbar
                     items={[
                         { href: "/", label: "Home" },
                         { href: "#committees", label: "Committees" },
                         { href: "#updates", label: "Updates" },
-                        // { href: "https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjI6yQGXP7D0esg/viewform", label: "Register" },
+                        { href: "/registrations", label: "Register" },
                     ]}
                 />
 
@@ -209,8 +209,6 @@ export default function VizagPage() {
                 >
                     <div className="absolute inset-0 -z-20 bg-hero" aria-hidden="true">
                         <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 via-slate-900/20 to-red-800/15" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent transform -skew-x-12 animate-shimmer" />
-                        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-red-200/5 to-transparent transform skew-x-12 animate-shimmer-reverse" />
                     </div>
 
                     <div className="container relative z-10">
@@ -266,12 +264,11 @@ export default function VizagPage() {
                                     }}
                                     className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 px-4"
                                 >
-                                    {/* <Button asChild size="lg" className="btn-accent w-full sm:w-auto bg-red-600 hover:bg-red-700">
-                                        <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjI6yQGXP7D0esg/viewform" target="_blank" rel="noopener noreferrer">
+                                    <Button asChild size="lg" className="btn-accent w-full sm:w-auto bg-red-600 hover:bg-red-700 shadow-[0_0_20px_rgba(239,68,68,0.3)] border border-red-500/50 text-white">
+                                        <Link href="/registrations">
                                             Register Now
                                         </Link>
-                                    </Button> */}
-
+                                    </Button>
                                     <Button asChild size="lg" className="btn-glass w-full sm:w-auto">
                                         <Link
                                             href="#updates"
@@ -390,16 +387,11 @@ export default function VizagPage() {
                                     Follow us on Instagram for the latest updates on registrations, committee reveals, and more.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                                    {/* <Button asChild className="btn-accent bg-red-600 hover:bg-red-700 border-red-500/30">
-                                        <Link
-                                            href="https://docs.google.com/forms/d/e/1FAIpQLSeGUGAkvtcv97Xba2rmuzsYFHOm3V8ksEgbjI6yQGXP7D0esg/viewform"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center"
-                                        >
+                                    <Button asChild className="btn-accent bg-red-600 hover:bg-red-700 border-red-500/30 text-white">
+                                        <Link href="/registrations" className="flex items-center">
                                             Register Now
                                         </Link>
-                                    </Button> */}
+                                    </Button>
                                     <Button asChild className="btn-glass bg-red-500/10 hover:bg-red-500/20 border-red-500/30">
                                         <Link
                                             href="https://www.instagram.com/sapphiremunvizag/"
@@ -418,7 +410,7 @@ export default function VizagPage() {
                 </ChunkSection >
 
                 <VizagFooter />
-            </div>
+            </>
         </div >
     )
 }
