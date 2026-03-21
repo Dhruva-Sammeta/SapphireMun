@@ -3,7 +3,7 @@ import { getServiceSupabase } from "@/lib/supabase"
 
 export const dynamic = "force-dynamic"
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "sapphire2026"
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Sapphire#2026"
 
 export async function POST(req: NextRequest) {
   try {
