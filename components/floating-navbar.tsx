@@ -114,8 +114,9 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
       <header
         className={`fixed z-50 transition-all duration-300 ${isMobile ? "top-3 left-4 right-4" : "top-6 left-1/2 -translate-x-1/2"} ${isScrolled ? "scale-[0.97]" : "scale-100"}`}
       >
-        <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl py-3 px-4">
-          <div className="flex items-center justify-between gap-4 sm:gap-6">
+        <div className="bg-[#0a1535]/40 backdrop-blur-2xl border border-white/10 border-t-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] shadow-cyan-500/10 py-3 px-4 transition-all duration-500 hover:bg-[#0a1535]/50 hover:border-white/15 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-full pointer-events-none" />
+          <div className="relative flex items-center justify-between gap-4 sm:gap-6">
             {/* Logo & Switcher Trigger */}
             <div
               className="relative"

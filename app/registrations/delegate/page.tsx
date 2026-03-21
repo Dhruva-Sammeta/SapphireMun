@@ -157,7 +157,7 @@ export default function DelegateRegistrationPage() {
 
       {/* Step indicator */}
       <div className="container max-w-xl mx-auto px-4 pb-10 mt-4">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-between sm:justify-center gap-1 sm:gap-0 bg-[#0a1535]/40 backdrop-blur-2xl border border-white/10 border-t-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] px-4 sm:px-8 py-3.5 transition-all duration-500">
           {stepLabels.map((label, i) => (
             <React.Fragment key={label}>
               <div className="flex items-center gap-2">
