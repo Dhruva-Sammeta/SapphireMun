@@ -8,10 +8,18 @@ type Delegate = {
   id: string
   name: string
   email: string
+  phone: string
   school: string
+  grade_year: string
+  attended_muns: string
+  experience: string
   committee: string
   country: string
-  experience: string
+  committee_2: string
+  portfolio_2: string
+  committee_3: string
+  portfolio_3: string
+  heard_about: string
   status: string
   screenshot_url: string | null
   created_at: string
@@ -200,10 +208,16 @@ export default function AdminPanel() {
                   </div>
 
                   <div className="space-y-1 text-sm text-white/60">
-                    <p><span className="text-white/30">School:</span> {d.school}</p>
-                    <p><span className="text-white/30">Committee:</span> {d.committee}</p>
-                    <p><span className="text-white/30">Country:</span> {d.country}</p>
-                    {d.experience && <p><span className="text-white/30">Experience:</span> {d.experience}</p>}
+                    <p><span className="text-white/30">Phone:</span> {d.phone}</p>
+                    <p><span className="text-white/30">School:</span> {d.school} <span className="text-xs text-white/40">(Grade: {d.grade_year})</span></p>
+                    <p><span className="text-white/30">Attended MUNs:</span> {d.attended_muns}</p>
+                    {d.experience && <p><span className="text-white/30">MUN Exp:</span> {d.experience}</p>}
+                    <div className="pt-2 bg-white/5 p-2 rounded-lg mt-2 border border-white/5 space-y-1">
+                      <p><span className="text-white/30">Pref 1:</span> {d.committee} <span className="text-blue-300">({d.country})</span></p>
+                      {d.committee_2 && <p><span className="text-white/30">Pref 2:</span> {d.committee_2} <span className="text-blue-300">({d.portfolio_2})</span></p>}
+                      {d.committee_3 && <p><span className="text-white/30">Pref 3:</span> {d.committee_3} <span className="text-blue-300">({d.portfolio_3})</span></p>}
+                    </div>
+                    {d.heard_about && <p className="pt-2"><span className="text-white/30">Referral:</span> {d.heard_about}</p>}
                   </div>
 
                   {/* Screenshot */}

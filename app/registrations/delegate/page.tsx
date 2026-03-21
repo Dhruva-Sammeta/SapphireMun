@@ -7,12 +7,13 @@ import FloatingNavbar from "@/components/floating-navbar"
 import "../../refined.css"
 
 const COMMITTEES = [
-  "DISEC - Autonomous Weapons & Algorithmic Warfare",
-  "UNHRC - Surveillance Technologies & Digital Authoritarianism",
-  "LOK SABHA - The House of the People",
-  "IFI - Indian Film Industry",
-  "IP - International Press",
-  "No Preference",
+  "Disarmament and International Security Committee (Disec)",
+  "United Nations Human Rights Council (Unhrc)",
+  "Indian Film Industry (IFI)",
+  "Lok Sabha",
+  "International Press (IP)",
+  "Dhurandhar",
+  "One Piece",
 ]
 
 export default function DelegateRegistrationPage() {
@@ -22,11 +23,19 @@ export default function DelegateRegistrationPage() {
   const [delegateId, setDelegateId] = useState("")
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
     school: "",
+    grade_year: "",
+    attended_muns: "",
+    experience: "",
     committee: "",
     country: "",
-    experience: "",
+    committee_2: "",
+    portfolio_2: "",
+    committee_3: "",
+    portfolio_3: "",
+    heard_about: "",
   })
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
@@ -55,12 +64,22 @@ export default function DelegateRegistrationPage() {
 
   const validate = () => {
     const errs: Record<string, string> = {}
-    if (!formData.name.trim()) errs.name = "Full name is required"
-    if (!formData.email.trim()) errs.email = "Email is required"
+    if (!formData.name.trim()) errs.name = "Full Name is required"
+    if (!formData.phone.trim()) errs.phone = "Contact Number is required"
+    if (!formData.email.trim()) errs.email = "Email ID is required"
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = "Enter a valid email"
-    if (!formData.school.trim()) errs.school = "School / institution is required"
-    if (!formData.committee) errs.committee = "Select a committee"
-    if (!formData.country.trim()) errs.country = "Country preference is required"
+    if (!formData.school.trim()) errs.school = "School/Institution Name is required"
+    if (!formData.grade_year.trim()) errs.grade_year = "Grade/Year is required"
+    if (!formData.attended_muns) errs.attended_muns = "Please select Yes or No"
+    if (!formData.experience.trim()) errs.experience = "Required (mention none if N/A)"
+    
+    // Committees
+    if (!formData.committee) errs.committee = "Committee Preference 1 is required"
+    if (!formData.country.trim()) errs.country = "Portfolio Preference 1 is required"
+    if (!formData.committee_2) errs.committee_2 = "Committee Preference 2 is required"
+    if (!formData.portfolio_2.trim()) errs.portfolio_2 = "Portfolio Preference 2 is required"
+    if (!formData.committee_3) errs.committee_3 = "Committee Preference 3 is required"
+    if (!formData.portfolio_3.trim()) errs.portfolio_3 = "Portfolio Preference 3 is required"
     return errs
   }
 
@@ -190,39 +209,88 @@ export default function DelegateRegistrationPage() {
                   </div>
                 )}
 
-                {[
-                  { key: "name", label: "Full Name", placeholder: "John Doe", type: "text" },
-                  { key: "email", label: "Email Address", placeholder: "you@school.edu", type: "email" },
-                  { key: "school", label: "School / Institution", placeholder: "Oakridge International School", type: "text" },
-                  { key: "country", label: "Country/Role Preference", placeholder: "e.g. United States, India, or specific Role", type: "text" },
-                ].map((field) => (
-                  <div key={field.key} className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-white/50">{field.label}</label>
-                    <input
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      value={formData[field.key as keyof typeof formData]}
-                      onChange={(e) => handleChange(field.key, e.target.value)}
-                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${
-                        fieldErrors[field.key] ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"
-                      }`}
-                    />
-                    {fieldErrors[field.key] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[field.key]}</p>}
-                  </div>
-                ))}
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-white/50">Committee Preference</label>
-                  <select value={formData.committee} onChange={(e) => handleChange("committee", e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white outline-none transition-all focus:ring-2 appearance-none ${fieldErrors.committee ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30"}`}>
-                    <option value="" disabled className="bg-slate-900">Select a committee...</option>
-                    {COMMITTEES.map((c) => <option key={c} value={c} className="bg-slate-900">{c}</option>)}
-                  </select>
-                  {fieldErrors.committee && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.committee}</p>}
+                {/* 1. Delegate Profile */}
+                <div className="space-y-4">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">Delegate Profile</h3>
+                  
+                  {[
+                    { key: "name", label: "Full Name *", placeholder: "Your answer", type: "text" },
+                    { key: "phone", label: "Contact Number *", placeholder: "Your answer", type: "tel" },
+                    { key: "email", label: "Email ID *", placeholder: "Your answer", type: "email" },
+                    { key: "school", label: "School/Institution Name *", placeholder: "Your answer", type: "text" },
+                    { key: "grade_year", label: "Grade/Year *", placeholder: "Your answer", type: "text" },
+                  ].map((field) => (
+                    <div key={field.key} className="space-y-1.5">
+                      <label className="text-xs font-semibold tracking-wider text-white/70">{field.label}</label>
+                      <input
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        value={formData[field.key as keyof typeof formData]}
+                        onChange={(e) => handleChange(field.key, e.target.value)}
+                        className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${
+                          fieldErrors[field.key] ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"
+                        }`}
+                      />
+                      {fieldErrors[field.key] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[field.key]}</p>}
+                    </div>
+                  ))}
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-white/50">MUN Experience <span className="text-white/30">(optional)</span></label>
-                  <textarea placeholder="Your MUN experience, or 'First timer'" value={formData.experience} onChange={(e) => handleChange("experience", e.target.value)} rows={3} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 focus:ring-blue-500/30 resize-none" />
+                {/* 2. MUN Experience */}
+                <div className="space-y-4 pt-2">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">MUN Experience</h3>
+                  
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold tracking-wider text-white/70">Have you attended MUNs before? *</label>
+                    <div className="flex gap-4">
+                      {["Yes", "No"].map(opt => (
+                        <label key={opt} className="flex items-center gap-2 text-sm text-white/80 cursor-pointer">
+                          <input type="radio" name="attended_muns" value={opt} checked={formData.attended_muns === opt} onChange={(e) => handleChange("attended_muns", e.target.value)} className="w-4 h-4 accent-blue-500" />
+                          {opt}
+                        </label>
+                      ))}
+                    </div>
+                    {fieldErrors.attended_muns && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.attended_muns}</p>}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold tracking-wider text-white/70">If attended previously, Number of conferences attended * <br/><span className="text-white/40 text-[10px] uppercase block mt-1">(Please mention: Conference Name - Committee - Country/Portfolio - Year. If not, mention none)</span></label>
+                    <textarea placeholder="Your answer" value={formData.experience} onChange={(e) => handleChange("experience", e.target.value)} rows={3} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 resize-none ${fieldErrors.experience ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
+                    {fieldErrors.experience && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.experience}</p>}
+                  </div>
+                </div>
+
+                {/* 3. Committee Preferences */}
+                <div className="space-y-4 pt-2">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">Committee Preferences</h3>
+                  
+                  {[1, 2, 3].map(num => (
+                    <div key={`pref-${num}`} className="space-y-4 pb-4 border-b border-white/5 last:border-0 last:pb-0">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-semibold tracking-wider text-white/70">Committee Preference {num} *</label>
+                        <div className="space-y-2">
+                          {COMMITTEES.map(c => (
+                            <label key={c+num} className="flex items-center gap-3 text-sm text-white/80 cursor-pointer p-2 hover:bg-white/5 rounded-lg transition-colors">
+                              <input type="radio" name={`committee_${num}`} value={c} checked={formData[num === 1 ? "committee" : `committee_${num}` as keyof typeof formData] === c} onChange={(e) => handleChange(num === 1 ? "committee" : `committee_${num}`, e.target.value)} className="w-4 h-4 accent-blue-500 mt-0.5 shrink-0" />
+                              <span className="leading-snug">{c}</span>
+                            </label>
+                          ))}
+                        </div>
+                        {fieldErrors[num === 1 ? "committee" : `committee_${num}`] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[num === 1 ? "committee" : `committee_${num}`]}</p>}
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-semibold tracking-wider text-white/70">Portfolio Preference {num} *</label>
+                        <input type="text" placeholder="Your answer" value={formData[num === 1 ? "country" : `portfolio_${num}` as keyof typeof formData]} onChange={(e) => handleChange(num === 1 ? "country" : `portfolio_${num}`, e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors[num === 1 ? "country" : `portfolio_${num}`] ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
+                        {fieldErrors[num === 1 ? "country" : `portfolio_${num}`] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[num === 1 ? "country" : `portfolio_${num}`]}</p>}
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="space-y-1.5 pt-2">
+                    <label className="text-xs font-semibold tracking-wider text-white/70">How did you hear about Sapphire MUN? <span className="text-white/40 text-[10px] uppercase block mt-1">(Tell us the name of the person)</span></label>
+                    <input type="text" placeholder="Your answer" value={formData.heard_about} onChange={(e) => handleChange("heard_about", e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/40" />
+                  </div>
                 </div>
 
                 <button onClick={handleStep1Submit} disabled={loading} className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-sm hover:from-blue-500 hover:to-blue-400 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">

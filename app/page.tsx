@@ -29,8 +29,6 @@ export default function EditionSelector() {
     router.push(`/${edition}`)
   }
 
-  }
-
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#050a2a] text-white flex flex-col items-center justify-center font-sans">
 
