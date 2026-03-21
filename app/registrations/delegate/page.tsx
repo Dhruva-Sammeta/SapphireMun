@@ -198,7 +198,7 @@ export default function DelegateRegistrationPage() {
                   { key: "name", label: "Full Name", placeholder: "John Doe", type: "text" },
                   { key: "email", label: "Email Address", placeholder: "you@school.edu", type: "email" },
                   { key: "school", label: "School / Institution", placeholder: "Oakridge International School", type: "text" },
-                  { key: "country", label: "Country Preference", placeholder: "e.g. United States, India", type: "text" },
+                  { key: "country", label: "Country/Role Preference", placeholder: "e.g. United States, India, or specific Role", type: "text" },
                 ].map((field) => (
                   <div key={field.key} className="space-y-1.5">
                     <label className="text-xs font-semibold uppercase tracking-wider text-white/50">{field.label}</label>

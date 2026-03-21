@@ -97,12 +97,15 @@ export async function PATCH(req: NextRequest) {
                 <img src="https://sapphiremun.com/images/sapphire-mun-hero-logo.png" alt="Sapphire MUN" style="height:48px;margin-bottom:24px;" />
                 <h1 style="font-size:22px;color:white;margin:0 0 16px;">Hi ${delegate.name},</h1>
                 <p style="color:rgba(230,240,255,0.8);line-height:1.7;margin:0 0 16px;">
-                  Great news — your registration for <strong style="color:#0fe0ff;">Sapphire MUN Hyderabad 2.0</strong> has been <strong style="color:#22c55e;">approved</strong>!
+                  Great news - your registration for <strong style="color:#0fe0ff;">Sapphire MUN Hyderabad 2.0</strong> has been <strong style="color:#22c55e;">approved</strong>!
                 </p>
                 <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;margin:20px 0;">
                   <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Committee:</strong> ${delegate.committee}</p>
-                  <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Country:</strong> ${delegate.country}</p>
+                  <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Country/Role Preference:</strong> ${delegate.country}</p>
                 </div>
+                <p style="color:rgba(230,240,255,0.7);line-height:1.7;margin:12px 0;font-size:13px;font-style:italic;opacity:0.8;">
+                  Note: Your preference for country/role will be accommodated if possible, but not guaranteed.
+                </p>
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;margin:0 0 8px;">
                   Your official delegate pass will be shared closer to the event. Stay tuned!
                 </p>
@@ -136,7 +139,7 @@ export async function PATCH(req: NextRequest) {
           await resend.emails.send({
             from: `Sapphire MUN <${fromEmail}>`,
             to: delegate.email,
-            subject: "Registration Update — Sapphire MUN",
+            subject: "Registration Update - Sapphire MUN",
             html: `
               <div style="font-family:'Inter',Arial,sans-serif;max-width:600px;margin:0 auto;background:#050a2a;color:#e6f0ff;padding:40px 32px;border-radius:16px;">
                 <h1 style="font-size:22px;color:white;margin:0 0 16px;">Hi ${delegate.name},</h1>
