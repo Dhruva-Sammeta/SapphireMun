@@ -358,9 +358,9 @@ export default function DelegateRegistrationPage() {
 
                 {/* Info box */}
                 <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-white/50">Amount</span>
-                    <span className="font-semibold text-white">₹{process.env.NEXT_PUBLIC_REGISTRATION_FEE || "—"}</span>
+                  <div className="flex justify-between items-center gap-4">
+                    <span className="text-white/50">Priority Round Delegate Fee</span>
+                    <span className="font-semibold text-white whitespace-nowrap">₹2249</span>
                   </div>
                 </div>
 
