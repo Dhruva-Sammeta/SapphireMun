@@ -448,6 +448,7 @@ export default function HyderabadPage() {
                 <FloatingNavbar
                     items={[
                         { href: "/", label: "Home" },
+                        { href: "/registrations", label: "Registrations" },
                         { href: "#committees", label: "Committees" },
                         { href: "#archive", label: "Archive" },
                         { href: "#contact", label: "Contact" },
@@ -560,12 +561,12 @@ export default function HyderabadPage() {
                                     }}
                                     className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 px-4"
                                 >
-                                    {/* <Button asChild size="lg" className="btn-accent w-full sm:w-auto">
+                                    <Button asChild size="lg" className="btn-accent w-full sm:w-auto">
                                         <Link href="/registrations" className="flex items-center justify-center">
                                             Register Now
                                             <ArrowRight className="ml-2 h-4 w-4" />
                                         </Link>
-                                    </Button> */}
+                                    </Button>
                                     <Button
                                         onClick={() => router.push("/vizag")}
                                         size="lg"
@@ -839,12 +840,12 @@ export default function HyderabadPage() {
                                     The success of our first edition has set the stage for something even bigger. Register now or follow us for the latest announcements.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                                    {/* <Button asChild className="btn-accent">
+                                    <Button asChild className="btn-accent">
                                         <Link href="/registrations" className="flex items-center">
                                             Register Now
                                             <ArrowRight className="ml-2 h-4 w-4" />
                                         </Link>
-                                    </Button> */}
+                                    </Button>
                                     <Button asChild className="btn-glass">
                                         <Link
                                             href="https://www.instagram.com/sapphire_mun/"
@@ -918,9 +919,9 @@ export default function HyderabadPage() {
                                         <MapPin className="h-4 w-4 text-accent" />
                                         <span className="py-2.5">Hyderabad, India</span>
                                     </div>
-                                    {/* <Button asChild className="btn-accent w-full mt-4">
+                                    <Button asChild className="btn-accent w-full mt-4">
                                         <Link href="/registrations">Register for Edition 2</Link>
-                                    </Button> */}
+                                    </Button>
                                 </div>
                             </div>
                         </div>
