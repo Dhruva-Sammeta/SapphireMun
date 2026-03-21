@@ -438,10 +438,9 @@ export default function HyderabadPage() {
                     "/images/design-mode/download.png",
                 ]}
             />
-            {/* Content opacity controlled here — always rendered so hero is in DOM before preloader exits */}
+            {/* Content visibility controlled here — always rendered so hero is in DOM before preloader exits */}
             <div
-                className="transition-opacity duration-700"
-                style={{ opacity: revealed ? 1 : 0, pointerEvents: revealed ? "auto" : "none" }}
+                style={{ pointerEvents: revealed ? "auto" : "none" }}
             >
                 <FloatingNavbar
                     items={[

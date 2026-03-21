@@ -8,14 +8,6 @@ import FloatingNavbar from "@/components/floating-navbar"
 import "../../app/refined.css"
 
 export default function RegistrationsPage() {
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
-
   return (
     <div className="min-h-screen bg-app text-app overflow-x-hidden">
       <FloatingNavbar

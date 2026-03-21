@@ -8,10 +8,8 @@ import { ArrowRight, MapPin, Calendar, CheckCircle, Sparkles } from "lucide-reac
 export default function EditionSelector() {
   const router = useRouter()
   const [selected, setSelected] = useState<"hyderabad" | "vizag" | null>(null)
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     // Optional: Check local storage for auto-redirect
     // const savedEdition = localStorage.getItem("sapphire-edition")
     // if (savedEdition === "hyderabad") router.push("/hyderabad")
@@ -31,7 +29,7 @@ export default function EditionSelector() {
     router.push(`/${edition}`)
   }
 
-  if (!mounted) return null;
+  }
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#050a2a] text-white flex flex-col items-center justify-center font-sans">

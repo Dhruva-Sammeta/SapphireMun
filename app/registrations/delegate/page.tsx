@@ -16,7 +16,6 @@ const COMMITTEES = [
 ]
 
 export default function DelegateRegistrationPage() {
-  const [mounted, setMounted] = React.useState(false)
   const [step, setStep] = useState(1) // 1: Info, 2: Pay + Upload, 3: Success
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -53,9 +52,6 @@ export default function DelegateRegistrationPage() {
     e.preventDefault()
     handleFileSelect(e.dataTransfer.files?.[0] || null)
   }, [handleFileSelect])
-
-  React.useEffect(() => { setMounted(true) }, [])
-  if (!mounted) return null
 
   const validate = () => {
     const errs: Record<string, string> = {}
