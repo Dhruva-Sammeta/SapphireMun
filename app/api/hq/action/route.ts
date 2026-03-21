@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     }
 
     const supabase = getServiceSupabase()
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "sapphire.mun1@gmail.com"
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "noreply@sapphiremun.com"
     const resendKey = process.env.RESEND_API_KEY
 
     if (action === "approve") {

@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     // Send email with pass
     try {
       const resendKey = process.env.RESEND_API_KEY
-      const fromEmail = process.env.RESEND_FROM_EMAIL || "registrations@sapphiremun.com"
+      const fromEmail = process.env.RESEND_FROM_EMAIL || "noreply@sapphiremun.com"
 
       if (resendKey) {
         const { Resend } = await import("resend")
