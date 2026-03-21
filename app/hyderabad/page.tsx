@@ -25,6 +25,7 @@ import {
     Play,
     ImageIcon,
     Mail,
+    Sword,
 } from "lucide-react"
 
 import FloatingCard from "@/components/floating-card"
@@ -127,9 +128,18 @@ function DhurandharCard() {
                 background: "linear-gradient(135deg, #0d0608 0%, #1a0308 40%, #0d060a 100%)",
                 border: "1px solid transparent",
                 backgroundClip: "padding-box",
-                boxShadow: "0 0 40px 0 rgba(180,30,30,0.15), 0 0 0 1px rgba(200,60,30,0.2), inset 0 1px 0 rgba(255,140,60,0.08)",
+                boxShadow: "0 0 60px 0 rgba(180,30,30,0.2), 0 0 0 1px rgba(200,60,30,0.25), inset 0 1px 0 rgba(255,140,60,0.08)",
             }}
         >
+            {/* Horizontal scan-line sweep */}
+            <div
+                className="pointer-events-none absolute inset-x-0 h-px opacity-0 group-hover:opacity-100"
+                style={{
+                    background: "linear-gradient(to right, transparent 0%, rgba(255,100,40,0.6) 50%, transparent 100%)",
+                    animation: "dhurandhar-scan 2.5s linear infinite",
+                    top: "0",
+                }}
+            />
             {/* Animated border glow */}
             <div
                 className="pointer-events-none absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"
@@ -161,14 +171,14 @@ function DhurandharCard() {
                     <div className="flex items-center gap-3">
                         {/* Crown icon */}
                         <div
-                            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 group-hover:scale-110"
+                            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12"
                             style={{
                                 background: "radial-gradient(circle, rgba(220,60,30,0.3) 0%, rgba(180,30,10,0.15) 100%)",
-                                boxShadow: "0 0 20px rgba(220,60,30,0.4), inset 0 0 10px rgba(255,100,40,0.1)",
-                                border: "1px solid rgba(200,80,40,0.4)",
+                                boxShadow: "0 0 20px rgba(220,60,30,0.4), 0 0 0 1px rgba(200,80,40,0.4), inset 0 0 10px rgba(255,100,40,0.1)",
+                                animation: "dhurandhar-ring-pulse 3s ease-in-out infinite",
                             }}
                         >
-                            <span className="text-lg" role="img" aria-label="crown">👑</span>
+                            <Sword className="h-5 w-5" style={{ color: "rgba(255,140,80,1)", filter: "drop-shadow(0 0 6px rgba(220,80,30,0.9))" }} />
                         </div>
                         <div>
                             <div style={{ color: "rgba(255,140,80,1)", textShadow: "0 0 20px rgba(220,80,30,0.8), 0 0 40px rgba(180,40,20,0.4)" }}>
@@ -607,14 +617,14 @@ export default function HyderabadPage() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                            {/* Dhurandhar — the special committee, always first */}
+                            <DhurandharCard />
+
                             {committees.map((c) => (
                                 <CommitteeCard key={c.id} c={c} />
                             ))}
 
-                            {/* Dhurandhar — the special committee */}
-                            <DhurandharCard />
-
-                            {/* One classified card for upcoming reveal */}
+                            {/* Classified incoming slot — sits in the regular grid */}
                             <div className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-500 metallic-card border border-cyan-500/8 hover:border-cyan-500/25 opacity-70">
                                 <div className="space-y-4 z-10 relative">
                                     <div className="flex items-center gap-3">

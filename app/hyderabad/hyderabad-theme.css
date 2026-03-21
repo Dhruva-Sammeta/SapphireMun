@@ -40,3 +40,17 @@
 .hyd-theme .bg-surface {
   background-color: rgba(6, 13, 38, 0.6);
 }
+
+/* ─── Dhurandhar card animations ─── */
+@keyframes dhurandhar-scan {
+  0%   { top: -2px;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: 100%;  opacity: 0; }
+}
+
+@keyframes dhurandhar-ring-pulse {
+  0%,  100% { box-shadow: 0 0 20px rgba(220,60,30,0.4), 0 0 0 1px rgba(200,80,40,0.4), inset 0 0 10px rgba(255,100,40,0.1); }
+  50%        { box-shadow: 0 0 35px rgba(220,60,30,0.8), 0 0 0 2px rgba(240,100,50,0.7), inset 0 0 16px rgba(255,120,50,0.2); }
+}
+
