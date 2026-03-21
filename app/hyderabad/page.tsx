@@ -148,10 +148,10 @@ function DhurandharCard() {
             >
                 <div className="flex items-end justify-around w-full h-full px-1">
                     {Array.from({ length: 28 }, (_, i) => {
-                        const heights = [18,26,22,30,20,28,16,24,32,18,26,22,28,20,30,24,18,26,20,28,22,16,30,24,20,28,22,18]
-                        const speeds  = [1.0,0.8,1.2,0.9,1.3,0.7,1.1,0.95,1.15,0.85,1.05,0.9,1.2,1.0,0.8,1.15,0.95,1.3,0.85,1.05,0.9,1.2,0.75,1.1,0.95,0.8,1.25,1.0]
-                        const delays  = [0,0.1,0.05,0.2,0.15,0.08,0.18,0.03,0.12,0.22,0.07,0.17,0.02,0.14,0.09,0.19,0.04,0.11,0.16,0.06,0.21,0.13,0.08,0.18,0.03,0.15,0.1,0.22]
-                        const greens  = [80,50,65,40,70,55,45,60,35,75,50,65,42,58,48,70,55,38,62,48,66,44,72,52,60,42,68,56]
+                        const heights = [18, 26, 22, 30, 20, 28, 16, 24, 32, 18, 26, 22, 28, 20, 30, 24, 18, 26, 20, 28, 22, 16, 30, 24, 20, 28, 22, 18]
+                        const speeds = [1.0, 0.8, 1.2, 0.9, 1.3, 0.7, 1.1, 0.95, 1.15, 0.85, 1.05, 0.9, 1.2, 1.0, 0.8, 1.15, 0.95, 1.3, 0.85, 1.05, 0.9, 1.2, 0.75, 1.1, 0.95, 0.8, 1.25, 1.0]
+                        const delays = [0, 0.1, 0.05, 0.2, 0.15, 0.08, 0.18, 0.03, 0.12, 0.22, 0.07, 0.17, 0.02, 0.14, 0.09, 0.19, 0.04, 0.11, 0.16, 0.06, 0.21, 0.13, 0.08, 0.18, 0.03, 0.15, 0.1, 0.22]
+                        const greens = [80, 50, 65, 40, 70, 55, 45, 60, 35, 75, 50, 65, 42, 58, 48, 70, 55, 38, 62, 48, 66, 44, 72, 52, 60, 42, 68, 56]
                         return (
                             <div
                                 key={i}
@@ -246,9 +246,9 @@ function DhurandharCard() {
                     className="space-y-2"
                 >
                     <p className="text-xs font-medium italic" style={{ color: "rgba(255,140,80,0.5)" }}>The Sapphire Special Committee</p>
-                    <p className="text-sm font-medium" style={{ color: "rgba(255,140,80,0.8)" }}>Crisis Committee · Advanced · Invite Only</p>
+                    <p className="text-sm font-medium" style={{ color: "rgba(255,140,80,0.8)" }}>Crisis Committee · Criminally Advanced</p>
                     <p className="text-sm leading-relaxed" style={{ color: "rgba(200,150,140,0.75)" }}>
-                        Dhurandhar — the war strategist. A closed, invite-only crisis committee where the most elite delegates navigate an unscripted geopolitical collapse in real time. Power shifts. Alliances fall. Only the sharpest survive.
+                        Dhurandhar — the war strategist. A closed, crisis committee where the most elite delegates navigate an unscripted geopolitical collapse in real time. Power shifts. Alliances fall. Only the sharpest survive.
                     </p>
                 </motion.div>
 
