@@ -140,7 +140,36 @@ function DhurandharCard() {
                     top: "0",
                 }}
             />
-            {/* Animated border glow */}
+            {/* ── Full-width flame wall at bottom of card ── */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-0 left-0 right-0 overflow-hidden"
+                style={{ height: "52px", maskImage: "linear-gradient(to top, black 40%, transparent 100%)" }}
+            >
+                <div className="flex items-end justify-around w-full h-full px-1">
+                    {Array.from({ length: 28 }, (_, i) => {
+                        const heights = [18,26,22,30,20,28,16,24,32,18,26,22,28,20,30,24,18,26,20,28,22,16,30,24,20,28,22,18]
+                        const speeds  = [1.0,0.8,1.2,0.9,1.3,0.7,1.1,0.95,1.15,0.85,1.05,0.9,1.2,1.0,0.8,1.15,0.95,1.3,0.85,1.05,0.9,1.2,0.75,1.1,0.95,0.8,1.25,1.0]
+                        const delays  = [0,0.1,0.05,0.2,0.15,0.08,0.18,0.03,0.12,0.22,0.07,0.17,0.02,0.14,0.09,0.19,0.04,0.11,0.16,0.06,0.21,0.13,0.08,0.18,0.03,0.15,0.1,0.22]
+                        const greens  = [80,50,65,40,70,55,45,60,35,75,50,65,42,58,48,70,55,38,62,48,66,44,72,52,60,42,68,56]
+                        return (
+                            <div
+                                key={i}
+                                style={{
+                                    width: "3px",
+                                    height: `${heights[i % heights.length]}px`,
+                                    borderRadius: "50% 50% 25% 25% / 55% 55% 45% 45%",
+                                    background: `radial-gradient(ellipse at 50% 85%, rgba(255,${greens[i % greens.length]},20,1) 0%, rgba(220,55,15,0.8) 45%, transparent 100%)`,
+                                    filter: "blur(0.8px)",
+                                    animation: `dhurandhar-flame ${speeds[i % speeds.length]}s ease-in-out ${delays[i % delays.length]}s infinite alternate`,
+                                    transformOrigin: "bottom center",
+                                    flexShrink: 0,
+                                }}
+                            />
+                        )
+                    })}
+                </div>
+            </div>
             <div
                 className="pointer-events-none absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"
                 style={{
@@ -190,23 +219,7 @@ function DhurandharCard() {
                                     animateOnLoad={true}
                                 />
                             </div>
-                            {/* Flame flicker beneath title */}
-                            <div className="flex items-end gap-[3px] mt-[3px] ml-[1px]" aria-hidden="true">
-                                {[0, 1, 2, 3, 4].map((i) => (
-                                    <div
-                                        key={i}
-                                        style={{
-                                            width: `${[4,6,5,6,4][i]}px`,
-                                            height: `${[10,14,12,13,9][i]}px`,
-                                            borderRadius: "50% 50% 30% 30% / 60% 60% 40% 40%",
-                                            background: `radial-gradient(ellipse at 50% 80%, rgba(255,${[180,120,150,110,160][i]},30,0.95) 0%, rgba(220,60,20,0.7) 50%, transparent 100%)`,
-                                            filter: "blur(0.6px)",
-                                            animation: `dhurandhar-flame ${[1.1,0.9,1.3,1.0,1.2][i]}s ease-in-out ${[0,0.15,0.05,0.2,0.08][i]}s infinite alternate`,
-                                            transformOrigin: "bottom center",
-                                        }}
-                                    />
-                                ))}
-                            </div>
+
                         </div>
                     </div>
                     {/* Special committee badge */}
