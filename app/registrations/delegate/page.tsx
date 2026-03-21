@@ -40,8 +40,9 @@ function validateStep1(data: FormData): Record<string, string> {
 const COMMITTEES = [
   "DISEC - Autonomous Weapons & Algorithmic Warfare",
   "UNHRC - Surveillance Technologies & Digital Authoritarianism",
-  "Committee 3 - To Be Announced",
-  "Committee 4 - To Be Announced",
+  "LOK SABHA - The House of the People",
+  "IFI - Indian Film Industry",
+  "IP - International Press",
   "No Preference",
 ]
 

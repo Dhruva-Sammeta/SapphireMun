@@ -202,7 +202,7 @@ function buildPassHTML(data: PassData, qrDataUrl: string): string {
     </div>
 
     <div class="info-section">
-      <div class="info-value">${escapeHtml(data.committee_pref.split(' — ')[0])}</div>
+      <div class="info-value">${escapeHtml(data.committee_pref.split(' - ')[0])}</div>
       <div class="info-value" style="font-size: 24px;">ID: ${escapeHtml(data.delegate_id)}</div>
     </div>
 
