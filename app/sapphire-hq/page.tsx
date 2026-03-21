@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { CheckCircle, XCircle, Loader2, LogIn, RefreshCw, Users, Clock, ThumbsUp, ThumbsDown, Filter } from "lucide-react"
+import { CheckCircle, XCircle, Loader2, LogIn, RefreshCw, Users, Clock, ThumbsUp, ThumbsDown, ImageIcon } from "lucide-react"
 
 type Delegate = {
   id: string
@@ -13,6 +13,7 @@ type Delegate = {
   country: string
   experience: string
   status: string
+  screenshot_url: string | null
   created_at: string
 }
 
@@ -22,36 +23,51 @@ export default function AdminPanel() {
   const [delegates, setDelegates] = useState<Delegate[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [loginError, setLoginError] = useState("")
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [filter, setFilter] = useState<"all" | "pending" | "approved" | "rejected">("pending")
+  const [expandedImage, setExpandedImage] = useState<string | null>(null)
 
-  const fetchDelegates = async (pw?: string) => {
+  const fetchDelegates = async (pw?: string, statusFilter?: string) => {
     const token = pw || password
+    const f = statusFilter ?? filter
     setLoading(true)
     setError("")
     try {
-      const statusParam = filter === "all" ? "" : `?status=${filter}`
+      const statusParam = f === "all" ? "" : `?status=${f}`
       const res = await fetch(`/api/delegates${statusParam}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       const data = await res.json()
+      if (res.status === 401) {
+        setAuthed(false)
+        setLoginError("Incorrect password.")
+        setLoading(false)
+        return false
+      }
       if (!res.ok) {
         setError(data.error || "Failed to load delegates.")
         setLoading(false)
-        return
+        return false
       }
       setDelegates(data.delegates || [])
+      return true
     } catch {
       setError("Could not connect to the server.")
+      return false
     } finally {
       setLoading(false)
     }
   }
 
   const handleLogin = async () => {
-    if (!password.trim()) { setError("Enter the admin password."); return }
-    setAuthed(true)
-    await fetchDelegates(password)
+    if (!password.trim()) { setLoginError("Enter the admin password."); return }
+    setLoginError("")
+    setLoading(true)
+    const ok = await fetchDelegates(password, "pending")
+    if (ok) {
+      setAuthed(true)
+    }
   }
 
   useEffect(() => {
@@ -73,7 +89,6 @@ export default function AdminPanel() {
       if (!res.ok) {
         alert(data.error || "Action failed.")
       } else {
-        // Remove from current view
         setDelegates((prev) => prev.filter((d) => d.id !== id))
       }
     } catch {
@@ -83,14 +98,11 @@ export default function AdminPanel() {
     }
   }
 
+  // Login screen
   if (!authed) {
     return (
       <div className="min-h-screen bg-[#050a2a] flex items-center justify-center px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-sm p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md space-y-6"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-sm p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md space-y-6">
           <div className="text-center space-y-2">
             <div className="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mx-auto">
               <LogIn className="w-6 h-6 text-blue-300" />
@@ -98,24 +110,25 @@ export default function AdminPanel() {
             <h1 className="text-xl font-light text-white">Admin <span className="font-semibold text-blue-300">Access</span></h1>
           </div>
 
-          {error && (
-            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 text-sm">{error}</div>
+          {loginError && (
+            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 text-sm">{loginError}</div>
           )}
 
           <input
             type="password"
             placeholder="Enter admin password"
             value={password}
-            onChange={(e) => { setPassword(e.target.value); setError("") }}
+            onChange={(e) => { setPassword(e.target.value); setLoginError("") }}
             onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 outline-none focus:ring-2 focus:ring-blue-500/30"
           />
 
           <button
             onClick={handleLogin}
-            className="w-full py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition-all"
+            disabled={loading}
+            className="w-full py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            Login
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Login"}
           </button>
         </motion.div>
       </div>
@@ -124,13 +137,17 @@ export default function AdminPanel() {
 
   return (
     <div className="min-h-screen bg-[#050a2a] text-white">
+      {/* Expanded image modal */}
+      {expandedImage && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setExpandedImage(null)}>
+          <img src={expandedImage} alt="Payment screenshot" className="max-w-full max-h-[90vh] rounded-xl object-contain" />
+        </div>
+      )}
+
       {/* Header */}
       <div className="border-b border-white/10 px-4 md:px-8 py-4 flex items-center justify-between">
         <h1 className="text-lg font-light">Sapphire <span className="font-semibold text-blue-300">HQ</span></h1>
-        <button
-          onClick={() => fetchDelegates()}
-          className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-        >
+        <button onClick={() => fetchDelegates()} className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
           <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} /> Refresh
         </button>
       </div>
@@ -142,30 +159,24 @@ export default function AdminPanel() {
             key={f}
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all capitalize ${
-              filter === f
-                ? "bg-blue-500/20 border border-blue-500/40 text-blue-300"
-                : "bg-white/5 border border-white/10 text-white/50 hover:text-white/80"
+              filter === f ? "bg-blue-500/20 border border-blue-500/40 text-blue-300" : "bg-white/5 border border-white/10 text-white/50 hover:text-white/80"
             }`}
           >
             {f === "pending" && <Clock className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />}
             {f === "approved" && <ThumbsUp className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />}
             {f === "rejected" && <ThumbsDown className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />}
             {f === "all" && <Users className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />}
-            {f} ({f === "all" ? delegates.length : delegates.filter((d) => f === "all" || d.status === f).length})
+            {f}
           </button>
         ))}
       </div>
 
       {/* Content */}
       <div className="px-4 md:px-8 pb-12">
-        {error && (
-          <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm mb-6">{error}</div>
-        )}
+        {error && <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm mb-6">{error}</div>}
 
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-6 h-6 animate-spin text-blue-400" />
-          </div>
+          <div className="flex items-center justify-center py-20"><Loader2 className="w-6 h-6 animate-spin text-blue-400" /></div>
         ) : delegates.length === 0 ? (
           <div className="text-center py-20 text-white/30">
             <Users className="w-10 h-10 mx-auto mb-3 opacity-50" />
@@ -175,14 +186,7 @@ export default function AdminPanel() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence>
               {delegates.map((d) => (
-                <motion.div
-                  key={d.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 space-y-3"
-                >
+                <motion.div key={d.id} layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 space-y-3">
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="font-semibold text-white">{d.name}</h3>
@@ -202,25 +206,32 @@ export default function AdminPanel() {
                     {d.experience && <p><span className="text-white/30">Experience:</span> {d.experience}</p>}
                   </div>
 
+                  {/* Screenshot */}
+                  {d.screenshot_url ? (
+                    <div className="pt-1">
+                      <p className="text-xs text-white/30 mb-1.5">Payment Screenshot:</p>
+                      <img
+                        src={d.screenshot_url}
+                        alt="Payment proof"
+                        onClick={() => setExpandedImage(d.screenshot_url)}
+                        className="w-full max-h-40 object-cover rounded-lg border border-white/10 cursor-pointer hover:border-blue-500/40 transition-all"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5 text-xs text-yellow-400/60 pt-1">
+                      <ImageIcon className="w-3.5 h-3.5" /> No screenshot uploaded
+                    </div>
+                  )}
+
                   <p className="text-xs text-white/20">{new Date(d.created_at).toLocaleString()}</p>
 
                   {d.status === "pending" && (
                     <div className="flex gap-2 pt-2">
-                      <button
-                        onClick={() => handleAction(d.id, "approved")}
-                        disabled={actionLoading === d.id}
-                        className="flex-1 py-2 rounded-lg bg-green-600/20 border border-green-500/30 text-green-300 text-sm font-medium hover:bg-green-600/40 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5"
-                      >
-                        {actionLoading === d.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle className="w-3.5 h-3.5" />}
-                        Approve
+                      <button onClick={() => handleAction(d.id, "approved")} disabled={actionLoading === d.id} className="flex-1 py-2 rounded-lg bg-green-600/20 border border-green-500/30 text-green-300 text-sm font-medium hover:bg-green-600/40 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5">
+                        {actionLoading === d.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle className="w-3.5 h-3.5" />} Approve
                       </button>
-                      <button
-                        onClick={() => handleAction(d.id, "rejected")}
-                        disabled={actionLoading === d.id}
-                        className="flex-1 py-2 rounded-lg bg-red-600/20 border border-red-500/30 text-red-300 text-sm font-medium hover:bg-red-600/40 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5"
-                      >
-                        {actionLoading === d.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <XCircle className="w-3.5 h-3.5" />}
-                        Reject
+                      <button onClick={() => handleAction(d.id, "rejected")} disabled={actionLoading === d.id} className="flex-1 py-2 rounded-lg bg-red-600/20 border border-red-500/30 text-red-300 text-sm font-medium hover:bg-red-600/40 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5">
+                        {actionLoading === d.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <XCircle className="w-3.5 h-3.5" />} Reject
                       </button>
                     </div>
                   )}
