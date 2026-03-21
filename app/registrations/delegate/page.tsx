@@ -150,7 +150,7 @@ export default function DelegateRegistrationPage() {
       <section className="relative pt-32 pb-12 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-hero" aria-hidden="true">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-slate-900/20 to-blue-800/15" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full opacity-50 animate-pulse" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] max-w-[1000px] h-[500px] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.12),transparent_60%)] opacity-60 animate-pulse pointer-events-none" />
         </div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="z-10 container max-w-4xl mx-auto px-4 text-center space-y-4">
           <img src="/images/sapphire-mun-hero-logo.png" alt="Sapphire MUN" className="h-16 w-auto mx-auto mb-2 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]" />

@@ -30,7 +30,7 @@ export default function RegistrationsPage() {
       <section className="relative pt-32 pb-20 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-hero" aria-hidden="true">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-slate-900/20 to-blue-800/15" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full opacity-50 animate-pulse" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] max-w-[1000px] h-[500px] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.12),transparent_60%)] opacity-60 animate-pulse pointer-events-none" />
         </div>
 
         <AnimatePresence mode="wait">

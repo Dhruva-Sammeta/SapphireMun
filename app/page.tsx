@@ -39,7 +39,7 @@ export default function EditionSelector() {
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-[#050a2a] via-[#0a1b54] to-[#020410]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full opacity-50 animate-pulse" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] max-w-[1000px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.12),transparent_60%)] opacity-60 animate-pulse pointer-events-none" />
       </div>
 
       <AnimatePresence mode="wait">
@@ -78,7 +78,7 @@ export default function EditionSelector() {
               className="flex-1 group relative cursor-pointer"
               onClick={() => handleSelect("hyderabad")}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-blue-900/40 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -inset-4 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="relative h-full bg-[#0a1535]/80 backdrop-blur-md border border-blue-500/20 rounded-2xl p-8 flex flex-col items-center text-center overflow-hidden transition-all duration-300 group-hover:border-blue-400/50 group-hover:bg-[#0f1e4a]/90 shadow-2xl">
 
                 {/* Glow effect */}
@@ -114,7 +114,7 @@ export default function EditionSelector() {
               onClick={() => handleSelect("vizag")}
             >
               {/* Red/Purple Glow for Vizag */}
-              <div className="absolute inset-0 bg-gradient-to-b from-red-500/10 to-purple-900/40 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -inset-4 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <div className="relative h-full bg-[#0a1535]/80 backdrop-blur-md border border-red-500/20 rounded-2xl p-8 flex flex-col items-center text-center overflow-hidden transition-all duration-300 group-hover:border-red-400/50 group-hover:bg-[#1a0f1e]/90 shadow-2xl">
 
                 <div className="absolute inset-0 bg-gradient-to-br from-red-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

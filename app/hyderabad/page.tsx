@@ -179,11 +179,11 @@ function DhurandharCard() {
             />
 
             {/* Ember glow orbs */}
-            <div className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full blur-[80px] opacity-40 group-hover:opacity-70 transition-opacity duration-700"
+            <div className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-700"
                 style={{ background: "radial-gradient(circle, rgba(220,60,30,0.8) 0%, rgba(180,30,10,0.4) 50%, transparent 70%)" }} />
-            <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full blur-[70px] opacity-25 group-hover:opacity-50 transition-opacity duration-700"
+            <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full opacity-25 group-hover:opacity-50 transition-opacity duration-700"
                 style={{ background: "radial-gradient(circle, rgba(255,120,30,0.6) 0%, rgba(200,60,20,0.3) 50%, transparent 70%)" }} />
-            <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-1000"
+            <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-1000"
                 style={{ background: "radial-gradient(ellipse, rgba(255,80,30,0.5) 0%, transparent 70%)" }} />
 
             {/* Film grain texture overlay */}
@@ -319,7 +319,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
             onMouseEnter={handleCardHover}
             className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-500 metallic-card border border-cyan-500/15 hover:border-cyan-400/40"
         >
-            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-cyan-400/5 blur-2xl group-hover:bg-cyan-400/15 transition-colors duration-700 pointer-events-none" />
+            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.05),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.15),transparent_70%)] transition-all duration-700 pointer-events-none" />
 
             <div className="space-y-3 z-10 relative">
                 <div className="flex items-center gap-3">
@@ -525,7 +525,7 @@ export default function HyderabadPage() {
                                     }}
                                     className="inline-block relative px-0 my-2 py-16"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-radial from-blue-500/10 to-transparent blur-2xl" />
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)]" />
                                     <img
                                         src="/images/sapphire-mun-hero-logo.png"
                                         alt="Sapphire Model United Nations emblem"
