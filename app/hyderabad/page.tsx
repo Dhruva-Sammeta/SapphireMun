@@ -95,6 +95,10 @@ function DhurandharCard() {
     const isMobileRef = useRef(false)
 
     useEffect(() => {
+        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
+    }, [])
+
+    useEffect(() => {
         const card = cardRef.current
         if (!card) return
         const threshold = 0.15
@@ -122,7 +126,9 @@ function DhurandharCard() {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
-            className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 sm:col-span-2 lg:col-span-3"
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 sm:col-span-2 lg:col-span-3 ${
+                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+            }`}
             style={{
                 background: "linear-gradient(135deg, #0d0608 0%, #1a0308 40%, #0d060a 100%)",
                 border: "1px solid transparent",
@@ -281,6 +287,10 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
     const hasAutoPlayed = useRef(false)
     const isMobileRef = useRef(false)
 
+    useEffect(() => {
+        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
+    }, [])
+
     // Native IntersectionObserver — works for both desktop (15% threshold) and
     // mobile (50% threshold so it fires when card is center-focused while scrolling)
     useEffect(() => {
@@ -315,7 +325,9 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
-            className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-500 metallic-card border border-cyan-500/15 hover:border-cyan-400/40"
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card border border-cyan-500/15 hover:border-cyan-400/40 ${
+                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+            }`}
         >
             <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.05),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.15),transparent_70%)] transition-all duration-700 pointer-events-none" />
 
@@ -345,7 +357,6 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
                 >
                     <p className="text-cyan-200/60 text-xs font-medium italic">{c.fullName}</p>
                     <p className="text-cyan-200/80 text-sm font-medium">{c.type_level}</p>
-                    <p className="text-muted text-sm leading-relaxed line-clamp-3">Agenda to be announced.</p>
                 </motion.div>
 
                 <motion.div

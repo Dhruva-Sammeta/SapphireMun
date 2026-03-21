@@ -65,7 +65,9 @@ function VizagCommitteeCard({ item }: { item: any }) {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
-            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-500 metallic-card ${
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card ${
+                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+            } ${
                 isRevealed
                     ? "border border-red-500/15 hover:border-red-400/40"
                     : "border border-red-500/10 hover:border-red-500/30"
