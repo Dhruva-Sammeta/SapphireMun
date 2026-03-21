@@ -67,7 +67,7 @@ export default function DelegateRegistrationPage() {
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null)
   const [uploadError, setUploadError] = useState("")
   const [verificationStatus, setVerificationStatus] = useState<
-    "idle" | "uploading" | "verified" | "flagged" | "rejected" | "error"
+    "idle" | "uploading" | "pending" | "verified" | "flagged" | "rejected" | "error"
   >("idle")
   const [verificationReasons, setVerificationReasons] = useState<string[]>([])
 
@@ -156,12 +156,8 @@ export default function DelegateRegistrationPage() {
       })
       const data = await res.json()
 
-      if (data.status === "verified") {
-        setVerificationStatus("verified")
-        setStep(3)
-      } else if (data.status === "flagged") {
-        setVerificationStatus("flagged")
-        setVerificationReasons(data.reasons || [])
+      if (data.status === "pending") {
+        setVerificationStatus("pending")
         setStep(3)
       } else if (data.status === "rejected") {
         setVerificationStatus("rejected")
@@ -434,7 +430,7 @@ export default function DelegateRegistrationPage() {
                   className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-sm hover:from-blue-500 hover:to-blue-400 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
                 >
                   {verificationStatus === "uploading" ? (
-                    <><Loader2 className="w-4 h-4 animate-spin" /> Verifying with AI...</>
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Uploading Screenshot...</>
                   ) : (
                     <><Upload className="w-4 h-4" /> Submit for Verification</>
                   )}
@@ -459,51 +455,44 @@ export default function DelegateRegistrationPage() {
                 transition={{ duration: 0.5 }}
                 className="metallic-card p-8 text-center space-y-6"
               >
-                {verificationStatus === "verified" && (
+                {verificationStatus === "pending" && (
                   <>
-                    <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto border border-green-400/30 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
-                      <CheckCircle className="w-10 h-10 text-green-400" />
+                    <div className="w-20 h-20 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto border border-blue-400/30 shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                      <CheckCircle className="w-10 h-10 text-blue-400" />
                     </div>
 
-                    <h2 className="text-2xl font-light text-white">Registration <span className="font-semibold metallic-text">Complete!</span></h2>
+                    <h2 className="text-2xl font-light text-white">Under <span className="font-semibold text-blue-300">Review</span></h2>
 
-                    <div className="mx-auto w-fit px-6 py-3 rounded-2xl bg-green-500/10 border border-green-500/20">
+                    <div className="mx-auto w-fit px-6 py-3 rounded-2xl bg-blue-500/10 border border-blue-500/20">
                       <p className="text-xs text-white/50 mb-1">Delegate ID</p>
-                      <p className="text-xl font-bold text-green-300 tracking-wider">{delegateRecord.delegate_id}</p>
+                      <p className="text-xl font-bold text-blue-300 tracking-wider">{delegateRecord.delegate_id}</p>
                     </div>
 
                     <div className="space-y-2 text-sm text-white/60">
-                      <p>Your payment has been verified successfully.</p>
-                      <p>Your official <span className="font-semibold text-white/80">Sapphire MUN delegate pass</span> will be generated and sent to <span className="font-semibold text-white/80">{formData.email}</span> shortly.</p>
+                      <p>We have successfully received your payment screenshot.</p>
+                      <p>Our team will verify your transaction manually and email your official delegate pass to <span className="font-semibold text-white/80">{formData.email}</span> within 24 hours.</p>
                     </div>
                   </>
                 )}
 
-                {verificationStatus === "flagged" && (
+                {verificationStatus === "rejected" && (
                   <>
-                    <div className="w-20 h-20 rounded-full bg-yellow-500/20 flex items-center justify-center mx-auto border border-yellow-400/30 shadow-[0_0_30px_rgba(234,179,8,0.2)]">
-                      <AlertCircle className="w-10 h-10 text-yellow-400" />
+                    <div className="w-20 h-20 rounded-full bg-red-500/20 flex items-center justify-center mx-auto border border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.3)]">
+                      <AlertCircle className="w-10 h-10 text-red-500" />
                     </div>
-
-                    <h2 className="text-2xl font-light text-white">Under <span className="font-semibold text-yellow-300">Manual Review</span></h2>
-
-                    <div className="mx-auto w-fit px-6 py-3 rounded-2xl bg-yellow-500/10 border border-yellow-500/20">
-                      <p className="text-xs text-white/50 mb-1">Delegate ID</p>
-                      <p className="text-xl font-bold text-yellow-300 tracking-wider">{delegateRecord.delegate_id}</p>
-                    </div>
-
+                    
+                    <h2 className="text-2xl font-light text-white">Upload <span className="font-semibold text-red-400">Failed</span></h2>
+                    
                     <div className="space-y-2 text-sm text-white/60">
-                      <p>Your payment could not be automatically verified and has been submitted for manual review.</p>
-                      <p>You will receive your delegate pass at <span className="font-semibold text-white/80">{formData.email}</span> within 24 hours.</p>
+                      <p>We could not accept your screenshot.</p>
                     </div>
-
+                    
                     {verificationReasons.length > 0 && (
-                      <div className="text-left p-4 rounded-xl bg-yellow-500/5 border border-yellow-500/15 space-y-2">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-yellow-400/80">Review Notes</p>
-                        <ul className="space-y-1 text-xs text-white/50">
+                      <div className="text-left p-4 rounded-xl bg-red-500/10 border border-red-500/20 space-y-2 mt-4 mx-auto max-w-sm">
+                        <ul className="space-y-1 text-xs text-red-300/80">
                           {verificationReasons.map((r, i) => (
                             <li key={i} className="flex items-start gap-2">
-                              <span className="text-yellow-400 mt-0.5">&#8226;</span> {r}
+                              <span className="text-red-400 mt-0.5">&#8226;</span> {r}
                             </li>
                           ))}
                         </ul>
