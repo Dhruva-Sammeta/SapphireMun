@@ -307,8 +307,8 @@ export default function DelegateRegistrationPage() {
                 <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/15 space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-wider text-blue-300/70">Registration Fee</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-white/60">Amount</span>
-                    <span className="text-lg font-bold text-blue-300">₹{process.env.NEXT_PUBLIC_REGISTRATION_FEE || "—"}</span>
+                    <span className="text-sm text-white/60">Priority Round Delegate Fee</span>
+                    <span className="text-lg font-bold text-blue-300">₹2249</span>
                   </div>
                   <p className="text-xs text-white/40">Payment QR will be shown on the next step after submitting your details.</p>
                 </div>
