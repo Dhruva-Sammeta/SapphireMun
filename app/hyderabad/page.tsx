@@ -85,6 +85,153 @@ const committees = [
     },
 ]
 
+/* ─── DhurandharCard — special committee, cinematic red/amber glow ─── */
+function DhurandharCard() {
+    const cardRef = useRef<HTMLDivElement>(null)
+    const [hyperKey, setHyperKey] = useState(0)
+    const [bodyVisible, setBodyVisible] = useState(false)
+    const hasAutoPlayed = useRef(false)
+    const isMobileRef = useRef(false)
+
+    useEffect(() => {
+        const card = cardRef.current
+        if (!card) return
+        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
+        const threshold = isMobileRef.current ? 0.5 : 0.15
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAutoPlayed.current) {
+                    hasAutoPlayed.current = true
+                    setHyperKey(k => k + 1)
+                    const t = setTimeout(() => setBodyVisible(true), 200)
+                    observer.disconnect()
+                    return () => clearTimeout(t)
+                }
+            },
+            { threshold, rootMargin: isMobileRef.current ? "-15% 0px -15% 0px" : "-60px" }
+        )
+        observer.observe(card)
+        return () => observer.disconnect()
+    }, [])
+
+    const handleCardHover = useCallback(() => {
+        if (hasAutoPlayed.current && !isMobileRef.current) setHyperKey(k => k + 1)
+    }, [])
+
+    return (
+        <div
+            ref={cardRef}
+            onMouseEnter={handleCardHover}
+            className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 sm:col-span-2 lg:col-span-3"
+            style={{
+                background: "linear-gradient(135deg, #0d0608 0%, #1a0308 40%, #0d060a 100%)",
+                border: "1px solid transparent",
+                backgroundClip: "padding-box",
+                boxShadow: "0 0 40px 0 rgba(180,30,30,0.15), 0 0 0 1px rgba(200,60,30,0.2), inset 0 1px 0 rgba(255,140,60,0.08)",
+            }}
+        >
+            {/* Animated border glow */}
+            <div
+                className="pointer-events-none absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+                style={{
+                    background: "linear-gradient(135deg, transparent 0%, rgba(180,30,30,0.07) 50%, transparent 100%)",
+                    boxShadow: "inset 0 0 0 1px rgba(200,80,40,0.3)",
+                }}
+            />
+
+            {/* Ember glow orbs */}
+            <div className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full blur-[80px] opacity-40 group-hover:opacity-70 transition-opacity duration-700"
+                style={{ background: "radial-gradient(circle, rgba(220,60,30,0.8) 0%, rgba(180,30,10,0.4) 50%, transparent 70%)" }} />
+            <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full blur-[70px] opacity-25 group-hover:opacity-50 transition-opacity duration-700"
+                style={{ background: "radial-gradient(circle, rgba(255,120,30,0.6) 0%, rgba(200,60,20,0.3) 50%, transparent 70%)" }} />
+            <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-1000"
+                style={{ background: "radial-gradient(ellipse, rgba(255,80,30,0.5) 0%, transparent 70%)" }} />
+
+            {/* Film grain texture overlay */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-[0.03]"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+                    backgroundSize: "128px 128px",
+                }}
+            />
+
+            <div className="space-y-3 z-10 relative">
+                {/* Header row */}
+                <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                        {/* Crown icon */}
+                        <div
+                            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 group-hover:scale-110"
+                            style={{
+                                background: "radial-gradient(circle, rgba(220,60,30,0.3) 0%, rgba(180,30,10,0.15) 100%)",
+                                boxShadow: "0 0 20px rgba(220,60,30,0.4), inset 0 0 10px rgba(255,100,40,0.1)",
+                                border: "1px solid rgba(200,80,40,0.4)",
+                            }}
+                        >
+                            <span className="text-lg" role="img" aria-label="crown">👑</span>
+                        </div>
+                        <div>
+                            <div style={{ color: "rgba(255,140,80,1)", textShadow: "0 0 20px rgba(220,80,30,0.8), 0 0 40px rgba(180,40,20,0.4)" }}>
+                                <HyperText
+                                    key={hyperKey}
+                                    text="DHURANDHAR"
+                                    className="text-lg md:text-xl font-bold tracking-wider"
+                                    duration={700}
+                                    animateOnLoad={true}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    {/* Special committee badge */}
+                    <div
+                        className="flex-shrink-0 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest animate-pulse"
+                        style={{
+                            background: "linear-gradient(135deg, rgba(220,60,30,0.2), rgba(180,30,10,0.1))",
+                            border: "1px solid rgba(200,80,40,0.4)",
+                            color: "rgba(255,140,80,0.9)",
+                            boxShadow: "0 0 10px rgba(220,60,30,0.2)",
+                        }}
+                    >
+                        Special Committee
+                    </div>
+                </div>
+
+                {/* Divider — red glow */}
+                <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(200,60,30,0.5), rgba(255,120,50,0.7), rgba(200,60,30,0.5), transparent)" }} />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={bodyVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+                    className="space-y-2"
+                >
+                    <p className="text-xs font-medium italic" style={{ color: "rgba(255,140,80,0.5)" }}>The Sapphire Special Committee</p>
+                    <p className="text-sm font-medium" style={{ color: "rgba(255,140,80,0.8)" }}>Crisis Committee · Advanced · Invite Only</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(200,150,140,0.75)" }}>
+                        Dhurandhar — the war strategist. A closed, invite-only crisis committee where the most elite delegates navigate an unscripted geopolitical collapse in real time. Power shifts. Alliances fall. Only the sharpest survive.
+                    </p>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={bodyVisible ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ duration: 0.4, delay: 0.35 }}
+                    className="mt-auto pt-2"
+                    style={{ borderTop: "1px solid rgba(200,60,30,0.15)" }}
+                >
+                    <p className="text-xs flex items-center gap-2 mt-2 font-medium tracking-wide" style={{ color: "rgba(255,140,80,0.9)" }}>
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "rgba(220,60,30,0.9)" }} />
+                            <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "rgba(220,60,30,1)" }} />
+                        </span>
+                        Invites in Progress
+                    </p>
+                </motion.div>
+            </div>
+        </div>
+    )
+}
+
 /* ─── CommitteeCard ─── */
 type CommitteeItem = (typeof committees)[number]
 
@@ -455,7 +602,7 @@ export default function HyderabadPage() {
                                 Our <span className="font-semibold metallic-text">Committees</span>
                             </h2>
                             <p className="text-base md:text-lg text-muted max-w-2xl mx-auto px-2">
-                                Five committees. Five arenas. One unforgettable experience.
+                                Six committees. One special. Unlimited possibility.
                             </p>
                         </div>
 
@@ -463,6 +610,9 @@ export default function HyderabadPage() {
                             {committees.map((c) => (
                                 <CommitteeCard key={c.id} c={c} />
                             ))}
+
+                            {/* Dhurandhar — the special committee */}
+                            <DhurandharCard />
 
                             {/* One classified card for upcoming reveal */}
                             <div className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-500 metallic-card border border-cyan-500/8 hover:border-cyan-500/25 opacity-70">
