@@ -97,8 +97,7 @@ function DhurandharCard() {
     useEffect(() => {
         const card = cardRef.current
         if (!card) return
-        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
-        const threshold = isMobileRef.current ? 0.5 : 0.15
+        const threshold = 0.15
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting && !hasAutoPlayed.current) {
@@ -109,7 +108,7 @@ function DhurandharCard() {
                     return () => clearTimeout(t)
                 }
             },
-            { threshold, rootMargin: isMobileRef.current ? "-15% 0px -15% 0px" : "-60px" }
+            { threshold, rootMargin: "0px" }
         )
         observer.observe(card)
         return () => observer.disconnect()
@@ -248,7 +247,7 @@ function DhurandharCard() {
                     <p className="text-xs font-medium italic" style={{ color: "rgba(255,140,80,0.5)" }}>The Sapphire Special Committee</p>
                     <p className="text-sm font-medium" style={{ color: "rgba(255,140,80,0.8)" }}>Crisis Committee · Criminally Advanced</p>
                     <p className="text-sm leading-relaxed" style={{ color: "rgba(200,150,140,0.75)" }}>
-                        Dhurandhar — the war strategist. A closed, crisis committee where the most elite delegates navigate an unscripted geopolitical collapse in real time. Power shifts. Alliances fall. Only the sharpest survive.
+                        Agenda to be announced.
                     </p>
                 </motion.div>
 
@@ -288,8 +287,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
         const card = cardRef.current
         if (!card) return
 
-        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
-        const threshold = isMobileRef.current ? 0.5 : 0.15
+        const threshold = 0.15
 
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -302,7 +300,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
                     return () => clearTimeout(t)
                 }
             },
-            { threshold, rootMargin: isMobileRef.current ? "-15% 0px -15% 0px" : "-60px" }
+            { threshold, rootMargin: "0px" }
         )
         observer.observe(card)
         return () => observer.disconnect()
@@ -347,7 +345,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
                 >
                     <p className="text-cyan-200/60 text-xs font-medium italic">{c.fullName}</p>
                     <p className="text-cyan-200/80 text-sm font-medium">{c.type_level}</p>
-                    <p className="text-muted text-sm leading-relaxed line-clamp-3">{c.desc}</p>
+                    <p className="text-muted text-sm leading-relaxed line-clamp-3">Agenda to be announced.</p>
                 </motion.div>
 
                 <motion.div
@@ -361,7 +359,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
                         </span>
-                        Agenda Announced
+                        Agenda to be announced
                     </p>
                 </motion.div>
             </div>
