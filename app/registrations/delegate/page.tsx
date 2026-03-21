@@ -160,8 +160,8 @@ export default function DelegateRegistrationPage() {
       </section>
 
       {/* Step indicator */}
-      <div className="container max-w-xl mx-auto px-4 pb-6">
-        <div className="flex items-center justify-center gap-2">
+      <div className="container max-w-xl mx-auto px-4 pb-6 mt-4">
+        <div className="flex items-center justify-center">
           {stepLabels.map((label, i) => (
             <React.Fragment key={label}>
               <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export default function DelegateRegistrationPage() {
                 </div>
                 <span className={`text-xs font-medium hidden sm:inline ${step === i + 1 ? "text-blue-300" : "text-white/30"}`}>{label}</span>
               </div>
-              {i < 2 && <div className={`w-8 h-0.5 rounded-full ${step > i + 1 ? "bg-green-500/40" : "bg-white/10"}`} />}
+              {i < 2 && <div className={`w-10 h-0.5 mx-3 rounded-full ${step > i + 1 ? "bg-green-500/40" : "bg-white/10"}`} />}
             </React.Fragment>
           ))}
         </div>
