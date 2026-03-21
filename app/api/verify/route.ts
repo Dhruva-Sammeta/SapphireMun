@@ -12,9 +12,7 @@ import { createHash } from "crypto"
  *  4. Image hash deduplication (SHA-256)
  *  5. Rate limiting (1 submission per 30s per delegate)
  *  6. Screenshot upload to Supabase Storage
- *  7. Gemini Vision 5-layer verification with anti-spoof prompt
- *  8. Extracted UTR uniqueness check (database)
- *  9. Status update + pass generation trigger
+ *  7. Status update (pending for manual review)
  */
 
 const MAX_VERIFY_ATTEMPTS = 5
