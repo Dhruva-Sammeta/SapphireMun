@@ -364,12 +364,12 @@ export default function DelegateRegistrationPage() {
                   </div>
                 </div>
 
-                {/* AI verification notice */}
+                {/* Manual verification notice */}
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-blue-500/5 border border-blue-500/15">
                   <ShieldCheck className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
                   <div className="text-sm">
-                    <p className="font-medium text-blue-200 mb-1">AI-Powered Verification</p>
-                    <p className="text-white/50 text-xs">Our system will automatically read your transaction details from the screenshot. No need to enter a UTR manually.</p>
+                    <p className="font-medium text-blue-200 mb-1">Secure Manual Verification</p>
+                    <p className="text-white/50 text-xs">Our finance team will manually review your payment within 24 hours. Please upload a clear transaction screenshot.</p>
                   </div>
                 </div>
 
