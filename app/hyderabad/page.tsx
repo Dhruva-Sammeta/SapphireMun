@@ -190,6 +190,23 @@ function DhurandharCard() {
                                     animateOnLoad={true}
                                 />
                             </div>
+                            {/* Flame flicker beneath title */}
+                            <div className="flex items-end gap-[3px] mt-[3px] ml-[1px]" aria-hidden="true">
+                                {[0, 1, 2, 3, 4].map((i) => (
+                                    <div
+                                        key={i}
+                                        style={{
+                                            width: `${[4,6,5,6,4][i]}px`,
+                                            height: `${[10,14,12,13,9][i]}px`,
+                                            borderRadius: "50% 50% 30% 30% / 60% 60% 40% 40%",
+                                            background: `radial-gradient(ellipse at 50% 80%, rgba(255,${[180,120,150,110,160][i]},30,0.95) 0%, rgba(220,60,20,0.7) 50%, transparent 100%)`,
+                                            filter: "blur(0.6px)",
+                                            animation: `dhurandhar-flame ${[1.1,0.9,1.3,1.0,1.2][i]}s ease-in-out ${[0,0.15,0.05,0.2,0.08][i]}s infinite alternate`,
+                                            transformOrigin: "bottom center",
+                                        }}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
                     {/* Special committee badge */}

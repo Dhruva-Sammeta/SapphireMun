@@ -54,3 +54,10 @@
   50%        { box-shadow: 0 0 35px rgba(220,60,30,0.8), 0 0 0 2px rgba(240,100,50,0.7), inset 0 0 16px rgba(255,120,50,0.2); }
 }
 
+@keyframes dhurandhar-flame {
+  0%   { transform: scaleY(1)    scaleX(1)    translateY(0px); opacity: 0.9; }
+  50%  { transform: scaleY(0.75) scaleX(0.85) translateY(2px); opacity: 0.6; }
+  100% { transform: scaleY(0.9)  scaleX(1.1)  translateY(1px); opacity: 0.8; }
+}
+
+
