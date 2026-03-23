@@ -26,6 +26,7 @@ import {
     ImageIcon,
     Mail,
     Sword,
+    Anchor,
 } from "lucide-react"
 
 import FloatingCard from "@/components/floating-card"
@@ -270,6 +271,139 @@ function DhurandharCard() {
                             <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "rgba(220,60,30,1)" }} />
                         </span>
                         Invites in Progress
+                    </p>
+                </motion.div>
+            </div>
+        </div>
+    )
+}
+
+/* ─── OnePieceCard — nautical wave animation ─── */
+function OnePieceCard() {
+    const cardRef = useRef<HTMLDivElement>(null)
+    const [hyperKey, setHyperKey] = useState(0)
+    const [bodyVisible, setBodyVisible] = useState(false)
+    const hasAutoPlayed = useRef(false)
+    const isMobileRef = useRef(false)
+
+    useEffect(() => {
+        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
+    }, [])
+
+    useEffect(() => {
+        const card = cardRef.current
+        if (!card) return
+        const threshold = 0.15
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAutoPlayed.current) {
+                    hasAutoPlayed.current = true
+                    setHyperKey(k => k + 1)
+                    const t = setTimeout(() => setBodyVisible(true), 200)
+                    observer.disconnect()
+                    return () => clearTimeout(t)
+                }
+            },
+            { threshold, rootMargin: "0px" }
+        )
+        observer.observe(card)
+        return () => observer.disconnect()
+    }, [])
+
+    const handleCardHover = useCallback(() => {
+        if (hasAutoPlayed.current && !isMobileRef.current) setHyperKey(k => k + 1)
+    }, [])
+
+    return (
+        <div
+            ref={cardRef}
+            onMouseEnter={handleCardHover}
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card ${
+                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+            } border border-cyan-500/10 hover:border-teal-500/40`}
+        >
+            {/* Base hover glow (nautical teal) */}
+            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.05),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.2),transparent_70%)] transition-all duration-700 pointer-events-none" />
+
+            {/* Wave Effect container */}
+            <div
+                className="absolute inset-x-0 bottom-0 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                style={{ height: "70px", maskImage: "linear-gradient(to bottom, transparent, black)" }}
+            >
+                <motion.div
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{ repeat: Infinity, ease: "linear", duration: 8 }}
+                    className="absolute bottom-0 flex w-[200%]"
+                >
+                    <svg className="w-full h-full text-teal-400/10" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C89.71,114.62,185.92,86.62,267.39,63.44Z" fill="currentColor" />
+                    </svg>
+                    <svg className="w-full h-full text-teal-400/10" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C89.71,114.62,185.92,86.62,267.39,63.44Z" fill="currentColor" />
+                    </svg>
+                </motion.div>
+                <motion.div
+                    animate={{ x: ["-50%", "0%"] }}
+                    transition={{ repeat: Infinity, ease: "linear", duration: 12 }}
+                    className="absolute bottom-0 flex w-[200%]"
+                >
+                    <svg className="w-full h-full text-blue-500/10" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="currentColor" />
+                    </svg>
+                    <svg className="w-full h-full text-blue-500/10" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="currentColor" />
+                    </svg>
+                </motion.div>
+            </div>
+
+            <div className="space-y-4 z-10 relative">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-teal-900/15 text-teal-500/40 group-hover:scale-110 group-hover:bg-teal-900/40 transition-all duration-300">
+                        <Anchor className="h-5 w-5 group-hover:text-teal-400 transition-colors" />
+                    </div>
+                    <div className="flex-1">
+                        <HyperText
+                            key={hyperKey}
+                            text="ONE PIECE"
+                            className="text-lg md:text-xl font-bold tracking-wider text-fg drop-shadow-[0_0_15px_rgba(20,184,166,0.2)]"
+                            duration={800}
+                            animateOnLoad={true}
+                        />
+                    </div>
+                    <div
+                        className="flex-shrink-0 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-teal-500/10 border border-teal-500/20 text-teal-300 shadow-[0_0_10px_rgba(20,184,166,0.1)]"
+                    >
+                        Secret
+                    </div>
+                </div>
+                
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-teal-500/10 group-hover:via-teal-500/40 to-transparent transition-all duration-700" />
+                
+                <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={bodyVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+                    className="space-y-2"
+                >
+                    <p className="text-teal-200/60 text-xs font-medium italic">The Grand Line Fleet</p>
+                    <p className="text-teal-200/80 text-sm font-medium">Grand Line · Classified</p>
+                    <p className="text-muted/80 text-sm leading-relaxed line-clamp-3">
+                        Set sail for the Grand Line. Navigate treacherous alliances, legendary bounties, and the pursuit of ultimate freedom.
+                    </p>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={bodyVisible ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ duration: 0.4, delay: 0.35 }}
+                    className="mt-auto pt-2 border-t border-teal-500/10"
+                >
+                    <p className="text-xs text-teal-400/80 flex items-center gap-2 mt-2 font-medium tracking-wide">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500" />
+                        </span>
+                        Awaiting Orders
                     </p>
                 </motion.div>
             </div>
@@ -663,30 +797,8 @@ export default function HyderabadPage() {
                                 <CommitteeCard key={c.id} c={c} />
                             ))}
 
-                            {/* Classified incoming slot — sits in the regular grid */}
-                            <div className="group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-500 metallic-card border border-cyan-500/8 hover:border-cyan-500/25 opacity-70">
-                                <div className="space-y-4 z-10 relative">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-cyan-900/15 text-cyan-500/40 group-hover:scale-110 transition-all duration-300">
-                                            <Lock className="h-5 w-5" />
-                                        </div>
-                                        <HyperText
-                                            text="INCOMING"
-                                            className="text-lg font-bold text-cyan-500/40 group-hover:text-cyan-400 tracking-widest"
-                                            duration={800}
-                                            animateOnLoad={true}
-                                        />
-                                    </div>
-                                    <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/15 to-transparent opacity-30" />
-                                    <p className="text-cyan-500/25 text-xs uppercase tracking-wider font-medium">
-                                        Classified • Level 6
-                                    </p>
-                                    <div className="space-y-2 opacity-25 mt-2">
-                                        <div className="h-2 bg-cyan-500/20 rounded w-3/4 animate-pulse" />
-                                        <div className="h-2 bg-cyan-500/20 rounded w-1/2 animate-pulse delay-75" />
-                                    </div>
-                                </div>
-                            </div>
+                            {/* One Piece — nautical special committee slot */}
+                            <OnePieceCard />
                         </div>
                     </div>
                 </ChunkSection>
