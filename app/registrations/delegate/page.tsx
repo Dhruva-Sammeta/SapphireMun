@@ -72,7 +72,7 @@ export default function DelegateRegistrationPage() {
     if (!formData.grade_year.trim()) errs.grade_year = "Grade/Year is required"
     if (!formData.attended_muns) errs.attended_muns = "Please select Yes or No"
     if (!formData.experience.trim()) errs.experience = "Required (mention none if N/A)"
-    
+
     // Committees
     if (!formData.committee) errs.committee = "Committee Preference 1 is required"
     if (!formData.country.trim()) errs.country = "Portfolio Preference 1 is required"
@@ -157,11 +157,10 @@ export default function DelegateRegistrationPage() {
           {stepLabels.map((label, i) => (
             <React.Fragment key={label}>
               <div className="flex items-center gap-2">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                  step > i + 1 ? "bg-green-500/30 border border-green-500/50 text-green-300" :
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${step > i + 1 ? "bg-green-500/30 border border-green-500/50 text-green-300" :
                   step === i + 1 ? "bg-blue-500/30 border border-blue-500/50 text-blue-300" :
-                  "bg-white/5 border border-white/10 text-white/30"
-                }`}>
+                    "bg-white/5 border border-white/10 text-white/30"
+                  }`}>
                   {step > i + 1 ? <CheckCircle className="w-4 h-4" /> : i + 1}
                 </div>
                 <span className={`text-xs font-medium hidden sm:inline ${step === i + 1 ? "text-blue-300" : "text-white/30"}`}>{label}</span>
@@ -189,7 +188,7 @@ export default function DelegateRegistrationPage() {
                 {/* 1. Delegate Profile */}
                 <div className="space-y-4">
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">Delegate Profile</h3>
-                  
+
                   {[
                     { key: "name", label: "Full Name *", placeholder: "Your answer", type: "text" },
                     { key: "phone", label: "Contact Number *", placeholder: "Your answer", type: "tel" },
@@ -204,9 +203,8 @@ export default function DelegateRegistrationPage() {
                         placeholder={field.placeholder}
                         value={formData[field.key as keyof typeof formData]}
                         onChange={(e) => handleChange(field.key, e.target.value)}
-                        className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${
-                          fieldErrors[field.key] ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"
-                        }`}
+                        className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors[field.key] ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"
+                          }`}
                       />
                       {fieldErrors[field.key] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[field.key]}</p>}
                     </div>
@@ -216,7 +214,7 @@ export default function DelegateRegistrationPage() {
                 {/* 2. MUN Experience */}
                 <div className="space-y-4 pt-2">
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">MUN Experience</h3>
-                  
+
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold tracking-wider text-white/70">Have you attended MUNs before? *</label>
                     <div className="flex gap-4">
@@ -231,7 +229,7 @@ export default function DelegateRegistrationPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold tracking-wider text-white/70">If attended previously, Number of conferences attended * <br/><span className="text-white/40 text-[10px] uppercase block mt-1">(Please mention: Conference Name - Committee - Country/Portfolio - Year. If not, mention none)</span></label>
+                    <label className="text-xs font-semibold tracking-wider text-white/70">If attended previously, Number of conferences attended * <br /><span className="text-white/40 text-[10px] uppercase block mt-1">(Please mention: Conference Name - Committee - Country/Portfolio - Year. If not, mention none)</span></label>
                     <textarea placeholder="Your answer" value={formData.experience} onChange={(e) => handleChange("experience", e.target.value)} rows={3} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 resize-none ${fieldErrors.experience ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
                     {fieldErrors.experience && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.experience}</p>}
                   </div>
@@ -240,14 +238,14 @@ export default function DelegateRegistrationPage() {
                 {/* 3. Committee Preferences */}
                 <div className="space-y-4 pt-2">
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">Committee Preferences</h3>
-                  
+
                   {[1, 2, 3].map(num => (
                     <div key={`pref-${num}`} className="space-y-4 pb-4 border-b border-white/5 last:border-0 last:pb-0">
                       <div className="space-y-1.5">
                         <label className="text-xs font-semibold tracking-wider text-white/70">Committee Preference {num} *</label>
                         <div className="space-y-2">
                           {COMMITTEES.map(c => (
-                            <label key={c+num} className="flex items-center gap-3 text-sm text-white/80 cursor-pointer p-2 hover:bg-white/5 rounded-lg transition-colors">
+                            <label key={c + num} className="flex items-center gap-3 text-sm text-white/80 cursor-pointer p-2 hover:bg-white/5 rounded-lg transition-colors">
                               <input type="radio" name={`committee_${num}`} value={c} checked={formData[num === 1 ? "committee" : `committee_${num}` as keyof typeof formData] === c} onChange={(e) => handleChange(num === 1 ? "committee" : `committee_${num}`, e.target.value)} className="w-4 h-4 accent-blue-500 mt-0.5 shrink-0" />
                               <span className="leading-snug">{c}</span>
                             </label>
@@ -312,7 +310,7 @@ export default function DelegateRegistrationPage() {
                       <p>You <strong>MUST</strong> pay the delegate fee beforehand and upload a valid payment screenshot below.</p>
                       <p className="font-medium text-red-300 flex items-start gap-1.5 bg-red-500/10 p-2.5 rounded-lg border border-red-500/20">
                         <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                        <span>Your screenshot MUST clearly show the <span className="underline decoration-red-400 underline-offset-2">12-digit UPI Transaction ID (UTR)</span>.</span>
+                        <span>Your screenshot MUST clearly show the <span className="underline decoration-red-400 italic-offset-2">12-digit UPI Transaction ID OR TRANSACTION REFERENCE NUMBER</span>.</span>
                       </p>
                       <p><strong>Your application will NOT be processed without a valid screenshot containing the transaction ID.</strong></p>
                     </div>
@@ -330,9 +328,8 @@ export default function DelegateRegistrationPage() {
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={handleDrop}
                     onClick={() => document.getElementById("file-input")?.click()}
-                    className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-all ${
-                      screenshotPreview ? "border-green-500/40 bg-green-500/5" : "border-white/15 bg-white/[0.02] hover:border-blue-500/40 hover:bg-blue-500/5"
-                    }`}
+                    className={`cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-all ${screenshotPreview ? "border-green-500/40 bg-green-500/5" : "border-white/15 bg-white/[0.02] hover:border-blue-500/40 hover:bg-blue-500/5"
+                      }`}
                   >
                     {screenshotPreview ? (
                       <div className="space-y-3">
