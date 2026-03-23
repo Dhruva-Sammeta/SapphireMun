@@ -292,7 +292,15 @@ export default function DelegateRegistrationPage() {
                 <div className="text-center space-y-3">
                   <p className="text-sm text-white/60">Scan the QR code to pay:</p>
                   <div className="inline-block rounded-2xl border border-white/10 bg-white p-3">
-                    <img src="/images/payment-qr.png" alt="Payment QR Code" className="w-52 h-52 object-contain" />
+                    <img src="/images/newpaymentqr.jpeg" alt="Payment QR Code" className="w-52 h-52 object-contain" />
+                  </div>
+                  <div className="pt-2 pb-2 space-y-1.5">
+                    <p className="text-sm font-medium text-white/90 bg-[#16203a] py-2 px-4 rounded-xl inline-flex items-center gap-2 border border-blue-500/20 shadow-inner">
+                      UPI ID: <span className="font-mono text-blue-300 tracking-wide">7993044817@ybl</span>
+                    </p>
+                    <p className="text-xs text-white/60 uppercase tracking-widest font-semibold flex items-center justify-center pt-1">
+                      VENKATA SATYA NAGA SAI TEJA
+                    </p>
                   </div>
                 </div>
 
@@ -300,10 +308,14 @@ export default function DelegateRegistrationPage() {
                 <div className="space-y-4">
                   <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 space-y-2">
                     <p className="text-sm font-bold text-red-400 flex items-center gap-2"><AlertCircle className="w-5 h-5 flex-shrink-0" /> MANDATORY PAYMENT STEP</p>
-                    <p className="text-sm text-red-200/90 leading-relaxed">
-                      You <strong>MUST</strong> pay the delegate fee beforehand and upload a valid payment screenshot below. 
-                      <span className="block mt-1"><strong>Your application will NOT be processed without it.</strong></span>
-                    </p>
+                    <div className="text-sm text-red-200/90 leading-relaxed space-y-2">
+                      <p>You <strong>MUST</strong> pay the delegate fee beforehand and upload a valid payment screenshot below.</p>
+                      <p className="font-medium text-red-300 flex items-start gap-1.5 bg-red-500/10 p-2.5 rounded-lg border border-red-500/20">
+                        <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                        <span>Your screenshot MUST clearly show the <span className="underline decoration-red-400 underline-offset-2">12-digit UPI Transaction ID (UTR)</span>.</span>
+                      </p>
+                      <p><strong>Your application will NOT be processed without a valid screenshot containing the transaction ID.</strong></p>
+                    </div>
                   </div>
 
                   <label className="text-xs font-semibold uppercase tracking-wider text-white/50 block">Upload Payment Screenshot *</label>
