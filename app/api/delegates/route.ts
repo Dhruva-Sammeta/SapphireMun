@@ -58,7 +58,7 @@ export async function PATCH(req: NextRequest) {
   }
 
   try {
-    const { id, status } = await req.json()
+    const { id, status, reason } = await req.json()
 
     if (!id || !["approved", "rejected"].includes(status)) {
       return NextResponse.json({ error: "Valid id and status (approved/rejected) required." }, { status: 400 })
@@ -66,9 +66,14 @@ export async function PATCH(req: NextRequest) {
 
     const supabase = getSupabase()
 
+    const updatePayload: any = { status }
+    if (status === "rejected" && reason) {
+      updatePayload.rejection_reason = reason
+    }
+
     const { data: delegate, error: updateError } = await supabase
       .from("delegates")
-      .update({ status })
+      .update(updatePayload)
       .eq("id", id)
       .select("name, email, committee, country")
       .single()
@@ -146,6 +151,12 @@ export async function PATCH(req: NextRequest) {
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;margin:0 0 16px;">
                   Unfortunately, your registration could not be approved at this time.
                 </p>
+                ${reason ? `
+                <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:16px;margin:20px 0;">
+                  <p style="margin:0 0 8px;color:rgba(252,165,165,0.9);font-size:12px;text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">Reason for Rejection</p>
+                  <p style="margin:0;color:white;font-size:14px;line-height:1.6;">${reason}</p>
+                </div>
+                ` : ""}
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;">
                   If you believe this is an error, please reply to this email, contact us on Instagram <a href="https://instagram.com/sapphire_mun/" style="color:#0fe0ff;text-decoration:none;">@sapphire_mun</a>, or email us at <a href="mailto:sapphire.mun1@gmail.com" style="color:#0fe0ff;text-decoration:none;">sapphire.mun1@gmail.com</a>.
                 </p>
