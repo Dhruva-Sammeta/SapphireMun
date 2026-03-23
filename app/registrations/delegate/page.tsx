@@ -89,55 +89,32 @@ export default function DelegateRegistrationPage() {
     if (error) setError("")
   }
 
-  // Step 1 → submit registration
-  const handleStep1Submit = async () => {
+  // Step 1 → Validate locally and proceed to payment
+  const handleStep1Submit = () => {
     const errs = validate()
     if (Object.keys(errs).length > 0) { setFieldErrors(errs); return }
-
-    setLoading(true)
-    setError("")
-
-    try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-      const data = await res.json()
-      if (!res.ok) {
-        setError(data.error || "Registration failed. Please try again.")
-        setLoading(false)
-        return
-      }
-      setDelegateId(data.delegate.id)
-      setStep(2)
-    } catch {
-      setError("Could not connect to the server. Check your internet and try again.")
-    } finally {
-      setLoading(false)
-    }
+    setStep(2)
   }
 
-  // Step 2 → upload screenshot
+  // Step 2 → upload screenshot and register
   const handleStep2Submit = async () => {
-    if (!screenshotFile) { setUploadError("Please upload your payment screenshot."); return }
-    if (!delegateId) { setUploadError("Session error. Please restart."); return }
+    if (!screenshotFile) { setUploadError("A payment screenshot is MANDATORY to proceed."); return }
 
     setLoading(true)
     setUploadError("")
 
     try {
       const fd = new FormData()
+      Object.entries(formData).forEach(([key, value]) => fd.append(key, value))
       fd.append("screenshot", screenshotFile)
-      fd.append("delegate_id", delegateId)
 
-      const res = await fetch("/api/upload", {
+      const res = await fetch("/api/register", {
         method: "POST",
         body: fd,
       })
       const data = await res.json()
       if (!res.ok) {
-        setUploadError(data.error || "Upload failed. Please try again.")
+        setUploadError(data.error || "Submission failed. Please try again.")
         setLoading(false)
         return
       }
@@ -320,8 +297,16 @@ export default function DelegateRegistrationPage() {
                 </div>
 
                 {/* Upload area */}
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-white/50">Upload Payment Screenshot</label>
+                <div className="space-y-4">
+                  <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 space-y-2">
+                    <p className="text-sm font-bold text-red-400 flex items-center gap-2"><AlertCircle className="w-5 h-5 flex-shrink-0" /> MANDATORY PAYMENT STEP</p>
+                    <p className="text-sm text-red-200/90 leading-relaxed">
+                      You <strong>MUST</strong> pay the delegate fee beforehand and upload a valid payment screenshot below. 
+                      <span className="block mt-1"><strong>Your application will NOT be processed without it.</strong></span>
+                    </p>
+                  </div>
+
+                  <label className="text-xs font-semibold uppercase tracking-wider text-white/50 block">Upload Payment Screenshot *</label>
 
                   {uploadError && (
                     <div className="flex items-start gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
