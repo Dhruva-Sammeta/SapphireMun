@@ -36,6 +36,7 @@ export default function DelegateRegistrationPage() {
     committee_3: "",
     portfolio_3: "",
     heard_about: "",
+    referral_code: "",
   })
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
@@ -80,6 +81,15 @@ export default function DelegateRegistrationPage() {
     if (!formData.portfolio_2.trim()) errs.portfolio_2 = "Portfolio Preference 2 is required"
     if (!formData.committee_3) errs.committee_3 = "Committee Preference 3 is required"
     if (!formData.portfolio_3.trim()) errs.portfolio_3 = "Portfolio Preference 3 is required"
+    
+    if (formData.referral_code.trim()) {
+      if (formData.referral_code.trim().toUpperCase() !== "SAPPHIRE250") {
+        errs.referral_code = "Invalid referral code"
+      } else if (!formData.heard_about.trim()) {
+        errs.heard_about = "Name of the referer is required when using a code"
+      }
+    }
+
     return errs
   }
 
@@ -105,7 +115,17 @@ export default function DelegateRegistrationPage() {
 
     try {
       const fd = new FormData()
-      Object.entries(formData).forEach(([key, value]) => fd.append(key, value))
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "referral_code") return
+        if (key === "heard_about") {
+          const finalVal = formData.referral_code.trim() 
+            ? `${value} [Code: ${formData.referral_code.trim().toUpperCase()}]` 
+            : value
+          fd.append(key, finalVal)
+        } else {
+          fd.append(key, value)
+        }
+      })
       fd.append("screenshot", screenshotFile)
 
       const res = await fetch("/api/register", {
@@ -264,7 +284,14 @@ export default function DelegateRegistrationPage() {
 
                   <div className="space-y-1.5 pt-2">
                     <label className="text-xs font-semibold tracking-wider text-white/70">How did you hear about Sapphire MUN? <span className="text-white/40 text-[10px] uppercase block mt-1">(Tell us the name of the person)</span></label>
-                    <input type="text" placeholder="Your answer" value={formData.heard_about} onChange={(e) => handleChange("heard_about", e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/40" />
+                    <input type="text" placeholder="Your answer" value={formData.heard_about} onChange={(e) => handleChange("heard_about", e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.heard_about ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
+                    {fieldErrors.heard_about && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.heard_about}</p>}
+                  </div>
+
+                  <div className="space-y-1.5 pt-2">
+                    <label className="text-xs font-semibold tracking-wider text-white/70">Referral Code (Optional) <span className="text-white/40 text-[10px] uppercase block mt-1">(Code is valid only if you provide the referer's name above)</span></label>
+                    <input type="text" placeholder="e.g., SAPPHIRE250" value={formData.referral_code} onChange={(e) => handleChange("referral_code", e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.referral_code ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
+                    {fieldErrors.referral_code && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.referral_code}</p>}
                   </div>
                 </div>
 
@@ -282,8 +309,20 @@ export default function DelegateRegistrationPage() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-blue-300/70">Priority Round Delegate Fee</p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-white/60">Amount</span>
-                    <span className="text-2xl font-bold text-blue-300">₹2249</span>
+                    <div className="text-right">
+                      {formData.referral_code.trim().toUpperCase() === "SAPPHIRE250" && formData.heard_about.trim() ? (
+                        <>
+                          <span className="text-sm text-white/40 line-through mr-2">₹2249</span>
+                          <span className="text-2xl font-bold text-green-400">₹1999</span>
+                        </>
+                      ) : (
+                        <span className="text-2xl font-bold text-blue-300">₹2249</span>
+                      )}
+                    </div>
                   </div>
+                  {formData.referral_code.trim().toUpperCase() === "SAPPHIRE250" && formData.heard_about.trim() && (
+                    <p className="text-xs text-green-400 mt-1">₹250 discount applied for using referral code!</p>
+                  )}
                 </div>
 
                 {/* QR */}
