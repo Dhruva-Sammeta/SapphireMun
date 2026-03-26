@@ -83,7 +83,7 @@ export default function DelegateRegistrationPage() {
     if (!formData.portfolio_3.trim()) errs.portfolio_3 = "Portfolio Preference 3 is required"
     
     if (formData.referral_code.trim()) {
-      if (formData.referral_code.trim().toUpperCase() !== "SAPPHIRE250") {
+      if (formData.referral_code.trim().toUpperCase() !== "SAPPHIRE") {
         errs.referral_code = "Invalid referral code"
       } else if (!formData.heard_about.trim()) {
         errs.heard_about = "Name of the referer is required when using a code"
