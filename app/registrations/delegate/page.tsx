@@ -290,7 +290,7 @@ export default function DelegateRegistrationPage() {
 
                   <div className="space-y-1.5 pt-2">
                     <label className="text-xs font-semibold tracking-wider text-white/70">Referral Code (Optional) <span className="text-white/40 text-[10px] uppercase block mt-1">(Code is valid only if you provide the referer's name above)</span></label>
-                    <input type="text" placeholder="e.g., SAPPHIRE250" value={formData.referral_code} onChange={(e) => handleChange("referral_code", e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.referral_code ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
+                    <input type="text" placeholder="e.g., SAPPHIRE---" value={formData.referral_code} onChange={(e) => handleChange("referral_code", e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.referral_code ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
                     {fieldErrors.referral_code && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.referral_code}</p>}
                   </div>
                 </div>
