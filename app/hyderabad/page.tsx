@@ -691,8 +691,8 @@ export default function HyderabadPage() {
                                     </h1>
                                     <p className="text-base md:text-lg text-muted font-light max-w-2xl mx-auto leading-relaxed">
                                         Strategize. Socialize. Scrutinize.<br className="hidden sm:block" />
-                                        India&apos;s first Experience-targeted Model United Nations returns to Hyderabad.
-                                    </p>
+                                        India&apos;s first Experience-targeted Model United Nations returns to Hyderabad. Now Merged with YI'MUN Hyderabad, Details to emerge soon...
+                                 </p>
                                 </motion.div>
 
                                 {/* CTA Buttons */}
