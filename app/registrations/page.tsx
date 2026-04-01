@@ -9,7 +9,7 @@ import "../../app/refined.css"
 
 export default function RegistrationsPage() {
   // Toggle this to true when regular round registrations open
-  const isDelegateRegistrationOpen = false;
+  const isDelegateRegistrationOpen = true;
 
   return (
     <div className="min-h-screen bg-app text-app overflow-x-hidden">
@@ -77,11 +77,11 @@ export default function RegistrationsPage() {
                       Delegate
                     </h2>
                     <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 relative z-10">
-                      Registration
+                      Round 1 Registration
                     </div>
 
                     <p className="text-sm text-white/60 mb-6 leading-relaxed relative z-10">
-                      Register as a delegate, make your payment, and receive your official digital pass.
+                      Phase 1 registrations are now live! Register as a delegate, make your payment, and receive your official digital pass.
                     </p>
 
                     <div className="mt-auto px-6 py-2.5 rounded-full border border-blue-500/30 text-sm font-semibold text-blue-200 bg-blue-900/20 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 flex items-center gap-2 relative z-10">
@@ -107,11 +107,11 @@ export default function RegistrationsPage() {
                     Delegate
                   </h2>
                   <div className="text-xs font-bold uppercase tracking-widest text-red-400/80 mb-4 relative z-10">
-                    Priority Closed
+                    Round 1 Closed
                   </div>
 
                   <p className="text-sm text-white/40 mb-6 leading-relaxed relative z-10">
-                    Priority Round has concluded. Regular registrations will open soon!
+                    Round 1 has concluded. Round 2 registrations will open soon!
                   </p>
 
                   <div className="mt-auto px-6 py-2.5 rounded-full border border-white/5 text-sm font-semibold text-gray-400 bg-white/5 flex items-center gap-2 relative z-10">
