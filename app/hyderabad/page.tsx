@@ -127,9 +127,8 @@ function DhurandharCard() {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
-            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 sm:col-span-2 lg:col-span-3 ${
-                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
-            }`}
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 sm:col-span-2 lg:col-span-3 ${!bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+                }`}
             style={{
                 background: "linear-gradient(135deg, #0d0608 0%, #1a0308 40%, #0d060a 100%)",
                 border: "1px solid transparent",
@@ -318,9 +317,8 @@ function OnePieceCard() {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
-            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card ${
-                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
-            } border border-cyan-500/10 hover:border-teal-500/40`}
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card ${!bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+                } border border-cyan-500/10 hover:border-teal-500/40`}
         >
             {/* Base hover glow (nautical teal) */}
             <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.05),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.2),transparent_70%)] transition-all duration-700 pointer-events-none" />
@@ -376,9 +374,9 @@ function OnePieceCard() {
                         Secret
                     </div>
                 </div>
-                
+
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-teal-500/10 group-hover:via-teal-500/40 to-transparent transition-all duration-700" />
-                
+
                 <motion.div
                     initial={{ opacity: 0, y: 8 }}
                     animate={bodyVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
@@ -459,9 +457,8 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
-            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card border border-cyan-500/15 hover:border-cyan-400/40 ${
-                !bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
-            }`}
+            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card border border-cyan-500/15 hover:border-cyan-400/40 ${!bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
+                }`}
         >
             <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.05),transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.15),transparent_70%)] transition-all duration-700 pointer-events-none" />
 
@@ -692,8 +689,8 @@ export default function HyderabadPage() {
                                     </h1>
                                     <p className="text-base md:text-lg text-muted font-light max-w-2xl mx-auto leading-relaxed">
                                         Strategize. Socialize. Scrutinize.<br className="hidden sm:block" />
-                                        India&apos;s first Experience-targeted Model United Nations returns to Hyderabad. Now Handling all delegates of YI'MUN Hyderabad, Details to emerge soon...
-                                 </p>
+                                        India&apos;s first Experience-targeted Model United Nations returns to Hyderabad. Now Handling all delegates of YI'MUN Hyderabad.
+                                    </p>
                                 </motion.div>
 
                                 {/* CTA Buttons */}
@@ -826,13 +823,13 @@ export default function HyderabadPage() {
                                 >
                                     {/* Logo as Title */}
                                     <div className="w-56 md:w-80 lg:w-[450px]">
-                                        <img 
-                                            src="/images/VNR-new.png" 
-                                            alt="VNR VJIET Logo" 
+                                        <img
+                                            src="/images/VNR-new.png"
+                                            alt="VNR VJIET Logo"
                                             className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
                                         />
                                     </div>
-                                    
+
                                     <div className="space-y-2">
                                         {/* Official Campus Badge */}
                                         <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] md:text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-2">
@@ -848,9 +845,9 @@ export default function HyderabadPage() {
                                     {/* Google Maps CTA */}
                                     <div className="pt-2">
                                         <Button asChild className="btn-accent border border-cyan-400/30 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                                            <a 
-                                                href="https://maps.app.goo.gl/4EyznBdJFRK1scP26" 
-                                                target="_blank" 
+                                            <a
+                                                href="https://maps.app.goo.gl/4EyznBdJFRK1scP26"
+                                                target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center justify-center"
                                             >
