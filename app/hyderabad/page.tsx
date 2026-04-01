@@ -793,8 +793,8 @@ export default function HyderabadPage() {
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8 }}
+                            viewport={{ once: true, margin: "0px" }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
                             className="relative w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden metallic-card group"
                             style={{ minHeight: "600px" }}
                         >
@@ -816,12 +816,12 @@ export default function HyderabadPage() {
                             <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)] pointer-events-none" />
 
                             {/* Content Overlays */}
-                            <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-12 lg:p-16 min-h-[600px]">
+                            <div className="relative z-10 flex flex-col justify-center sm:justify-end h-full p-8 md:p-12 lg:p-16 min-h-[500px] md:min-h-[600px]">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true, margin: "-100px" }}
-                                    transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+                                    viewport={{ once: true, margin: "0px" }}
+                                    transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
                                     className="flex flex-col items-start space-y-4 md:space-y-6 max-w-3xl"
                                 >
                                     {/* Logo as Title */}

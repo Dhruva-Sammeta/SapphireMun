@@ -41,23 +41,20 @@ export default function ChunkSection({ id, className, children, threshold = 0.45
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const activeThreshold = isMobile ? mobileThreshold : threshold
-          if (entry.isIntersecting && entry.intersectionRatio >= activeThreshold) {
+          if (entry.isIntersecting) {
             setActive(true)
-          } else if (entry.intersectionRatio < 0.1) {
-            setActive(false)
           }
         })
       },
       {
-        threshold: isMobile ? [0, 0.05, mobileThreshold] : Array.from({ length: 10 }, (_, i) => i / 10),
-        rootMargin: isMobile ? "0px 0px -5% 0px" : "0px 0px -10% 0px",
+        threshold: 0,
+        rootMargin: "200px 0px 200px 0px", // Trigger earlier before it enters viewport
       },
     )
 
     obs.observe(el)
     return () => obs.disconnect()
-  }, [threshold, isMobile])
+  }, [])
 
   useEffect(() => {
     if (active) {
