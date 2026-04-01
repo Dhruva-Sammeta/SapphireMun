@@ -591,6 +591,7 @@ export default function HyderabadPage() {
                     items={[
                         { href: "/", label: "Home" },
                         { href: "/registrations", label: "Registrations" },
+                        { href: "#venue", label: "Venue" },
                         { href: "#committees", label: "Committees" },
                         { href: "#archive", label: "Archive" },
                         { href: "#contact", label: "Contact" },
@@ -733,7 +734,7 @@ export default function HyderabadPage() {
                                             <span className="text-lg md:text-xl font-semibold text-fg">MAY 1 · 2 · 3</span>
                                         </div>
                                         <div className="hidden sm:block w-px h-6 bg-cyan-400/30" />
-                                        <a href="https://maps.app.goo.gl/4EyznBdJFRK1scP26" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-cyan-300 transition-colors">
+                                        <a href="#venue" className="flex items-center gap-2 hover:text-cyan-300 transition-colors">
                                             <MapPin className="h-5 w-5 text-accent" />
                                             <span className="text-lg md:text-xl font-semibold text-fg">VNR VJIET, Hyderabad</span>
                                         </a>
@@ -815,26 +816,36 @@ export default function HyderabadPage() {
                             <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)] pointer-events-none" />
 
                             {/* Content Overlays */}
-                            <div className="relative z-10 flex flex-col justify-between h-full p-8 md:p-12 lg:p-16 min-h-[600px]">
-                                {/* Top Left: Text */}
+                            <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-12 lg:p-16 min-h-[600px]">
                                 <motion.div
-                                    initial={{ opacity: 0, y: -20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true, margin: "-100px" }}
-                                    transition={{ duration: 0.8, delay: 0.3 }}
-                                    className="space-y-3 md:space-y-4 max-w-xl text-left w-full"
+                                    transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+                                    className="flex flex-col items-start space-y-4 md:space-y-6 max-w-3xl"
                                 >
-                                    <div>
-                                        <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] md:text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-2 md:mb-3">
+                                    {/* Logo as Title */}
+                                    <div className="w-56 md:w-80 lg:w-[450px]">
+                                        <img 
+                                            src="/images/VNR-new.png" 
+                                            alt="VNR VJIET Logo" 
+                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
+                                        />
+                                    </div>
+                                    
+                                    <div className="space-y-2">
+                                        {/* Official Campus Badge */}
+                                        <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] md:text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-2">
                                             Official Campus
                                         </div>
-                                        <h3 className="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow-2xl">
-                                            VNR VJIET
-                                        </h3>
+
+                                        {/* Sub-text */}
+                                        <p className="text-base md:text-xl text-blue-50/90 font-light drop-shadow-md leading-relaxed">
+                                            Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
+                                        </p>
                                     </div>
-                                    <p className="text-base md:text-lg text-blue-50/90 font-light drop-shadow-md leading-relaxed">
-                                        Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
-                                    </p>
+
+                                    {/* Google Maps CTA */}
                                     <div className="pt-2">
                                         <Button asChild className="btn-accent border border-cyan-400/30 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
                                             <a 
@@ -849,23 +860,6 @@ export default function HyderabadPage() {
                                         </Button>
                                     </div>
                                 </motion.div>
-
-                                {/* Bottom Right: Logo */}
-                                <div className="flex justify-end w-full mt-auto">
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true, margin: "-100px" }}
-                                        transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                                        className="w-48 md:w-80 lg:w-[400px] flex-shrink-0"
-                                    >
-                                        <img 
-                                            src="/images/VNR-new.png" 
-                                            alt="VNR VJIET Logo" 
-                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
-                                        />
-                                    </motion.div>
-                                </div>
                             </div>
                         </motion.div>
                     </div>
