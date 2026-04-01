@@ -8,6 +8,9 @@ import FloatingNavbar from "@/components/floating-navbar"
 import "../../app/refined.css"
 
 export default function RegistrationsPage() {
+  // Toggle this to true when regular round registrations open
+  const isDelegateRegistrationOpen = false;
+
   return (
     <div className="min-h-screen bg-app text-app overflow-x-hidden">
       <FloatingNavbar
@@ -60,39 +63,62 @@ export default function RegistrationsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <Link href="/registrations/delegate" className="block h-full">
-                <div className="group relative h-full cursor-pointer rounded-2xl border border-blue-500/30 bg-gradient-to-b from-blue-950/30 to-[#0a1535]/80 backdrop-blur-md p-8 flex flex-col items-center text-center overflow-hidden transition-all duration-500 hover:border-blue-400/60 hover:bg-blue-900/20 hover:translate-y-[-4px] hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] shadow-2xl">
-                  {/* Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {isDelegateRegistrationOpen ? (
+                <Link href="/registrations/delegate" className="block h-full">
+                  <div className="group relative h-full cursor-pointer rounded-2xl border border-blue-500/30 bg-gradient-to-b from-blue-950/30 to-[#0a1535]/80 backdrop-blur-md p-8 flex flex-col items-center text-center overflow-hidden transition-all duration-500 hover:border-blue-400/60 hover:bg-blue-900/20 hover:translate-y-[-4px] hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] shadow-2xl">
+                    {/* Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                  <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-400/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-                    <Users className="w-8 h-8 text-blue-300" />
+                    <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-400/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                      <Users className="w-8 h-8 text-blue-300" />
+                    </div>
+
+                    <h2 className="text-2xl font-light mb-2 text-white group-hover:text-blue-200 transition-colors relative z-10">
+                      Delegate
+                    </h2>
+                    <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 relative z-10">
+                      Registration
+                    </div>
+
+                    <p className="text-sm text-white/60 mb-6 leading-relaxed relative z-10">
+                      Register as a delegate, make your payment, and receive your official digital pass.
+                    </p>
+
+                    <div className="mt-auto px-6 py-2.5 rounded-full border border-blue-500/30 text-sm font-semibold text-blue-200 bg-blue-900/20 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 flex items-center gap-2 relative z-10">
+                      Proceed <ArrowRight className="w-4 h-4" />
+                    </div>
+
+                    {/* Live pulse */}
+                    <div className="absolute top-4 right-4 z-10">
+                      <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ) : (
+                <div className="group relative h-full cursor-default rounded-2xl border border-gray-500/30 bg-gradient-to-b from-[#0a1535]/50 to-[#0a1535]/80 backdrop-blur-md p-8 flex flex-col items-center text-center overflow-hidden transition-all duration-500 shadow-2xl">
+                  <div className="w-16 h-16 rounded-full bg-gray-500/10 flex items-center justify-center mb-6 border border-gray-500/20 shadow-[0_0_20px_rgba(156,163,175,0.05)]">
+                    <Lock className="w-8 h-8 text-gray-500/80" />
                   </div>
 
-                  <h2 className="text-2xl font-light mb-2 text-white group-hover:text-blue-200 transition-colors relative z-10">
+                  <h2 className="text-2xl font-light mb-2 text-white/50 relative z-10">
                     Delegate
                   </h2>
-                  <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 relative z-10">
-                    Registration
+                  <div className="text-xs font-bold uppercase tracking-widest text-red-400/80 mb-4 relative z-10">
+                    Priority Closed
                   </div>
 
-                  <p className="text-sm text-white/60 mb-6 leading-relaxed relative z-10">
-                    Register as a delegate, make your payment, and receive your official digital pass.
+                  <p className="text-sm text-white/40 mb-6 leading-relaxed relative z-10">
+                    Priority Round has concluded. Regular registrations will open soon!
                   </p>
 
-                  <div className="mt-auto px-6 py-2.5 rounded-full border border-blue-500/30 text-sm font-semibold text-blue-200 bg-blue-900/20 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 flex items-center gap-2 relative z-10">
-                    Proceed <ArrowRight className="w-4 h-4" />
-                  </div>
-
-                  {/* Live pulse */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="relative flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
-                    </span>
+                  <div className="mt-auto px-6 py-2.5 rounded-full border border-white/5 text-sm font-semibold text-gray-400 bg-white/5 flex items-center gap-2 relative z-10">
+                     Closed Temporarily
                   </div>
                 </div>
-              </Link>
+              )}
             </motion.div>
 
             {/* Executive Board Applications — Active External */}
