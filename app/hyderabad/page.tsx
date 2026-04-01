@@ -733,10 +733,10 @@ export default function HyderabadPage() {
                                             <span className="text-lg md:text-xl font-semibold text-fg">MAY 1 · 2 · 3</span>
                                         </div>
                                         <div className="hidden sm:block w-px h-6 bg-cyan-400/30" />
-                                        <div className="flex items-center gap-2">
+                                        <a href="https://maps.app.goo.gl/4EyznBdJFRK1scP26" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-cyan-300 transition-colors">
                                             <MapPin className="h-5 w-5 text-accent" />
-                                            <span className="text-lg md:text-xl font-semibold text-fg">Hyderabad</span>
-                                        </div>
+                                            <span className="text-lg md:text-xl font-semibold text-fg">VNR VJIET, Hyderabad</span>
+                                        </a>
                                     </div>
                                 </motion.div>
 
@@ -794,8 +794,8 @@ export default function HyderabadPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.8 }}
-                            className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden metallic-card group"
-                            style={{ minHeight: "400px" }}
+                            className="relative w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden metallic-card group"
+                            style={{ minHeight: "600px" }}
                         >
                             {/* Video Background */}
                             <div className="absolute inset-0 z-0">
@@ -815,38 +815,51 @@ export default function HyderabadPage() {
                             <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)] pointer-events-none" />
 
                             {/* Content Overlays */}
-                            <div className="relative z-10 flex flex-col md:flex-row items-end md:items-center justify-between h-full p-8 md:p-12 mt-40 md:mt-24">
-                                <div className="flex flex-col md:flex-row items-start md:items-center gap-6 w-full">
+                            <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-16 lg:p-20 min-h-[600px]">
+                                <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-16 w-full mt-auto">
                                     <motion.div
-                                        initial={{ opacity: 0, x: -20, scale: 0.9 }}
-                                        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true, margin: "-100px" }}
                                         transition={{ duration: 0.8, delay: 0.3 }}
-                                        className="w-24 md:w-32 flex-shrink-0"
+                                        className="space-y-4 md:space-y-6 max-w-2xl text-left order-2 md:order-1"
+                                    >
+                                        <div>
+                                            <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs md:text-sm font-bold uppercase tracking-widest backdrop-blur-md mb-3">
+                                                Official Campus
+                                            </div>
+                                            <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-2xl">
+                                                VNR VJIET
+                                            </h3>
+                                        </div>
+                                        <p className="text-lg md:text-2xl text-blue-50/90 font-light drop-shadow-md leading-relaxed">
+                                            Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
+                                        </p>
+                                        <div className="pt-4">
+                                            <a 
+                                                href="https://maps.app.goo.gl/4EyznBdJFRK1scP26" 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0a1535] font-semibold hover:bg-blue-50 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105"
+                                            >
+                                                <MapPin className="w-5 h-5" />
+                                                View on Google Maps
+                                            </a>
+                                        </div>
+                                    </motion.div>
+
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true, margin: "-100px" }}
+                                        transition={{ duration: 0.8, delay: 0.5 }}
+                                        className="w-40 md:w-64 lg:w-80 flex-shrink-0 order-1 md:order-2 self-start md:self-end mb-6 md:mb-0"
                                     >
                                         <img 
                                             src="/images/VNR-new.png" 
-                                            alt="VNR VJIET" 
-                                            className="w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] relative z-10"
+                                            alt="VNR VJIET Logo" 
+                                            className="w-full h-auto drop-shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10"
                                         />
-                                    </motion.div>
-                                    
-                                    <motion.div
-                                        initial={{ opacity: 0, x: 20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true, margin: "-100px" }}
-                                        transition={{ duration: 0.8, delay: 0.5 }}
-                                        className="space-y-2 mt-4 md:mt-0"
-                                    >
-                                        <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-2">
-                                            Official Campus
-                                        </div>
-                                        <h3 className="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
-                                            VNR VJIET
-                                        </h3>
-                                        <p className="text-lg md:text-xl text-blue-100/90 font-light drop-shadow-md max-w-xl">
-                                            Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
-                                        </p>
                                     </motion.div>
                                 </div>
                             </div>
