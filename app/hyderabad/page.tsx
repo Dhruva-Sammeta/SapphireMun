@@ -815,50 +815,54 @@ export default function HyderabadPage() {
                             <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)] pointer-events-none" />
 
                             {/* Content Overlays */}
-                            <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-16 lg:p-20 min-h-[600px]">
-                                <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-16 w-full mt-auto">
-                                    <motion.div
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true, margin: "-100px" }}
-                                        transition={{ duration: 0.8, delay: 0.3 }}
-                                        className="space-y-4 md:space-y-6 max-w-2xl text-left order-2 md:order-1"
-                                    >
-                                        <div>
-                                            <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs md:text-sm font-bold uppercase tracking-widest backdrop-blur-md mb-3">
-                                                Official Campus
-                                            </div>
-                                            <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-2xl">
-                                                VNR VJIET
-                                            </h3>
+                            <div className="relative z-10 flex flex-col justify-between h-full p-8 md:p-12 lg:p-16 min-h-[600px]">
+                                {/* Top Left: Text */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: -20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.8, delay: 0.3 }}
+                                    className="space-y-3 md:space-y-4 max-w-xl text-left w-full"
+                                >
+                                    <div>
+                                        <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] md:text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-2 md:mb-3">
+                                            Official Campus
                                         </div>
-                                        <p className="text-lg md:text-2xl text-blue-50/90 font-light drop-shadow-md leading-relaxed">
-                                            Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
-                                        </p>
-                                        <div className="pt-4">
+                                        <h3 className="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow-2xl">
+                                            VNR VJIET
+                                        </h3>
+                                    </div>
+                                    <p className="text-base md:text-lg text-blue-50/90 font-light drop-shadow-md leading-relaxed">
+                                        Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
+                                    </p>
+                                    <div className="pt-2">
+                                        <Button asChild className="btn-accent border border-cyan-400/30 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
                                             <a 
                                                 href="https://maps.app.goo.gl/4EyznBdJFRK1scP26" 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#0a1535] font-semibold hover:bg-blue-50 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105"
+                                                className="flex items-center justify-center"
                                             >
-                                                <MapPin className="w-5 h-5" />
+                                                <MapPin className="mr-2 h-4 w-4" />
                                                 View on Google Maps
                                             </a>
-                                        </div>
-                                    </motion.div>
+                                        </Button>
+                                    </div>
+                                </motion.div>
 
+                                {/* Bottom Right: Logo */}
+                                <div className="flex justify-end w-full mt-auto">
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        initial={{ opacity: 0, scale: 0.95 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true, margin: "-100px" }}
-                                        transition={{ duration: 0.8, delay: 0.5 }}
-                                        className="w-40 md:w-64 lg:w-80 flex-shrink-0 order-1 md:order-2 self-start md:self-end mb-6 md:mb-0"
+                                        transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                                        className="w-48 md:w-80 lg:w-[400px] flex-shrink-0"
                                     >
                                         <img 
                                             src="/images/VNR-new.png" 
                                             alt="VNR VJIET Logo" 
-                                            className="w-full h-auto drop-shadow-[0_0_25px_rgba(255,255,255,0.3)] relative z-10"
+                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
                                         />
                                     </motion.div>
                                 </div>
