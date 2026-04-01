@@ -747,7 +747,7 @@ export default function HyderabadPage() {
                                     className="grid grid-cols-3 gap-6 pt-2 max-w-sm mx-auto text-fg"
                                 >
                                     <div className="text-center">
-                                        <div className="text-2xl font-semibold">5</div>
+                                        <div className="text-2xl font-semibold">7</div>
                                         <div className="text-xs text-muted">Committees</div>
                                     </div>
                                     <div className="text-center">
