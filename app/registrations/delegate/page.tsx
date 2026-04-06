@@ -314,10 +314,10 @@ export default function DelegateRegistrationPage() {
                       {formData.referral_code.trim().toUpperCase() === "SAPPHIRE250" && formData.heard_about.trim() ? (
                         <>
                           <span className="text-sm text-white/40 line-through mr-2">₹2500</span>
-                          <span className="text-2xl font-bold text-green-400">₹2250</span>
+                          <span className="text-2xl font-bold text-green-400">₹1799</span>
                         </>
                       ) : (
-                        <span className="text-2xl font-bold text-blue-300">₹2500</span>
+                        <span className="text-2xl font-bold text-blue-300">₹1799</span>
                       )}
                     </div>
                   </div>
