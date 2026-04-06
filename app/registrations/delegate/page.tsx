@@ -307,7 +307,7 @@ export default function DelegateRegistrationPage() {
               <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }} className="metallic-card p-6 md:p-8 space-y-6">
                 {/* Fee info */}
                 <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/15 space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-blue-300/70">Round 1 Delegate Fee</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-blue-300/70">Flash sale - Round 1 Delegate Fee </p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-white/60">Amount</span>
                     <div className="text-right">
