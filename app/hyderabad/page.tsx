@@ -728,7 +728,7 @@ export default function HyderabadPage() {
                                     <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl sm:rounded-full border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm">
                                         <div className="flex items-center gap-2">
                                             <Calendar className="h-5 w-5 text-accent" />
-                                            <span className="text-lg md:text-xl font-semibold text-fg">MAY 1 · 2 · 3</span>
+                                            <span className="text-lg md:text-xl font-semibold text-fg">APRIL-MAY 30 · 1 · 2</span>
                                         </div>
                                         <div className="hidden sm:block w-px h-6 bg-cyan-400/30" />
                                         <a href="#venue" className="flex items-center gap-2 hover:text-cyan-300 transition-colors">
@@ -1068,7 +1068,7 @@ export default function HyderabadPage() {
                                         <MapPin className="h-4 w-4 text-accent" /> Hyderabad
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <Calendar className="h-4 w-4 text-accent" /> May 1–3, 2026
+                                        <Calendar className="h-4 w-4 text-accent" /> April-May 30-2, 2026
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Users className="h-4 w-4 text-accent" /> 200+ Delegates
@@ -1118,7 +1118,7 @@ export default function HyderabadPage() {
                                     </div>
                                     <div className="flex items-center gap-2 text-muted">
                                         <Calendar className="h-4 w-4 text-accent" />
-                                        <span className="py-2.5">MAY 1 · 2 · 3, 2026</span>
+                                        <span className="py-2.5">APRIL-MAY 30 · 1 · 2, 2026</span>
                                     </div>
                                     <div className="flex items-center gap-2 text-muted">
                                         <MapPin className="h-4 w-4 text-accent" />
