@@ -85,11 +85,12 @@ export default function EditionSelector() {
                 </div>
 
                 <h2 className="text-3xl font-light mb-2 text-white group-hover:text-blue-200 transition-colors">Hyderabad</h2>
+                <div className="text-xs font-bold uppercase tracking-widest text-red-500 mb-2 animate-pulse border border-red-500/30 px-3 py-1 rounded-full bg-red-500/10 inline-block">POSTPONED</div>
                 <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6 animate-pulse">Second Edition • Upcoming</div>
 
                 <div className="space-y-3 w-full opacity-70 group-hover:opacity-100 transition-opacity">
                   <div className="flex items-center justify-center gap-2 text-xs sm:text-sm border-t border-white/5 pt-3 break-words text-center">
-                    <Calendar className="w-4 h-4 text-blue-400 flex-shrink-0" /> APRIL-MAY 30 · 1 · 2, 2026
+                    <Calendar className="w-4 h-4 text-blue-400 flex-shrink-0" /> JUNE 5 · 6 · 7, 2026
                   </div>
                   <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-center">
                     <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0" /> Hyderabad
