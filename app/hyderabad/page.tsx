@@ -726,7 +726,7 @@ export default function HyderabadPage() {
                                     className="pt-6 flex flex-col items-center gap-4"
                                 >
                                     <div className="inline-block px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-500 text-sm font-bold tracking-widest uppercase animate-pulse">
-                                        Postponed
+                                        New Dates
                                     </div>
                                     <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl sm:rounded-full border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm">
                                         <div className="flex items-center gap-2">

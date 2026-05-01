@@ -6,6 +6,7 @@ import { useMobile } from "@/hooks/use-mobile"
 import { motion, AnimatePresence } from "framer-motion"
 import { Layers, ChevronRight, Check } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 
 interface NavItem {
   href: string
@@ -37,7 +38,7 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (switcherRef.current && !switcherRef.current.contains(event.target as Node)) {
-        setIsSwitcherOpen(false)
+        // No longer needed for full screen dialog
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
@@ -84,20 +85,7 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
 
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    setIsSwitcherOpen(!isSwitcherOpen)
-  }
-
-  const handleMouseEnter = () => {
-    if (isMobile) return
-    hoverTimerRef.current = setTimeout(() => {
-      setIsSwitcherOpen(true)
-    }, 2000)
-  }
-
-  const handleMouseLeave = () => {
-    if (hoverTimerRef.current) {
-      clearTimeout(hoverTimerRef.current)
-    }
+    setIsSwitcherOpen(true)
   }
 
   const handleEditionSwitch = (href: string) => {
@@ -121,8 +109,6 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
             <div
               className="relative"
               ref={switcherRef}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             >
               <button
                 onClick={handleLogoClick}
@@ -136,48 +122,39 @@ export default function FloatingNavbar({ items = DEFAULT_NAV_ITEMS }: FloatingNa
                 <span className="hidden sm:block text-white font-semibold text-lg">Sapphire MUN</span>
               </button>
 
-              {/* Edition Switcher Dropdown */}
-              <AnimatePresence>
-                {isSwitcherOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-4 w-64 bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 p-2"
-                  >
-                    <div className="px-3 py-2 mb-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 flex items-center gap-2">
-                        <Layers className="w-3 h-3" /> Select Edition
-                      </p>
-                    </div>
-
+              <Dialog open={isSwitcherOpen} onOpenChange={setIsSwitcherOpen}>
+                <DialogContent showCloseButton={true} className="sm:max-w-md bg-[#0a1535]/95 backdrop-blur-2xl border border-blue-500/20 rounded-2xl p-6 shadow-[0_0_40px_rgba(37,99,235,0.15)] text-white">
+                  <DialogTitle className="text-2xl font-light text-center mb-6">
+                    Choose <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-white">Edition</span>
+                  </DialogTitle>
+                  
+                  <div className="flex flex-col gap-4">
                     <button
                       onClick={() => handleEditionSwitch("/hyderabad")}
-                      className={`flex w-full items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/hyderabad" ? "bg-blue-500/20 text-blue-400" : "hover:bg-white/5 text-white/70 hover:text-white"
-                        }`}
+                      className={`relative overflow-hidden group flex flex-col items-start p-4 rounded-xl border transition-all duration-300 ${pathname === "/hyderabad" ? "border-blue-400/50 bg-blue-500/10" : "border-white/10 bg-white/5 hover:border-blue-400/30 hover:bg-white/10"}`}
                     >
-                      <div className="flex flex-col text-left">
-                        <span className="text-sm font-semibold">Hyderabad Edition</span>
-                        <span className="text-[10px] opacity-60">Completed • Aug 2025</span>
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="flex items-center justify-between w-full mb-2">
+                        <span className="text-lg font-medium group-hover:text-blue-300 transition-colors">Hyderabad</span>
+                        {pathname === "/hyderabad" && <Check className="w-5 h-5 text-blue-400" />}
                       </div>
-                      {pathname === "/hyderabad" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
+                      <span className="text-xs font-semibold tracking-wider text-red-400/80 uppercase">New Dates • Upcoming</span>
                     </button>
 
                     <button
                       onClick={() => handleEditionSwitch("/vizag")}
-                      className={`flex w-full items-center justify-between px-3 py-3 rounded-xl transition-all duration-200 group/item ${pathname === "/vizag" ? "bg-red-500/20 text-red-400" : "hover:bg-white/5 text-white/70 hover:text-white"
-                        }`}
+                      className={`relative overflow-hidden group flex flex-col items-start p-4 rounded-xl border transition-all duration-300 ${pathname === "/vizag" ? "border-red-400/50 bg-red-500/10" : "border-white/10 bg-white/5 hover:border-red-400/30 hover:bg-white/10"}`}
                     >
-                      <div className="flex flex-col text-left">
-                        <span className="text-sm font-semibold">Visakhapatnam Edition</span>
-                        <span className="text-[10px] opacity-60">Upcoming • May 2026</span>
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="flex items-center justify-between w-full mb-2">
+                        <span className="text-lg font-medium group-hover:text-red-300 transition-colors">Visakhapatnam</span>
+                        {pathname === "/vizag" && <Check className="w-5 h-5 text-red-400" />}
                       </div>
-                      {pathname === "/vizag" ? <Check className="w-4 h-4" /> : <ChevronRight className="w-4 h-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
+                      <span className="text-xs font-semibold tracking-wider text-red-400/80 uppercase">First Edition • Upcoming</span>
                     </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
 
             {/* Desktop Navigation */}
