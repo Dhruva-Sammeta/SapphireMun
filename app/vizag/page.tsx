@@ -198,6 +198,7 @@ export default function VizagPage() {
                 <FloatingNavbar
                     items={[
                         { href: "/", label: "Home" },
+                        { href: "#venue", label: "Venue" },
                         { href: "#committees", label: "Committees" },
                         { href: "#updates", label: "Updates" },
                         { href: "/registrations", label: "Register" },
@@ -331,6 +332,94 @@ export default function VizagPage() {
                         <ChevronDown className="w-8 h-8 text-white/50 animate-bounce" />
                     </div>
                 </section>
+
+                {/* ════════════════ NEW VENUE ANNOUNCEMENT ════════════════ */}
+                <ChunkSection id="venue" className="py-16 md:py-24 relative">
+                    <div className="container px-4">
+                        <div className="text-center space-y-4 mb-10 md:mb-16">
+                            <h2 className="text-3xl md:text-5xl font-light text-fg">
+                                The <span className="font-semibold metallic-text">Venue</span>
+                            </h2>
+                            <p className="text-base md:text-lg text-muted max-w-2xl mx-auto px-2">
+                                We are proud to announce our official venue for Sapphire MUN Vizag.
+                            </p>
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "0px" }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="relative w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden metallic-card group"
+                            style={{ minHeight: "600px" }}
+                        >
+                            {/* Video Background */}
+                            <div className="absolute inset-0 z-0 bg-[#0a1535]">
+                                <video
+                                    src="/videos/vizagvenue.mp4"
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#050a1e]/90 via-[#050a1e]/40 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#050a1e]/80 via-transparent to-transparent" />
+                            </div>
+
+                            {/* Glow overlays */}
+                            <div className="absolute inset-0 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.15),transparent_70%)] pointer-events-none" />
+
+                            {/* Content Overlays */}
+                            <div className="relative z-10 flex flex-col justify-center sm:justify-end h-full p-8 md:p-12 lg:p-16 min-h-[500px] md:min-h-[600px]">
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true, margin: "0px" }}
+                                    transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                                    className="flex flex-col items-start space-y-4 md:space-y-6 max-w-3xl"
+                                >
+                                    {/* Logo as Title */}
+                                    <div className="w-48 md:w-64 lg:w-[300px]">
+                                        <img
+                                            src="/images/vizagvenuelogo.png"
+                                            alt="Four Points by Sheraton Logo"
+                                            className="w-full h-auto drop-shadow-xl relative z-10 bg-white/95 p-5 md:p-6 rounded-2xl"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        {/* Official Venue Badge */}
+                                        <div className="inline-block px-3 py-1 rounded-full bg-red-500/20 border border-red-400/30 text-red-200 text-[10px] md:text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-2">
+                                            Official Venue
+                                        </div>
+
+                                        {/* Sub-text */}
+                                        <p className="text-base md:text-xl text-white/90 font-light drop-shadow-md leading-relaxed">
+                                            The perfect venue for an unparalleled diplomatic experience. <br className="hidden sm:block" />
+                                            <span className="text-sm md:text-base text-white/70">Four Points by Sheraton Visakhapatnam, Waltair Main Rd.</span>
+                                        </p>
+                                    </div>
+
+                                    {/* Google Maps CTA */}
+                                    <div className="pt-2">
+                                        <Button asChild className="btn-accent bg-red-600 hover:bg-red-700 border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.3)] text-white">
+                                            <a
+                                                href="https://www.google.com/maps/search/?api=1&query=Four+Points+by+Sheraton+Visakhapatnam"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center justify-center"
+                                            >
+                                                <MapPin className="mr-2 h-4 w-4" />
+                                                View on Google Maps
+                                            </a>
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </ChunkSection>
 
                 {/* Committees Placeholder */}
                 <ChunkSection id="committees" className="py-12 md:py-24 relative">
