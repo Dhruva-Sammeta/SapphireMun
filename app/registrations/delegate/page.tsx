@@ -25,10 +25,12 @@ export default function DelegateRegistrationPage() {
     name: "",
     phone: "",
     email: "",
+    insta_id: "",
     school: "",
     grade_year: "",
     attended_muns: "",
     experience: "",
+    country_preference: "",
     committee: "",
     country: "",
     committee_2: "",
@@ -73,6 +75,7 @@ export default function DelegateRegistrationPage() {
     if (!formData.grade_year.trim()) errs.grade_year = "Grade/Year is required"
     if (!formData.attended_muns) errs.attended_muns = "Please select Yes or No"
     if (!formData.experience.trim()) errs.experience = "Required (mention none if N/A)"
+    if (!formData.country_preference.trim()) errs.country_preference = "Country preference is required"
 
     // Committees
     if (!formData.committee) errs.committee = "Committee Preference 1 is required"
@@ -230,6 +233,19 @@ export default function DelegateRegistrationPage() {
                       {fieldErrors[field.key] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[field.key]}</p>}
                     </div>
                   ))}
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold tracking-wider text-white/70">Instagram ID (Optional)</label>
+                    <input
+                      type="text"
+                      placeholder="@username"
+                      value={formData.insta_id}
+                      onChange={(e) => handleChange("insta_id", e.target.value)}
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.insta_id ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"
+                        }`}
+                    />
+                    {fieldErrors.insta_id && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.insta_id}</p>}
+                  </div>
                 </div>
 
                 {/* 2. MUN Experience */}
@@ -259,6 +275,18 @@ export default function DelegateRegistrationPage() {
                 {/* 3. Committee Preferences */}
                 <div className="space-y-4 pt-2">
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">Committee Preferences</h3>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold tracking-wider text-white/70">Country Preference (Overall) *</label>
+                    <input
+                      type="text"
+                      placeholder="Your answer"
+                      value={formData.country_preference}
+                      onChange={(e) => handleChange("country_preference", e.target.value)}
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.country_preference ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`}
+                    />
+                    {fieldErrors.country_preference && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.country_preference}</p>}
+                  </div>
 
                   {[1, 2, 3].map(num => (
                     <div key={`pref-${num}`} className="space-y-4 pb-4 border-b border-white/5 last:border-0 last:pb-0">

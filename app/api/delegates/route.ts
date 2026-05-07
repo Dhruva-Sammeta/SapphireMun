@@ -75,7 +75,7 @@ export async function PATCH(req: NextRequest) {
       .from("delegates")
       .update(updatePayload)
       .eq("id", id)
-      .select("name, email, committee, country")
+      .select("name, email, committee, country, committee_pref, country_pref")
       .single()
 
     if (updateError || !delegate) {
@@ -85,6 +85,8 @@ export async function PATCH(req: NextRequest) {
 
     // Send email on approval
     if (status === "approved") {
+      const committeeLabel = delegate.committee || delegate.committee_pref || "TBD"
+      const countryLabel = delegate.country || delegate.country_pref || "TBD"
       const resendKey = process.env.RESEND_API_KEY
       const fromEmail = process.env.RESEND_FROM_EMAIL || "noreply@sapphiremun.com"
 
@@ -105,8 +107,8 @@ export async function PATCH(req: NextRequest) {
                   Great news - your registration for <strong style="color:#0fe0ff;">Sapphire MUN Hyderabad 2.0</strong> has been <strong style="color:#22c55e;">approved</strong>!
                 </p>
                 <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;margin:20px 0;">
-                  <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Committee:</strong> ${delegate.committee}</p>
-                  <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Country/Role Preference:</strong> ${delegate.country}</p>
+                  <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Committee:</strong> ${committeeLabel}</p>
+                  <p style="margin:4px 0;color:rgba(230,240,255,0.7);font-size:14px;"><strong>Country/Role Preference:</strong> ${countryLabel}</p>
                 </div>
                 <p style="color:rgba(230,240,255,0.7);line-height:1.7;margin:12px 0;font-size:13px;font-style:italic;opacity:0.8;">
                   Note: Your preference for country/role will be accommodated if possible, but not guaranteed.
