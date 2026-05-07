@@ -903,11 +903,11 @@ export default function AdminPanel() {
             <p>No delegates match the current filters.</p>
           </div>
         ) : (
-          <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-b from-[#0a1535]/80 to-[#050a2a]/90 backdrop-blur-xl overflow-hidden shadow-2xl">
-            <Table className="min-w-[1200px]">
+          <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-b from-[#0a1535]/80 to-[#050a2a]/90 backdrop-blur-xl overflow-x-auto shadow-2xl custom-scrollbar">
+            <Table className="min-w-[1200px] w-full">
               <TableHeader>
-                <TableRow className="bg-blue-950/20 border-b border-blue-500/20">
-                  <TableHead className="text-blue-200/80 font-semibold tracking-wide">Name</TableHead>
+                <TableRow className="bg-blue-950/40 border-b border-blue-500/20 hover:bg-blue-950/40">
+                  <TableHead className="text-blue-200/90 font-semibold tracking-wide py-4">Name</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Email</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Phone</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">School</TableHead>
