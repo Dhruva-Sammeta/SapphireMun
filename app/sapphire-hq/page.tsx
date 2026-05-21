@@ -56,7 +56,6 @@ type Delegate = {
   committee_pref?: string | null
   country?: string | null
   country_pref?: string | null
-  country_preference?: string | null
   committee_2?: string | null
   portfolio_2?: string | null
   committee_3?: string | null
@@ -95,7 +94,6 @@ const CHART_COLORS = [
 const QUESTION_OPTIONS = [
   { key: "committee", label: "Committee Preference 1" },
   { key: "country", label: "Portfolio Preference 1" },
-  { key: "country_preference", label: "Country Preference (Overall)" },
   { key: "committee_2", label: "Committee Preference 2" },
   { key: "portfolio_2", label: "Portfolio Preference 2" },
   { key: "committee_3", label: "Committee Preference 3" },
@@ -116,7 +114,6 @@ const CSV_COLUMNS: CsvColumn[] = [
   { key: "grade_year", label: "Grade/Year" },
   { key: "attended_muns", label: "Attended MUNs" },
   { key: "experience", label: "Experience" },
-  { key: "country_preference", label: "Country Preference (Overall)" },
   { key: "committee", label: "Committee Preference 1", format: (row) => getCommittee(row) },
   { key: "country", label: "Portfolio Preference 1", format: (row) => getCountry(row) },
   { key: "committee_2", label: "Committee Preference 2" },
@@ -136,7 +133,7 @@ const STATUS_ORDER: Record<string, number> = {
   rejected: 3,
 }
 
-const TABLE_COLUMN_COUNT = 13
+const TABLE_COLUMN_COUNT = 12
 
 function normalizeValue(value: unknown) {
   if (value === null || value === undefined) return ""
@@ -417,7 +414,6 @@ export default function AdminPanel() {
           getSchool(d),
           getCommittee(d),
           getCountry(d),
-          d.country_preference,
           d.insta_id,
           d.heard_about,
         ]
@@ -569,7 +565,6 @@ export default function AdminPanel() {
 
               <div className="space-y-2">
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">Preferences</h3>
-                <DetailRow label="Country Preference" value={selectedDelegate.country_preference || "-"} />
                 <DetailRow label="Committee 1" value={getCommittee(selectedDelegate)} />
                 <DetailRow label="Portfolio 1" value={getCountry(selectedDelegate)} />
                 <DetailRow label="Committee 2" value={selectedDelegate.committee_2} />
@@ -592,7 +587,7 @@ export default function AdminPanel() {
                     <img
                       src={selectedDelegate.screenshot_url}
                       alt="Payment proof"
-                      onClick={() => setExpandedImage(selectedDelegate.screenshot_url)}
+                      onClick={() => setExpandedImage(selectedDelegate.screenshot_url || null)}
                       className="w-full max-h-48 object-cover rounded-lg border border-white/10 cursor-pointer"
                     />
                     <p className="text-xs text-white/40">Click image to expand</p>
@@ -768,7 +763,7 @@ export default function AdminPanel() {
               className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs text-white/80"
             >
               {QUESTION_OPTIONS.map((opt) => (
-                <option key={opt.key} value={opt.key}>
+                <option key={opt.key} value={opt.key} className="bg-[#050a2a] text-white">
                   {opt.label}
                 </option>
               ))}
@@ -868,9 +863,9 @@ export default function AdminPanel() {
               onChange={(e) => setCommitteeFilter(e.target.value)}
               className="bg-black/20 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white/80 outline-none hover:border-white/20 transition-colors"
             >
-              <option value="all">All committees</option>
+              <option value="all" className="bg-[#050a2a] text-white">All committees</option>
               {committeeOptions.map((committee) => (
-                <option key={committee} value={committee}>
+                <option key={committee} value={committee} className="bg-[#050a2a] text-white">
                   {committee}
                 </option>
               ))}
@@ -881,10 +876,10 @@ export default function AdminPanel() {
               onChange={(e) => setSortBy(e.target.value as "newest" | "oldest" | "name" | "status")}
               className="bg-black/20 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white/80 outline-none hover:border-white/20 transition-colors"
             >
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="name">Name A-Z</option>
-              <option value="status">Status</option>
+              <option value="newest" className="bg-[#050a2a] text-white">Newest first</option>
+              <option value="oldest" className="bg-[#050a2a] text-white">Oldest first</option>
+              <option value="name" className="bg-[#050a2a] text-white">Name A-Z</option>
+              <option value="status" className="bg-[#050a2a] text-white">Status</option>
             </select>
           </div>
           
@@ -915,7 +910,6 @@ export default function AdminPanel() {
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Attended</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Committee 1</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Portfolio 1</TableHead>
-                  <TableHead className="text-blue-200/80 font-semibold tracking-wide">Country Pref</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Screenshot</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Status</TableHead>
                   <TableHead className="text-blue-200/80 font-semibold tracking-wide">Submitted</TableHead>
@@ -936,11 +930,10 @@ export default function AdminPanel() {
                         <TableCell className="text-white/70 whitespace-nowrap">{d.attended_muns || "-"}</TableCell>
                         <TableCell className="text-blue-300 font-medium whitespace-nowrap max-w-[200px] truncate">{getCommittee(d) || "-"}</TableCell>
                         <TableCell className="text-blue-300 font-medium whitespace-nowrap">{getCountry(d) || "-"}</TableCell>
-                        <TableCell className="text-white/70 whitespace-nowrap">{d.country_preference || "-"}</TableCell>
                         <TableCell className="whitespace-nowrap">
                           {d.screenshot_url ? (
                             <button
-                              onClick={() => setExpandedImage(d.screenshot_url)}
+                              onClick={() => setExpandedImage(d.screenshot_url || null)}
                               className="flex items-center gap-1 text-xs text-blue-200 hover:text-blue-100"
                             >
                               <ImageIcon className="w-3.5 h-3.5" /> View

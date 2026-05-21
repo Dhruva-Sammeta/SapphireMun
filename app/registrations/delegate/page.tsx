@@ -30,7 +30,6 @@ export default function DelegateRegistrationPage() {
     grade_year: "",
     attended_muns: "",
     experience: "",
-    country_preference: "",
     committee: "",
     country: "",
     committee_2: "",
@@ -75,15 +74,14 @@ export default function DelegateRegistrationPage() {
     if (!formData.grade_year.trim()) errs.grade_year = "Grade/Year is required"
     if (!formData.attended_muns) errs.attended_muns = "Please select Yes or No"
     if (!formData.experience.trim()) errs.experience = "Required (mention none if N/A)"
-    if (!formData.country_preference.trim()) errs.country_preference = "Country preference is required"
 
     // Committees
     if (!formData.committee) errs.committee = "Committee Preference 1 is required"
-    if (!formData.country.trim()) errs.country = "Portfolio Preference 1 is required"
+    if (!formData.country.trim()) errs.country = "Country/Portfolio Preference 1 is required"
     if (!formData.committee_2) errs.committee_2 = "Committee Preference 2 is required"
-    if (!formData.portfolio_2.trim()) errs.portfolio_2 = "Portfolio Preference 2 is required"
+    if (!formData.portfolio_2.trim()) errs.portfolio_2 = "Country/Portfolio Preference 2 is required"
     if (!formData.committee_3) errs.committee_3 = "Committee Preference 3 is required"
-    if (!formData.portfolio_3.trim()) errs.portfolio_3 = "Portfolio Preference 3 is required"
+    if (!formData.portfolio_3.trim()) errs.portfolio_3 = "Country/Portfolio Preference 3 is required"
     
     if (formData.referral_code.trim()) {
       if (formData.referral_code.trim().toUpperCase() !== "SAPPHIRE250") {
@@ -276,18 +274,6 @@ export default function DelegateRegistrationPage() {
                 <div className="space-y-4 pt-2">
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">Committee Preferences</h3>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold tracking-wider text-white/70">Country Preference (Overall) *</label>
-                    <input
-                      type="text"
-                      placeholder="Your answer"
-                      value={formData.country_preference}
-                      onChange={(e) => handleChange("country_preference", e.target.value)}
-                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors.country_preference ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`}
-                    />
-                    {fieldErrors.country_preference && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.country_preference}</p>}
-                  </div>
-
                   {[1, 2, 3].map(num => (
                     <div key={`pref-${num}`} className="space-y-4 pb-4 border-b border-white/5 last:border-0 last:pb-0">
                       <div className="space-y-1.5">
@@ -304,7 +290,7 @@ export default function DelegateRegistrationPage() {
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-xs font-semibold tracking-wider text-white/70">Portfolio Preference {num} *</label>
+                        <label className="text-xs font-semibold tracking-wider text-white/70">Country/Portfolio Preference {num} *</label>
                         <input type="text" placeholder="Your answer" value={formData[num === 1 ? "country" : `portfolio_${num}` as keyof typeof formData]} onChange={(e) => handleChange(num === 1 ? "country" : `portfolio_${num}`, e.target.value)} className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder-white/25 outline-none transition-all focus:ring-2 ${fieldErrors[num === 1 ? "country" : `portfolio_${num}`] ? "border-red-500/60 focus:ring-red-500/40" : "border-white/10 focus:ring-blue-500/30 focus:border-blue-500/40"}`} />
                         {fieldErrors[num === 1 ? "country" : `portfolio_${num}`] && <p className="text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors[num === 1 ? "country" : `portfolio_${num}`]}</p>}
                       </div>
