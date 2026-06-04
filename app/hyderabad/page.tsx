@@ -822,11 +822,11 @@ export default function HyderabadPage() {
                                     className="flex flex-col items-start space-y-4 md:space-y-6 max-w-3xl"
                                 >
                                     {/* Logo as Title */}
-                                    <div className="w-56 md:w-80 lg:w-[450px]">
+                                    <div className="w-56 md:w-80 lg:w-[450px] bg-white/95 backdrop-blur-sm p-4 md:p-6 rounded-2xl border border-white/20 shadow-xl">
                                         <img
                                             src="/images/cropped-LOGO.png"
                                             alt="The Arthah School Logo"
-                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10 rounded-2xl object-contain"
+                                            className="w-full h-auto relative z-10 rounded-2xl object-contain"
                                         />
                                     </div>
 
