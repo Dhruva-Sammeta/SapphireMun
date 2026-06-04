@@ -736,7 +736,7 @@ export default function HyderabadPage() {
                                         <div className="hidden sm:block w-px h-6 bg-cyan-400/30" />
                                         <a href="#venue" className="flex items-center gap-2 hover:text-cyan-300 transition-colors">
                                             <MapPin className="h-5 w-5 text-accent" />
-                                            <span className="text-lg md:text-xl font-semibold text-fg">VNR VJIET, Hyderabad</span>
+                                            <span className="text-lg md:text-xl font-semibold text-fg">The Arthah School, Hyderabad</span>
                                         </a>
                                     </div>
                                 </motion.div>
@@ -798,14 +798,11 @@ export default function HyderabadPage() {
                             className="relative w-full max-w-7xl mx-auto rounded-[2.5rem] overflow-hidden metallic-card group"
                             style={{ minHeight: "600px" }}
                         >
-                            {/* Video Background */}
-                            <div className="absolute inset-0 z-0">
-                                <video
-                                    src="/videos/campushero.mp4"
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
+                            {/* Image Background */}
+                            <div className="absolute inset-0 z-0 bg-[#0a1535]">
+                                <img
+                                    src="/images/arathanschool.png"
+                                    alt="The Arthah School"
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a1535]/90 via-[#0a1535]/40 to-transparent" />
@@ -827,9 +824,9 @@ export default function HyderabadPage() {
                                     {/* Logo as Title */}
                                     <div className="w-56 md:w-80 lg:w-[450px]">
                                         <img
-                                            src="/images/VNR-new.png"
-                                            alt="VNR VJIET Logo"
-                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
+                                            src="/images/arthanschoolLOGO.png"
+                                            alt="The Arthah School Logo"
+                                            className="w-auto h-24 mb-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
                                         />
                                     </div>
 
@@ -841,7 +838,10 @@ export default function HyderabadPage() {
 
                                         {/* Sub-text */}
                                         <p className="text-base md:text-xl text-blue-50/90 font-light drop-shadow-md leading-relaxed">
-                                            Vignana Jyothi Institute of Engineering and Technology, Bachupally, Hyderabad.
+                                            The Arthah School, Hyderabad.
+                                        </p>
+                                        <p className="text-sm md:text-base text-cyan-400 font-medium drop-shadow-md leading-relaxed pt-2">
+                                            * Sapphire will provide transportation (pick up &amp; drop details will be announced before the event).
                                         </p>
                                     </div>
 
@@ -849,7 +849,7 @@ export default function HyderabadPage() {
                                     <div className="pt-2">
                                         <Button asChild className="btn-accent border border-cyan-400/30 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
                                             <a
-                                                href="https://maps.app.goo.gl/4EyznBdJFRK1scP26"
+                                                href="https://maps.app.goo.gl/nCXjkD8iBbtb5WCW7"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center justify-center"
@@ -1004,10 +1004,10 @@ export default function HyderabadPage() {
                                 <div className="grid grid-cols-2 gap-3">
                                     <div className="space-y-1.5">
                                         <div className="rounded-xl overflow-hidden bg-surface border border-white/10 aspect-square">
-                                            <video
+                                            <img
                                                 className="h-full w-full object-cover"
-                                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%281%29-JUoNqmvuGi09WaEPaaBd6wmyzUvIIy.mp4"
-                                                autoPlay muted loop playsInline
+                                                src="/images/arathanschool.png"
+                                                alt="Venue"
                                             />
                                         </div>
                                         <p className="text-xs text-muted text-center">Venue</p>
