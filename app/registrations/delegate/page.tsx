@@ -169,7 +169,7 @@ export default function DelegateRegistrationPage() {
           <img src="/images/sapphire-mun-hero-logo.png" alt="Sapphire MUN" className="h-16 w-auto mx-auto mb-2 drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]" />
           <h1 className="text-3xl md:text-4xl font-light tracking-wide text-white/90">Delegate <span className="font-semibold metallic-text">Registration</span></h1>
           <p className="text-sm text-white font-medium px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 inline-block">Round 1 Registrations Open</p>
-          <p className="text-[10px] text-muted max-w-lg mx-auto uppercase tracking-widest mt-2">Sapphire MUN Hyderabad 2.0 • June 5–7, 2026</p>
+          <p className="text-[10px] text-muted max-w-lg mx-auto uppercase tracking-widest mt-2">Sapphire MUN Hyderabad 2.0 • June 19–21, 2026</p>
         </motion.div>
       </section>
 

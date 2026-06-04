@@ -725,13 +725,13 @@ export default function HyderabadPage() {
                                     }}
                                     className="pt-6 flex flex-col items-center gap-4"
                                 >
-                                    <div className="inline-block px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-500 text-sm font-bold tracking-widest uppercase animate-pulse">
-                                        New Dates
+                                    <div className="inline-block px-4 py-1.5 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-400 text-sm font-bold tracking-widest uppercase">
+                                        Upcoming Edition
                                     </div>
                                     <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl sm:rounded-full border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm">
                                         <div className="flex items-center gap-2">
                                             <Calendar className="h-5 w-5 text-accent" />
-                                            <span className="text-lg md:text-xl font-semibold text-fg">JUNE 5 · 6 · 7</span>
+                                            <span className="text-lg md:text-xl font-semibold text-fg">JUNE 19 · 20 · 21</span>
                                         </div>
                                         <div className="hidden sm:block w-px h-6 bg-cyan-400/30" />
                                         <a href="#venue" className="flex items-center gap-2 hover:text-cyan-300 transition-colors">
@@ -905,23 +905,23 @@ export default function HyderabadPage() {
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                            <FloatingCard className="p-6 metallic-card text-center">
-                                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-cyan-500/15 flex items-center justify-center">
-                                    <Users className="h-6 w-6 text-accent" />
+                        <div className="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
+                            <FloatingCard className="p-8 metallic-card text-center border-accent/20">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-cyan-500/15 flex items-center justify-center">
+                                    <Sparkles className="h-8 w-8 text-accent" />
                                 </div>
-                                <h3 className="text-xl font-semibold text-fg mb-2">Certified Prizes</h3>
-                                <p className="text-muted text-sm leading-relaxed">
-                                    Compete for significant certificates, recommendations, and recognition along with the standard awards.
+                                <h3 className="text-2xl font-bold text-fg mb-3">₹50,000 Prize Pool</h3>
+                                <p className="text-muted text-base leading-relaxed">
+                                    Compete for our massive cash prize pool alongside significant certificates, recommendations, and prestigious recognition.
                                 </p>
                             </FloatingCard>
                             <FloatingCard className="p-6 metallic-card text-center">
                                 <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-cyan-500/15 flex items-center justify-center">
-                                    <Sparkles className="h-6 w-6 text-accent" />
+                                    <Users className="h-6 w-6 text-accent" />
                                 </div>
-                                <h3 className="text-xl font-semibold text-fg mb-2">Internships & Opportunities</h3>
+                                <h3 className="text-xl font-semibold text-fg mb-2">Internships & Networking</h3>
                                 <p className="text-muted text-sm leading-relaxed">
-                                    Gain access to internships at leading companies and opportunities for personal and professional growth.
+                                    Gain access to exclusive internships and premier networking opportunities in association with The Teen Entrepreneurship Network.
                                 </p>
                             </FloatingCard>
                         </div>
@@ -1071,7 +1071,7 @@ export default function HyderabadPage() {
                                         <MapPin className="h-4 w-4 text-accent" /> Hyderabad
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <Calendar className="h-4 w-4 text-accent" /> June 5-7, 2026
+                                        <Calendar className="h-4 w-4 text-accent" /> June 19-21, 2026
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Users className="h-4 w-4 text-accent" /> 200+ Delegates
@@ -1121,7 +1121,7 @@ export default function HyderabadPage() {
                                     </div>
                                     <div className="flex items-center gap-2 text-muted">
                                         <Calendar className="h-4 w-4 text-accent" />
-                                        <span className="py-2.5">JUNE 5 · 6 · 7, 2026</span>
+                                        <span className="py-2.5">JUNE 19 · 20 · 21, 2026</span>
                                     </div>
                                     <div className="flex items-center gap-2 text-muted">
                                         <MapPin className="h-4 w-4 text-accent" />
