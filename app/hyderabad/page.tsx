@@ -802,7 +802,7 @@ export default function HyderabadPage() {
                             <div className="absolute inset-0 z-0 bg-[#0a1535]">
                                 <img
                                     src="/images/arathanschool.png"
-                                    alt="The Arthah School"
+                                    alt="The Arthah School Campus"
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a1535]/90 via-[#0a1535]/40 to-transparent" />
@@ -826,7 +826,7 @@ export default function HyderabadPage() {
                                         <img
                                             src="/images/arthanschoolLOGO.png"
                                             alt="The Arthah School Logo"
-                                            className="w-auto h-24 mb-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
+                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
                                         />
                                     </div>
 
@@ -840,8 +840,8 @@ export default function HyderabadPage() {
                                         <p className="text-base md:text-xl text-blue-50/90 font-light drop-shadow-md leading-relaxed">
                                             The Arthah School, Hyderabad.
                                         </p>
-                                        <p className="text-sm md:text-base text-cyan-400 font-medium drop-shadow-md leading-relaxed pt-2">
-                                            * Sapphire will provide transportation (pick up &amp; drop details will be announced before the event).
+                                        <p className="text-sm md:text-md text-cyan-200/90 font-medium drop-shadow-md leading-relaxed mt-2 pt-2 border-t border-cyan-500/30">
+                                            Note: Sapphire MUN will be providing transport. Specific details and stops for pickup and drop off will be announced before the event.
                                         </p>
                                     </div>
 
@@ -1004,10 +1004,10 @@ export default function HyderabadPage() {
                                 <div className="grid grid-cols-2 gap-3">
                                     <div className="space-y-1.5">
                                         <div className="rounded-xl overflow-hidden bg-surface border border-white/10 aspect-square">
-                                            <img
+                                            <video
                                                 className="h-full w-full object-cover"
-                                                src="/images/arathanschool.png"
-                                                alt="Venue"
+                                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%281%29-JUoNqmvuGi09WaEPaaBd6wmyzUvIIy.mp4"
+                                                autoPlay muted loop playsInline
                                             />
                                         </div>
                                         <p className="text-xs text-muted text-center">Venue</p>
