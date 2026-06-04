@@ -824,9 +824,9 @@ export default function HyderabadPage() {
                                     {/* Logo as Title */}
                                     <div className="w-56 md:w-80 lg:w-[450px]">
                                         <img
-                                            src="/images/arthanschoolLOGO.png"
+                                            src="/images/cropped-LOGO.png"
                                             alt="The Arthah School Logo"
-                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10"
+                                            className="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)] relative z-10 rounded-2xl object-contain"
                                         />
                                     </div>
 
