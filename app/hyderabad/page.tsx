@@ -879,6 +879,78 @@ export default function HyderabadPage() {
                     </div>
                 </ChunkSection>
 
+                {/* ════════════════ SPONSORS ════════════════ */}
+                <ChunkSection className="py-24 relative overflow-hidden">
+                    <div className="container relative z-10">
+                        <div className="text-center space-y-4 mb-16">
+                            <h2 className="text-3xl md:text-5xl font-light text-fg">
+                                Our <span className="font-semibold metallic-text">Sponsors</span>
+                            </h2>
+                            <p className="text-lg text-muted max-w-2xl mx-auto">
+                                Proudly supported by our esteemed partners.
+                            </p>
+                        </div>
+
+                        <div className="max-w-5xl mx-auto">
+                            <FloatingCard className="p-8 md:p-12 metallic-card text-center relative overflow-hidden">
+                                {/* Gradient fade on left and right for seamless scrolling effect */}
+                                <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[rgba(10,15,35,0.9)] to-transparent z-10 pointer-events-none" />
+                                <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[rgba(10,15,35,0.9)] to-transparent z-10 pointer-events-none" />
+                                
+                                <div className="flex w-max relative items-center gap-16 sm:gap-24 animate-marquee py-4">
+                                    {/* Marquee Group 1 */}
+                                    <div className="flex items-center gap-16 sm:gap-24 shrink-0">
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Title Sponsor</div>
+                                            <img src="/images/sponsors/title-rangareddy.png" alt="Ranga Reddy Raptors - Title Sponsor" className="h-28 md:h-36 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">Gold Sponsor</div>
+                                            <img src="/images/sponsors/gold-exome.png" alt="Exome Life Sciences - Gold Sponsor" className="h-24 md:h-32 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-slate-300 bg-slate-300/10 px-3 py-1 rounded-full border border-slate-300/20">Silver Sponsor</div>
+                                            <img src="/images/sponsors/silver-nalgonda.png" alt="Nalgonda Speeds Strikers - Silver Sponsor" className="h-20 md:h-28 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-orange-400 bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">Bronze Sponsor</div>
+                                            <img src="/images/sponsors/bronze-24roots.png" alt="24 Roots - Bronze Sponsor" className="h-16 md:h-24 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-orange-400 bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">Bronze Sponsor</div>
+                                            <img src="/images/sponsors/bronze-fathersmodel.png" alt="Father's Model High School - Bronze Sponsor" className="h-16 md:h-24 object-contain" />
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Marquee Group 2 (Duplicate for seamless loop) */}
+                                    <div className="flex items-center gap-16 sm:gap-24 shrink-0">
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Title Sponsor</div>
+                                            <img src="/images/sponsors/title-rangareddy.png" alt="Ranga Reddy Raptors - Title Sponsor" className="h-28 md:h-36 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">Gold Sponsor</div>
+                                            <img src="/images/sponsors/gold-exome.png" alt="Exome Life Sciences - Gold Sponsor" className="h-24 md:h-32 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-slate-300 bg-slate-300/10 px-3 py-1 rounded-full border border-slate-300/20">Silver Sponsor</div>
+                                            <img src="/images/sponsors/silver-nalgonda.png" alt="Nalgonda Speeds Strikers - Silver Sponsor" className="h-20 md:h-28 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-orange-400 bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">Bronze Sponsor</div>
+                                            <img src="/images/sponsors/bronze-24roots.png" alt="24 Roots - Bronze Sponsor" className="h-16 md:h-24 object-contain" />
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="text-xs font-bold uppercase tracking-widest text-orange-400 bg-orange-400/10 px-3 py-1 rounded-full border border-orange-400/20">Bronze Sponsor</div>
+                                            <img src="/images/sponsors/bronze-fathersmodel.png" alt="Father's Model High School - Bronze Sponsor" className="h-16 md:h-24 object-contain" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </FloatingCard>
+                        </div>
+                    </div>
+                </ChunkSection>
+
                 {/* ════════════════ DELEGATE JOURNEY ════════════════ */}
                 <ChunkSection className="py-24">
                     <div className="container">
