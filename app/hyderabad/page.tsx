@@ -33,6 +33,8 @@ import {
 
 import FloatingCard from "@/components/floating-card"
 import FloatingNavbar from "@/components/floating-navbar"
+import ErrorBoundary from "@/components/error-boundary"
+import Itinerary from "@/components/itinerary"
 import "../refined.css"
 import "./hyderabad-theme.css"
 import ChunkSection from "@/components/chunk-section"
@@ -469,6 +471,7 @@ export default function HyderabadPage() {
                         { href: "/registrations", label: "Registrations" },
                         { href: "/resources", label: "Resources" },
                         { href: "#venue", label: "Venue" },
+                        { href: "#itinerary", label: "Schedule" },
                         { href: "#committees", label: "Committees" },
                         { href: "#archive", label: "Archive" },
                         { href: "#contact", label: "Contact" },
@@ -749,6 +752,21 @@ export default function HyderabadPage() {
                                 </motion.div>
                             </div>
                         </motion.div>
+                    </div>
+                </ChunkSection>
+
+                {/* ════════════════ ITINERARY / SCHEDULE ════════════════ */}
+                <ChunkSection id="itinerary" className="py-16 md:py-24 relative">
+                    <div className="container px-4">
+                        <div className="text-center space-y-4 mb-8 md:mb-16">
+                            <h2 className="text-3xl md:text-5xl font-light text-fg">
+                                Conference <span className="font-semibold metallic-text">Schedule</span>
+                            </h2>
+                            <p className="text-base md:text-lg text-muted max-w-2xl mx-auto px-2">
+                                Plan your days. An overview of committee sessions, socials, and events.
+                            </p>
+                        </div>
+                        <Itinerary />
                     </div>
                 </ChunkSection>
 

@@ -256,12 +256,11 @@ export default function ResourcesPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {generalDocs.map((doc, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    className="group relative rounded-3xl p-7 flex flex-col justify-between border border-slate-800 hover:border-cyan-500/40 bg-slate-900/40 backdrop-blur-xl h-full shadow-lg hover:shadow-[0_20px_40px_-15px_rgba(6,182,212,0.2)] transition-all duration-300"
-                  >
+                    <motion.div
+                      key={idx}
+                      variants={itemVariants}
+                      className="metallic-card group flex flex-col justify-between h-full rounded-3xl p-7 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(6,182,212,0.3)] hover:border-cyan-500/40"
+                    >
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] to-transparent rounded-3xl pointer-events-none" />
                     <div className="space-y-5 relative z-10">
                       <div className="flex justify-between items-start">
@@ -345,8 +344,7 @@ export default function ResourcesPage() {
                   <motion.div
                     key={idx}
                     variants={itemVariants}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    className="rounded-3xl p-6 flex flex-col justify-between border border-slate-800 hover:border-cyan-500/30 bg-slate-900/30 backdrop-blur-xl relative overflow-hidden group shadow-lg hover:shadow-[0_15px_35px_-10px_rgba(6,182,212,0.15)] transition-all duration-300"
+                    className="metallic-card group flex flex-col justify-between rounded-3xl p-6 relative overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_15px_35px_-10px_rgba(6,182,212,0.25)] hover:border-cyan-500/30"
                   >
                     {/* Subtle top-right decorative glow */}
                     <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-cyan-500/5 group-hover:bg-cyan-500/15 blur-2xl transition-colors duration-500 pointer-events-none" />
