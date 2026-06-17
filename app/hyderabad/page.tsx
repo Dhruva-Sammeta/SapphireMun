@@ -546,7 +546,7 @@ export default function HyderabadPage() {
                                         hidden: { opacity: 0, y: 30 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
                                     }}
-                                    className="inline-block relative px-0 my-1 py-4"
+                                    className="inline-block relative px-0 mt-24 mb-2"
                                 >
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)]" />
                                     <img
