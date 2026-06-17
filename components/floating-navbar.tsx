@@ -20,7 +20,7 @@ interface FloatingNavbarProps {
 const DEFAULT_NAV_ITEMS = [
   { href: "#experience", label: "Experience" },
   { href: "#committees", label: "Committees" },
-  { href: "https://www.sapphiremun.com/docs", label: "Resources" },
+  { href: "/resources", label: "Resources" },
   { href: "https://www.instagram.com/sapphire_mun/", label: "Contact" },
 ]
 

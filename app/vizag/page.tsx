@@ -250,7 +250,7 @@ export default function VizagPage() {
                                     className="space-y-4"
                                 >
                                     <div className="inline-flex items-center px-4 py-2 rounded-full text-white text-sm font-bold bg-gradient-to-r from-red-500 to-red-600 animate-pulse">
-                                        First Edition • Coming May 2026
+                                        First Edition • Coming Soon
                                     </div>
                                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight reflect-ribbon">
                                         Sapphire <span className="font-semibold metallic-text">MUN Vizag</span>
@@ -309,7 +309,7 @@ export default function VizagPage() {
                                         <div className="text-2xl font-semibold flex items-center justify-center gap-2">
                                             <Calendar className="h-5 w-5 text-red-400" />
                                         </div>
-                                        <div className="text-sm text-muted">May 30-31</div>
+                                        <div className="text-sm text-muted">Dates TBD</div>
                                     </div>
                                     <div className="text-center">
                                         <div className="text-2xl font-semibold flex items-center justify-center gap-2">
@@ -320,7 +320,7 @@ export default function VizagPage() {
                                     <div className="text-center col-span-3 my-0 pt-0">
                                         <div className="text-sm text-muted flex items-center gap-2 py-7 justify-center text-left">
                                             <Calendar className="text-sm flex items-center gap-2 justify-center py-0" />
-                                            May 30-31, 2026 • Visakhapatnam, India
+                                            Visakhapatnam, India
                                         </div>
                                     </div>
                                 </motion.div>

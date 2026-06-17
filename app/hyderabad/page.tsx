@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import {
     ArrowRight,
@@ -27,6 +27,8 @@ import {
     Mail,
     Sword,
     Anchor,
+    Activity,
+    History,
 } from "lucide-react"
 
 import FloatingCard from "@/components/floating-card"
@@ -48,6 +50,13 @@ const committees = [
         icon: Crosshair,
         type_level: "Security Council · Intermediate",
         desc: "Deliberation on global disarmament challenges and international security paradigms in an evolving geopolitical landscape.",
+        agenda: "Deliberating upon the prevention of the usage of unethical small arms and LAWS in Regional and International conflicts with special emphasis Convention on Certain Conventional Weapons (CCW)",
+        bgLink: null,
+        eb: [
+            { name: "Sai Swarnatej", position: "Chairperson", image: "/images/committees/DISEC/Disec's Chairperson- Sai Swarnatej.png" },
+            { name: "Anmol Lokhande", position: "Vice-Chair", image: "/images/committees/DISEC/Vice-Chair - DISEC - Anmol Lokhande.png" },
+            { name: "Marri Shaurya", position: "Rapporteur", image: "/images/committees/DISEC/Disec's Rapporteur- Marri Shaurya.png" }
+        ]
     },
     {
         id: 2,
@@ -57,6 +66,12 @@ const committees = [
         icon: Heart,
         type_level: "Human Rights · Intermediate",
         desc: "Addressing systemic human rights violations and the intersection of digital sovereignty with fundamental freedoms.",
+        agenda: "Protection and promotion of human rights while countering terrorism in the central sahel region.",
+        bgLink: null,
+        eb: [
+            { name: "Sanjuktha Naidu", position: "Chairperson", image: "/images/committees/UNHRC/Chairperson for UNHRC- Sanjuktha Naidu.png" },
+            { name: "Akshajj Arora", position: "Rapporteur", image: "/images/committees/UNHRC/Rapporteur for UNHRC- Akshajj Arora.png" }
+        ]
     },
     {
         id: 3,
@@ -66,6 +81,13 @@ const committees = [
         icon: Gavel,
         type_level: "Parliamentary · Advanced",
         desc: "India's lower house of Parliament. Engage in fierce parliamentary debate on policies shaping the nation's future.",
+        agenda: "Deliberation on the structural framework of the Uniform Civil Code (UCC). With special emphasis on Federal Autonomy and Minority Rights.",
+        bgLink: "/images/committees/Lok Sabha/LOKSABHA - BG - SAPPHIREMUN.pdf",
+        eb: [
+            { name: "Sangras Bhargav", position: "Speaker", image: "/images/committees/Lok Sabha/Speaker for Loksabha- Sangras Bhargav.png" },
+            { name: "PVS Deepak", position: "Deputy Speaker", image: "/images/committees/Lok Sabha/Loksabha's Deputy Speaker- PVS Deepak.png" },
+            { name: "Shanmukha", position: "Scribe", image: "/images/committees/Lok Sabha/LokSabha - Scribe - Shanmukha.png" }
+        ]
     },
     {
         id: 4,
@@ -75,6 +97,13 @@ const committees = [
         icon: Film,
         type_level: "Creative · Fun",
         desc: "A crisis simulation set in the world of Indian cinema. Navigate industry politics, creative disputes, and cultural influence.",
+        agenda: "Deliberation on Political Bias in Film Certification, Communal Bias, Workplace Harassment, and Structural Safety Reforms in the Indian Film Industry",
+        bgLink: null,
+        eb: [
+            { name: "Nagapranadeep Yenigalla", position: "Chairperson", image: "/images/committees/IFI/Nagapranadeep Yenigalla - Chairperson - IFI.png" },
+            { name: "Saaketh Abireddi", position: "Vice-chair", image: "/images/committees/IFI/Saaketh Abireddi- Vice-chair - IFI.png" },
+            { name: "Navdeep M", position: "Rapporteur", image: "/images/committees/IFI/Navdeep M - Rapporteur - IFI.png" }
+        ]
     },
     {
         id: 5,
@@ -84,201 +113,48 @@ const committees = [
         icon: Newspaper,
         type_level: "Press Corps · All Levels",
         desc: "Report, fact-check, and shape the narrative. The IP corps covers all committees with journalistic integrity and flair.",
+        agenda: "Journalistic coverage of all committees (covering reports, photography, and press conferences).",
+        bgLink: null,
+        eb: []
+    },
+    {
+        id: 6,
+        status: "revealed" as const,
+        title: "WHO",
+        fullName: "World Health Organisation",
+        icon: Activity,
+        type_level: "Specialized Agency · Intermediate",
+        desc: "Deliberating on global health security, infection prevention, and controlling public health risks associated with wildlife sales in traditional food markets.",
+        agenda: "Reducing public health risks associated with the sale of live wild animals of mammalian species in traditional food markets – infection prevention and control.",
+        bgLink: null,
+        eb: [
+            { name: "Sai Srikar", position: "Chairperson", image: "/images/committees/WHO/Sai Srikar - CHAIR PERSON WHO.png" },
+            { name: "Adhrit Gande", position: "Vice-Chair", image: "/images/committees/WHO/Adhrit Gande - Vice-Chair WHO.png" },
+            { name: "Parthiv", position: "Rapporteur", image: "/images/committees/WHO/Parthiv - Rapporteur - WHO.png" }
+        ]
+    },
+    {
+        id: 7,
+        status: "revealed" as const,
+        title: "HCC",
+        fullName: "Historical Crisis Committee",
+        icon: History,
+        type_level: "Crisis Committee · Advanced",
+        desc: "Travel back in time to navigate historical flashpoints, geopolitical shifts, and high-stakes decision-making with a strict freeze date.",
+        agenda: "Freeze date May 14th 1948",
+        bgLink: "/images/committees/HCC/HCC BG SAPPHIRE.pdf",
+        eb: [
+            { name: "Ayaan ahmed khan", position: "Chairperson", image: "/images/committees/HCC/Ayaan ahmed khan - chairperson - HCC.png" },
+            { name: "Maithreya Musunuri", position: "Vice-Chair", image: "/images/committees/HCC/Maithreya Musunuri - Vice-Chair HCC.png" },
+            { name: "Vishwas Yerram", position: "Co-Vice- Chair", image: "/images/committees/HCC/Vishwas Yerram - Co-Vice- Chair - HCC.png" }
+        ]
     },
 ]
 
-/* ─── DhurandharCard — special committee, cinematic red/amber glow ─── */
-function DhurandharCard() {
-    const cardRef = useRef<HTMLDivElement>(null)
-    const [hyperKey, setHyperKey] = useState(0)
-    const [bodyVisible, setBodyVisible] = useState(false)
-    const hasAutoPlayed = useRef(false)
-    const isMobileRef = useRef(false)
 
-    useEffect(() => {
-        isMobileRef.current = window.innerWidth < 768 || "ontouchstart" in window
-    }, [])
-
-    useEffect(() => {
-        const card = cardRef.current
-        if (!card) return
-        const threshold = 0.15
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !hasAutoPlayed.current) {
-                    hasAutoPlayed.current = true
-                    setHyperKey(k => k + 1)
-                    const t = setTimeout(() => setBodyVisible(true), 200)
-                    observer.disconnect()
-                    return () => clearTimeout(t)
-                }
-            },
-            { threshold, rootMargin: "0px" }
-        )
-        observer.observe(card)
-        return () => observer.disconnect()
-    }, [])
-
-    const handleCardHover = useCallback(() => {
-        if (hasAutoPlayed.current && !isMobileRef.current) setHyperKey(k => k + 1)
-    }, [])
-
-    return (
-        <div
-            ref={cardRef}
-            onMouseEnter={handleCardHover}
-            className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 sm:col-span-2 lg:col-span-3 ${!bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
-                }`}
-            style={{
-                background: "linear-gradient(135deg, #0d0608 0%, #1a0308 40%, #0d060a 100%)",
-                border: "1px solid transparent",
-                backgroundClip: "padding-box",
-                boxShadow: "0 0 60px 0 rgba(180,30,30,0.2), 0 0 0 1px rgba(200,60,30,0.25), inset 0 1px 0 rgba(255,140,60,0.08)",
-            }}
-        >
-            {/* Horizontal scan-line sweep */}
-            <div
-                className="pointer-events-none absolute inset-x-0 h-px opacity-0 group-hover:opacity-100"
-                style={{
-                    background: "linear-gradient(to right, transparent 0%, rgba(255,100,40,0.6) 50%, transparent 100%)",
-                    animation: "dhurandhar-scan 2.5s linear infinite",
-                    top: "0",
-                }}
-            />
-            {/* ── Full-width flame wall at bottom of card ── */}
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 left-0 right-0 overflow-hidden"
-                style={{ height: "52px", maskImage: "linear-gradient(to top, black 40%, transparent 100%)" }}
-            >
-                <div className="flex items-end justify-around w-full h-full px-1">
-                    {Array.from({ length: 28 }, (_, i) => {
-                        const heights = [18, 26, 22, 30, 20, 28, 16, 24, 32, 18, 26, 22, 28, 20, 30, 24, 18, 26, 20, 28, 22, 16, 30, 24, 20, 28, 22, 18]
-                        const speeds = [1.0, 0.8, 1.2, 0.9, 1.3, 0.7, 1.1, 0.95, 1.15, 0.85, 1.05, 0.9, 1.2, 1.0, 0.8, 1.15, 0.95, 1.3, 0.85, 1.05, 0.9, 1.2, 0.75, 1.1, 0.95, 0.8, 1.25, 1.0]
-                        const delays = [0, 0.1, 0.05, 0.2, 0.15, 0.08, 0.18, 0.03, 0.12, 0.22, 0.07, 0.17, 0.02, 0.14, 0.09, 0.19, 0.04, 0.11, 0.16, 0.06, 0.21, 0.13, 0.08, 0.18, 0.03, 0.15, 0.1, 0.22]
-                        const greens = [80, 50, 65, 40, 70, 55, 45, 60, 35, 75, 50, 65, 42, 58, 48, 70, 55, 38, 62, 48, 66, 44, 72, 52, 60, 42, 68, 56]
-                        return (
-                            <div
-                                key={i}
-                                style={{
-                                    width: "3px",
-                                    height: `${heights[i % heights.length]}px`,
-                                    borderRadius: "50% 50% 25% 25% / 55% 55% 45% 45%",
-                                    background: `radial-gradient(ellipse at 50% 85%, rgba(255,${greens[i % greens.length]},20,1) 0%, rgba(220,55,15,0.8) 45%, transparent 100%)`,
-                                    filter: "blur(0.8px)",
-                                    animation: `dhurandhar-flame ${speeds[i % speeds.length]}s ease-in-out ${delays[i % delays.length]}s infinite alternate`,
-                                    transformOrigin: "bottom center",
-                                    flexShrink: 0,
-                                }}
-                            />
-                        )
-                    })}
-                </div>
-            </div>
-            <div
-                className="pointer-events-none absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"
-                style={{
-                    background: "linear-gradient(135deg, transparent 0%, rgba(180,30,30,0.07) 50%, transparent 100%)",
-                    boxShadow: "inset 0 0 0 1px rgba(200,80,40,0.3)",
-                }}
-            />
-
-            {/* Ember glow orbs */}
-            <div className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-40 group-hover:opacity-70 transition-opacity duration-700"
-                style={{ background: "radial-gradient(circle, rgba(220,60,30,0.8) 0%, rgba(180,30,10,0.4) 50%, transparent 70%)" }} />
-            <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full opacity-25 group-hover:opacity-50 transition-opacity duration-700"
-                style={{ background: "radial-gradient(circle, rgba(255,120,30,0.6) 0%, rgba(200,60,20,0.3) 50%, transparent 70%)" }} />
-            <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-1000"
-                style={{ background: "radial-gradient(ellipse, rgba(255,80,30,0.5) 0%, transparent 70%)" }} />
-
-            {/* Film grain texture overlay */}
-            <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-[0.03]"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-                    backgroundSize: "128px 128px",
-                }}
-            />
-
-            <div className="space-y-3 z-10 relative">
-                {/* Header row */}
-                <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                        {/* Crown icon */}
-                        <div
-                            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12"
-                            style={{
-                                background: "radial-gradient(circle, rgba(220,60,30,0.3) 0%, rgba(180,30,10,0.15) 100%)",
-                                boxShadow: "0 0 20px rgba(220,60,30,0.4), 0 0 0 1px rgba(200,80,40,0.4), inset 0 0 10px rgba(255,100,40,0.1)",
-                                animation: "dhurandhar-ring-pulse 3s ease-in-out infinite",
-                            }}
-                        >
-                            <Sword className="h-5 w-5" style={{ color: "rgba(255,140,80,1)", filter: "drop-shadow(0 0 6px rgba(220,80,30,0.9))" }} />
-                        </div>
-                        <div>
-                            <div style={{ color: "rgba(255,140,80,1)", textShadow: "0 0 20px rgba(220,80,30,0.8), 0 0 40px rgba(180,40,20,0.4)" }}>
-                                <HyperText
-                                    key={hyperKey}
-                                    text="DHURANDHAR"
-                                    className="text-lg md:text-xl font-bold tracking-wider"
-                                    duration={700}
-                                    animateOnLoad={true}
-                                />
-                            </div>
-
-                        </div>
-                    </div>
-                    {/* Special committee badge */}
-                    <div
-                        className="flex-shrink-0 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest animate-pulse"
-                        style={{
-                            background: "linear-gradient(135deg, rgba(220,60,30,0.2), rgba(180,30,10,0.1))",
-                            border: "1px solid rgba(200,80,40,0.4)",
-                            color: "rgba(255,140,80,0.9)",
-                            boxShadow: "0 0 10px rgba(220,60,30,0.2)",
-                        }}
-                    >
-                        Special Committee
-                    </div>
-                </div>
-
-                {/* Divider — red glow */}
-                <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(200,60,30,0.5), rgba(255,120,50,0.7), rgba(200,60,30,0.5), transparent)" }} />
-
-                <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={bodyVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-                    className="space-y-2"
-                >
-                    <p className="text-xs font-medium italic" style={{ color: "rgba(255,140,80,0.5)" }}>The Sapphire Special Committee</p>
-                    <p className="text-sm font-medium" style={{ color: "rgba(255,140,80,0.8)" }}>Crisis Committee · Criminally Advanced</p>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(200,150,140,0.75)" }}>
-                        Agenda to be announced.
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={bodyVisible ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ duration: 0.4, delay: 0.35 }}
-                    className="mt-auto pt-2"
-                    style={{ borderTop: "1px solid rgba(200,60,30,0.15)" }}
-                >
-                    <p className="text-xs flex items-center gap-2 mt-2 font-medium tracking-wide" style={{ color: "rgba(255,140,80,0.9)" }}>
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "rgba(220,60,30,0.9)" }} />
-                            <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "rgba(220,60,30,1)" }} />
-                        </span>
-                        Invites in Progress
-                    </p>
-                </motion.div>
-            </div>
-        </div>
-    )
-}
 
 /* ─── OnePieceCard — nautical wave animation ─── */
-function OnePieceCard() {
+function OnePieceCard({ onClick }: { onClick: () => void }) {
     const cardRef = useRef<HTMLDivElement>(null)
     const [hyperKey, setHyperKey] = useState(0)
     const [bodyVisible, setBodyVisible] = useState(false)
@@ -317,6 +193,7 @@ function OnePieceCard() {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
+            onClick={onClick}
             className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card ${!bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
                 } border border-cyan-500/10 hover:border-teal-500/40`}
         >
@@ -412,7 +289,7 @@ function OnePieceCard() {
 /* ─── CommitteeCard ─── */
 type CommitteeItem = (typeof committees)[number]
 
-function CommitteeCard({ c }: { c: CommitteeItem }) {
+function CommitteeCard({ c, onClick }: { c: CommitteeItem; onClick: () => void }) {
     const cardRef = useRef<HTMLDivElement>(null)
     const [hyperKey, setHyperKey] = useState(0)
     const [bodyVisible, setBodyVisible] = useState(false)
@@ -457,6 +334,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
         <div
             ref={cardRef}
             onMouseEnter={handleCardHover}
+            onClick={onClick}
             className={`group relative rounded-2xl p-4 md:p-6 flex flex-col justify-between min-h-[220px] md:min-h-[260px] cursor-pointer overflow-hidden transition-all duration-700 metallic-card border border-cyan-500/15 hover:border-cyan-400/40 ${!bodyVisible ? "opacity-0 blur-xl md:opacity-100 md:blur-none translate-y-4 md:translate-y-0" : "opacity-100 blur-none translate-y-0"
                 }`}
         >
@@ -513,6 +391,7 @@ function CommitteeCard({ c }: { c: CommitteeItem }) {
 export default function HyderabadPage() {
     const heroRef = useRef<HTMLElement>(null)
     const [revealed, setRevealed] = React.useState(false)
+    const [selectedCommittee, setSelectedCommittee] = React.useState<any | null>(null)
     const router = useRouter()
     // Mouse glow state (hero only, desktop)
     const glowRef = useRef<HTMLDivElement>(null)
@@ -588,6 +467,7 @@ export default function HyderabadPage() {
                     items={[
                         { href: "/", label: "Home" },
                         { href: "/registrations", label: "Registrations" },
+                        { href: "/resources", label: "Resources" },
                         { href: "#venue", label: "Venue" },
                         { href: "#committees", label: "Committees" },
                         { href: "#archive", label: "Archive" },
@@ -708,6 +588,13 @@ export default function HyderabadPage() {
                                         </Link>
                                     </Button>
                                     <Button
+                                        onClick={() => router.push("/resources")}
+                                        size="lg"
+                                        className="btn-glass w-full sm:w-auto text-cyan-400 border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/10"
+                                    >
+                                        Resources
+                                    </Button>
+                                    <Button
                                         onClick={() => router.push("/vizag")}
                                         size="lg"
                                         className="btn-glass w-full sm:w-auto opacity-70 hover:opacity-100 bg-red-500/5 hover:bg-red-500/10 border-red-500/20"
@@ -726,7 +613,7 @@ export default function HyderabadPage() {
                                     className="pt-6 flex flex-col items-center gap-4"
                                 >
                                     <div className="inline-block px-4 py-1.5 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-400 text-sm font-bold tracking-widest uppercase">
-                                        Upcoming Edition
+                                        Resources Out
                                     </div>
                                     <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3 rounded-2xl sm:rounded-full border border-cyan-400/30 bg-cyan-500/5 backdrop-blur-sm">
                                         <div className="flex items-center gap-2">
@@ -750,7 +637,7 @@ export default function HyderabadPage() {
                                     className="grid grid-cols-3 gap-6 pt-2 max-w-sm mx-auto text-fg"
                                 >
                                     <div className="text-center">
-                                        <div className="text-2xl font-semibold">7</div>
+                                        <div className="text-2xl font-semibold">6</div>
                                         <div className="text-xs text-muted">Committees</div>
                                     </div>
                                     <div className="text-center">
@@ -878,16 +765,62 @@ export default function HyderabadPage() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                            {/* Dhurandhar — the special committee, always first */}
-                            <DhurandharCard />
-
                             {committees.map((c) => (
-                                <CommitteeCard key={c.id} c={c} />
+                                <CommitteeCard
+                                    key={c.id}
+                                    c={c}
+                                    onClick={() => setSelectedCommittee(c)}
+                                />
                             ))}
 
                             {/* One Piece — nautical special committee slot */}
-                            <OnePieceCard />
+                            <OnePieceCard
+                                onClick={() => setSelectedCommittee({
+                                    id: "one-piece",
+                                    title: "ONE PIECE",
+                                    fullName: "The Grand Line Fleet",
+                                    icon: Anchor,
+                                    type_level: "Grand Line · Classified",
+                                    desc: "Set sail for the Grand Line. Navigate treacherous alliances, legendary bounties, and the pursuit of ultimate freedom.",
+                                    specialType: "nautical",
+                                    bgLink: null,
+                                    eb: [
+                                        { name: "Taran Krishna", position: "Crisis Director", image: "/images/committees/ONE PIECE/Crisis Director for One Piece - Taran Krishna.png" },
+                                        { name: "Mohammed Omer", position: "Crisis Moderator", image: "/images/committees/ONE PIECE/Crisis Moderator for One Piece - Mohammed Omer.png" },
+                                        { name: "Vrishin", position: "Deputy Crisis Moderator", image: "/images/committees/ONE PIECE/Deputy Crisis Moderator for One Piece- Vrishin.png" }
+                                    ]
+                                })}
+                            />
                         </div>
+
+                        {/* Resources CTA Card under Committees */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            onClick={() => router.push("/resources")}
+                            className="mt-8 relative rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 cursor-pointer overflow-hidden transition-all duration-500 border border-cyan-500/20 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 hover:border-cyan-400/40 hover:from-cyan-500/10 hover:to-blue-500/10 group shadow-[0_8px_32px_rgba(6,182,212,0.05)]"
+                        >
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05),transparent_70%)] pointer-events-none" />
+                            <div className="space-y-2 z-10 relative flex-1 text-center md:text-left">
+                                <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">
+                                    Conference Prep
+                                </span>
+                                <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                                    Access Conference Resources & Guides
+                                </h3>
+                                <p className="text-sm text-muted/80 max-w-xl">
+                                    Download delegation resources, Liability forms, Codes of Conduct, and preparation documents for all committees.
+                                </p>
+                            </div>
+                            <div className="z-10 relative flex-shrink-0">
+                                <Button className="btn-accent shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                                    View Resources
+                                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </div>
+                        </motion.div>
                     </div>
                 </ChunkSection>
 
@@ -1082,6 +1015,127 @@ export default function HyderabadPage() {
                     </div>
                 </ChunkSection>
 
+                {/* ════════════════ COMMITTEE MODAL ════════════════ */}
+                <AnimatePresence>
+                    {selectedCommittee && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setSelectedCommittee(null)}
+                                className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                            />
+
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                                transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
+                                className={`relative w-full max-w-2xl rounded-[2rem] overflow-hidden shadow-[0_16px_64px_rgba(0,0,0,0.5)] p-5 md:p-7 border z-10 ${
+                                    selectedCommittee.specialType === "nautical"
+                                        ? "border-teal-500/20 bg-slate-900/50"
+                                        : "border-cyan-500/20 bg-slate-900/50"
+                                } backdrop-blur-2xl`}
+                            >
+                                <div
+                                    className="absolute -top-24 -right-24 w-48 h-48 rounded-full pointer-events-none blur-3xl opacity-60"
+                                    style={{
+                                        background: selectedCommittee.specialType === "nautical"
+                                            ? "radial-gradient(circle, rgba(20,184,166,0.4) 0%, transparent 70%)"
+                                            : "radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)"
+                                    }}
+                                />
+                                
+                                <button
+                                    onClick={() => setSelectedCommittee(null)}
+                                    className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all z-20 hover:scale-110"
+                                    aria-label="Close modal"
+                                >
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+
+                                <div className="flex flex-col md:flex-row gap-5 mb-1 relative z-10">
+                                    <div className="md:w-[55%]">
+                                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md mb-1">
+                                            {selectedCommittee.title}
+                                        </h2>
+                                        <p className="text-base font-semibold text-cyan-300 mb-1">{selectedCommittee.fullName}</p>
+                                        <p className="text-xs text-white/50 font-medium mb-3">{selectedCommittee.type_level}</p>
+                                        <p className="text-sm text-muted leading-relaxed mb-4">
+                                            {selectedCommittee.desc}
+                                        </p>
+                                        
+                                        <div>
+                                            {selectedCommittee.bgLink ? (
+                                                <a
+                                                    href={selectedCommittee.bgLink}
+                                                    download
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-bold transition-all shadow-[0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-0.5"
+                                                >
+                                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                    </svg>
+                                                    Background Guide
+                                                </a>
+                                            ) : (
+                                                <button
+                                                    disabled
+                                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white/40 text-xs font-semibold cursor-not-allowed"
+                                                >
+                                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                                    </svg>
+                                                    Locked
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="md:w-[45%] p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col justify-center relative overflow-hidden group hover:bg-white/[0.04] transition-colors">
+                                        <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] pointer-events-none group-hover:opacity-[0.06] transition-opacity group-hover:scale-110 duration-500">
+                                            {React.createElement(selectedCommittee.icon, { className: "w-32 h-32" })}
+                                        </div>
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-cyan-400/80 mb-2 flex items-center gap-1.5 relative z-10">
+                                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                            </svg>
+                                            Agenda
+                                        </h4>
+                                        {selectedCommittee.agenda ? (
+                                            <p className="text-sm text-white/90 leading-relaxed font-medium italic relative z-10">
+                                                "{selectedCommittee.agenda}"
+                                            </p>
+                                        ) : (
+                                            <p className="text-sm text-white/40 italic relative z-10">To be announced...</p>
+                                        )}
+                                    </div>
+                                </div>
+                                
+                                {selectedCommittee.eb && selectedCommittee.eb.length > 0 && (
+                                    <div className="relative z-10 mt-5 pt-4 border-t border-cyan-500/10">
+                                        <div className="flex flex-wrap justify-center gap-5 md:gap-8">
+                                            {selectedCommittee.eb.map((member: any, i: number) => (
+                                                <div key={i} className="flex flex-col items-center group max-w-[100px]">
+                                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border border-cyan-500/20 group-hover:border-cyan-400 transition-colors shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] flex-shrink-0">
+                                                        <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                    </div>
+                                                    <p className="text-white font-semibold text-center text-xs md:text-sm leading-tight">{member.name}</p>
+                                                    <p className="text-[9px] md:text-[10px] text-cyan-300 mt-1 uppercase tracking-widest text-center font-bold bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">{member.position}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>
+
                 {/* ════════════════ FOOTER ════════════════ */}
                 <div className="h-24 bg-gradient-to-b from-transparent to-[rgba(12,22,54,0.9)]" />
                 <footer className="py-5" style={{ background: "linear-gradient(180deg, rgba(12,22,54,0.9), rgba(10,18,46,0.95))" }}>
@@ -1103,7 +1157,7 @@ export default function HyderabadPage() {
                                     <Link href="#committees" className="block text-muted hover:text-accent transition-colors">Committees</Link>
                                     {/* <Link href="/registrations" className="block text-muted hover:text-accent transition-colors">Register</Link> */}
                                     <Link href="https://v0-mun-website-system.vercel.app" className="block text-muted hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer">Integrated Tech Experience</Link>
-                                    <Link href="/docs" className="block text-muted hover:text-accent transition-colors">Resources</Link>
+                                    <Link href="/resources" className="block text-muted hover:text-accent transition-colors">Resources</Link>
                                 </div>
                             </div>
 

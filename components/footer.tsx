@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
               <Link href="#committees" className="block text-muted hover:text-accent transition-colors">
                 Committees
               </Link>
-              <Link href="/docs" className="block text-muted hover:text-accent transition-colors">
+              <Link href="/resources" className="block text-muted hover:text-accent transition-colors">
                 Resources
               </Link>
               <Link

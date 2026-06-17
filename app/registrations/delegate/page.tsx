@@ -12,8 +12,9 @@ const COMMITTEES = [
   "Indian Film Industry (IFI)",
   "Lok Sabha",
   "International Press (IP)",
-  "Dhurandhar",
   "One Piece",
+  "World Health Organisation (WHO)",
+  "Historical Crisis Committee (HCC)",
 ]
 
 export default function DelegateRegistrationPage() {

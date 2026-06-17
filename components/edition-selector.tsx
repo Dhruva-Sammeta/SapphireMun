@@ -78,7 +78,7 @@ export default function EditionSelector({ onSelect }: EditionSelectorProps) {
                 </div>
 
                 <h2 className="text-3xl font-light mb-2 text-white group-hover:text-blue-200 transition-colors">Hyderabad</h2>
-                <div className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2 border border-cyan-400/30 px-3 py-1 rounded-full bg-cyan-500/10 inline-block">Upcoming Edition</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2 border border-cyan-400/30 px-3 py-1 rounded-full bg-cyan-500/10 inline-block">Resources Out</div>
                 <div className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6 animate-pulse">Second Edition</div>
 
                 <div className="space-y-3 w-full opacity-70 group-hover:opacity-100 transition-opacity">
@@ -114,11 +114,11 @@ export default function EditionSelector({ onSelect }: EditionSelectorProps) {
                 </div>
 
                 <h2 className="text-3xl font-light mb-2 text-white group-hover:text-red-200 transition-colors">Visakhapatnam</h2>
-                <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-6 animate-pulse">First Edition • Upcoming</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-6 animate-pulse">First Edition • Coming Soon</div>
 
                 <div className="space-y-3 w-full opacity-70 group-hover:opacity-100 transition-opacity">
                   <div className="flex items-center justify-center gap-2 text-sm border-t border-white/5 pt-3">
-                    <Calendar className="w-4 h-4 text-red-400" /> May 2026
+                    <Calendar className="w-4 h-4 text-red-400" /> Dates TBD
                   </div>
                   <div className="flex items-center justify-center gap-2 text-sm">
                     <MapPin className="w-4 h-4 text-red-400" /> Coastal Battery
