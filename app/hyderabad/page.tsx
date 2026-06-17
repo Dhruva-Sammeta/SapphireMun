@@ -538,7 +538,7 @@ export default function HyderabadPage() {
                                         transition: { staggerChildren: 0.15, delayChildren: 0.2 },
                                     },
                                 }}
-                                className="mx-auto max-w-4xl text-center space-y-6 px-4"
+                                className="mx-auto max-w-4xl text-center space-y-4 px-4"
                             >
                                 {/* Logo */}
                                 <motion.div
@@ -546,13 +546,13 @@ export default function HyderabadPage() {
                                         hidden: { opacity: 0, y: 30 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
                                     }}
-                                    className="inline-block relative px-0 my-2 py-16"
+                                    className="inline-block relative px-0 my-1 py-4"
                                 >
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_70%)]" />
                                     <img
                                         src="/images/sapphire-mun-hero-logo.png"
                                         alt="Sapphire Model United Nations emblem"
-                                        className="w-56 h-56 md:w-72 md:h-72 mx-auto object-contain relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-700"
+                                        className="w-48 h-48 md:w-60 md:h-60 mx-auto object-contain relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-700"
                                     />
                                 </motion.div>
 
@@ -562,7 +562,7 @@ export default function HyderabadPage() {
                                         hidden: { opacity: 0, y: 20 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
                                     }}
-                                    className="space-y-4"
+                                    className="space-y-3"
                                 >
                                     <div className="inline-flex items-center px-4 py-2 rounded-full text-[var(--ocean-1000)] text-sm font-bold bg-gradient-to-r from-cyan-400 to-blue-400">
                                         Edition 2 • Hyderabad
@@ -572,7 +572,7 @@ export default function HyderabadPage() {
                                     </h1>
                                     <p className="text-base md:text-lg text-muted font-light max-w-2xl mx-auto leading-relaxed">
                                         Strategize. Socialize. Scrutinize.<br className="hidden sm:block" />
-                                        India&apos;s first Experience-targeted Model United Nations returns to Hyderabad. Now Handling all delegates of YI'MUN Hyderabad.
+                                        India&apos;s first Experience-targeted Model United Nations returns to Hyderabad. Now Handling all delegates of YI&apos;MUN and Lumen MUN Hyderabad.
                                     </p>
                                 </motion.div>
 
@@ -582,7 +582,7 @@ export default function HyderabadPage() {
                                         hidden: { opacity: 0, y: 20 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
                                     }}
-                                    className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 px-4"
+                                    className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 px-4"
                                 >
                                     <Button asChild size="lg" className="btn-accent w-full sm:w-auto">
                                         <Link href="/registrations" className="flex items-center justify-center">
@@ -613,7 +613,7 @@ export default function HyderabadPage() {
                                         hidden: { opacity: 0, y: 20 },
                                         visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
                                     }}
-                                    className="pt-6 flex flex-col items-center gap-4"
+                                    className="pt-3 flex flex-col items-center gap-3"
                                 >
                                     <div className="inline-block px-4 py-1.5 rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-400 text-sm font-bold tracking-widest uppercase">
                                         Resources Out
@@ -659,7 +659,7 @@ export default function HyderabadPage() {
                                         hidden: { opacity: 0 },
                                         visible: { opacity: 1, transition: { duration: 1, delay: 0.5 } },
                                     }}
-                                    className="pt-8"
+                                    className="pt-4"
                                 >
                                     <ChevronDown className="w-8 h-8 text-white/25 animate-bounce mx-auto" />
                                 </motion.div>
