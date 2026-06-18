@@ -68,11 +68,11 @@ export default function ResourcesPage() {
     {
       title: "Code of Conduct",
       description: "Rules of procedure, dress code, and diplomatic guidelines.",
-      status: "Releasing Soon",
+      status: "Available",
       icon: Shield,
-      link: "#",
-      badgeColor: "bg-slate-800/50 border-slate-700 text-slate-400",
-      locked: true,
+      link: "/docs/code-of-conduct.pdf",
+      badgeColor: "bg-cyan-500/10 border-cyan-500/30 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]",
+      locked: false,
     },
     {
       title: "Liability Form",
