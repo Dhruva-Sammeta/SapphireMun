@@ -289,7 +289,7 @@ export default function ResourcesPage() {
                           className="w-full py-3 rounded-xl bg-slate-800/30 border border-slate-800 text-slate-500 text-xs font-bold cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
                         >
                           <Lock className="w-4 h-4" />
-                          Locked (Coming Soon)
+                          Background guides to be announced
                         </button>
                       ) : (
                         <>
