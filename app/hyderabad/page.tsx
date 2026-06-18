@@ -83,7 +83,7 @@ const committees = [
         icon: Gavel,
         type_level: "Parliamentary · Advanced",
         desc: "India's lower house of Parliament. Engage in fierce parliamentary debate on policies shaping the nation's future.",
-        agenda: "Deliberation on the structural framework of the Uniform Civil Code (UCC). With special emphasis on Federal Autonomy and Minority Rights.",
+        agenda: "Deliberation on the structural framework of the Uniform Civil Code (UCC) with special emphasis on federal autonomy and minority rights",
         bgLink: "/images/committees/Lok Sabha/LOKSABHA - BG - SAPPHIREMUN.pdf",
         eb: [
             { name: "Sangras Bhargav", position: "Speaker", image: "/images/committees/Lok Sabha/Speaker for Loksabha- Sangras Bhargav.png" },
@@ -280,7 +280,7 @@ function OnePieceCard({ onClick }: { onClick: () => void }) {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500" />
                         </span>
-                        Awaiting Orders
+                        Click here to view more
                     </p>
                 </motion.div>
             </div>
@@ -381,7 +381,7 @@ function CommitteeCard({ c, onClick }: { c: CommitteeItem; onClick: () => void }
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
                         </span>
-                        Agenda to be announced
+                        Click here to view more
                     </p>
                 </motion.div>
             </div>
@@ -800,6 +800,7 @@ export default function HyderabadPage() {
                                     icon: Anchor,
                                     type_level: "Grand Line · Classified",
                                     desc: "Set sail for the Grand Line. Navigate treacherous alliances, legendary bounties, and the pursuit of ultimate freedom.",
+                                    agenda: "Disbandment of the white beard pirates. Freeze date: Arrival of the Red haired pirates",
                                     specialType: "nautical",
                                     bgLink: null,
                                     eb: [
