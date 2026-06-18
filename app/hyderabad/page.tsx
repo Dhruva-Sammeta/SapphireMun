@@ -1123,7 +1123,7 @@ export default function HyderabadPage() {
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: 10 }}
                                 transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-                                className={`relative w-full max-w-2xl rounded-[2rem] overflow-hidden shadow-[0_16px_64px_rgba(0,0,0,0.5)] p-5 md:p-7 border z-10 ${
+                                className={`relative w-full max-w-4xl rounded-[2rem] overflow-hidden shadow-[0_16px_64px_rgba(0,0,0,0.5)] p-6 md:p-10 border z-10 ${
                                     selectedCommittee.specialType === "nautical"
                                         ? "border-teal-500/20 bg-slate-900/50"
                                         : "border-cyan-500/20 bg-slate-900/50"
@@ -1150,12 +1150,12 @@ export default function HyderabadPage() {
 
                                 <div className="flex flex-col md:flex-row gap-5 mb-1 relative z-10">
                                     <div className="md:w-[55%]">
-                                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md mb-1">
+                                        <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tight text-white drop-shadow-md mb-2">
                                             {selectedCommittee.title}
                                         </h2>
-                                        <p className="text-base font-semibold text-cyan-300 mb-1">{selectedCommittee.fullName}</p>
-                                        <p className="text-xs text-white/50 font-medium mb-3">{selectedCommittee.type_level}</p>
-                                        <p className="text-sm text-muted leading-relaxed mb-4">
+                                        <p className="text-lg font-semibold text-cyan-300 mb-2">{selectedCommittee.fullName}</p>
+                                        <p className="text-sm text-white/50 font-medium mb-4">{selectedCommittee.type_level}</p>
+                                        <p className="text-base md:text-lg text-muted leading-relaxed mb-6">
                                             {selectedCommittee.desc}
                                         </p>
                                         
@@ -1166,9 +1166,9 @@ export default function HyderabadPage() {
                                                     download
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-bold transition-all shadow-[0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-0.5"
+                                                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-sm font-bold transition-all shadow-[0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-0.5"
                                                 >
-                                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                                     </svg>
                                                     Background Guide
@@ -1176,12 +1176,12 @@ export default function HyderabadPage() {
                                             ) : (
                                                 <button
                                                     disabled
-                                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white/40 text-xs font-semibold cursor-not-allowed"
+                                                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white/40 text-sm font-semibold cursor-not-allowed"
                                                 >
-                                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                                     </svg>
-                                                    Locked
+                                                    Background guides to be announced
                                                 </button>
                                             )}
                                         </div>
@@ -1191,18 +1191,18 @@ export default function HyderabadPage() {
                                         <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] pointer-events-none group-hover:opacity-[0.06] transition-opacity group-hover:scale-110 duration-500">
                                             {React.createElement(selectedCommittee.icon, { className: "w-32 h-32" })}
                                         </div>
-                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-cyan-400/80 mb-2 flex items-center gap-1.5 relative z-10">
-                                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400/80 mb-3 flex items-center gap-2 relative z-10">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                             </svg>
                                             Agenda
                                         </h4>
                                         {selectedCommittee.agenda ? (
-                                            <p className="text-sm text-white/90 leading-relaxed font-medium italic relative z-10">
+                                            <p className="text-base md:text-lg text-white/90 leading-relaxed font-medium italic relative z-10">
                                                 "{selectedCommittee.agenda}"
                                             </p>
                                         ) : (
-                                            <p className="text-sm text-white/40 italic relative z-10">To be announced...</p>
+                                            <p className="text-base md:text-lg text-white/40 italic relative z-10">To be announced...</p>
                                         )}
                                     </div>
                                 </div>
@@ -1211,12 +1211,12 @@ export default function HyderabadPage() {
                                     <div className="relative z-10 mt-5 pt-4 border-t border-cyan-500/10">
                                         <div className="flex flex-wrap justify-center gap-5 md:gap-8">
                                             {selectedCommittee.eb.map((member: any, i: number) => (
-                                                <div key={i} className="flex flex-col items-center group max-w-[100px]">
-                                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 border border-cyan-500/20 group-hover:border-cyan-400 transition-colors shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] flex-shrink-0">
+                                                <div key={i} className="flex flex-col items-center group max-w-[120px] md:max-w-[140px]">
+                                                    <div className="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden mb-3 border border-cyan-500/20 group-hover:border-cyan-400 transition-colors shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] flex-shrink-0">
                                                         <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                                     </div>
-                                                    <p className="text-white font-semibold text-center text-xs md:text-sm leading-tight">{member.name}</p>
-                                                    <p className="text-[9px] md:text-[10px] text-cyan-300 mt-1 uppercase tracking-widest text-center font-bold bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">{member.position}</p>
+                                                    <p className="text-white font-semibold text-center text-sm md:text-base leading-tight">{member.name}</p>
+                                                    <p className="text-[10px] md:text-xs text-cyan-300 mt-1.5 uppercase tracking-widest text-center font-bold bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20">{member.position}</p>
                                                 </div>
                                             ))}
                                         </div>
